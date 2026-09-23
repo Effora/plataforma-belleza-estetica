@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+*.log
+.DS_Store
+.wrangler/
+dist/
+build/
+lighthouse-report.json
+scripts/
