@@ -518,8 +518,12 @@
     border-bottom: 1px solid var(--border);
     vertical-align: top;
   }
-  .money-table td:last-child,
   .money-table .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .money-list {
+    margin-top: 6px;
+    padding-left: 18px;
+    color: var(--muted);
+  }
   .money-table caption {
     caption-side: bottom;
     text-align: left;
