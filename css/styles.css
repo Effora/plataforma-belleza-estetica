@@ -518,6 +518,27 @@
     border-bottom: 1px solid var(--border);
     vertical-align: top;
   }
+  .topbar-nav a.lang-link {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0 12px;
+  }
+
+  .ads {
+    background: linear-gradient(135deg, rgba(200,245,90,.08), rgba(155,107,255,.1));
+    border: 1px solid rgba(200,245,90,.3);
+    border-radius: 16px;
+    padding: 24px 18px;
+    margin: 12px 0 36px;
+  }
+  .ads__title {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .ads .plan-card { background: var(--surface); }
+
   .money-table .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .money-list {
     margin-top: 6px;
