@@ -9,12 +9,21 @@
 - [Benchmark global](https://plataforma-belleza-estetica.pages.dev/#global): StyleSeat, Vagaro, Mindbody, theCut y GlossGenius.
 - [Producto](https://plataforma-belleza-estetica.pages.dev/#blueprint): módulos para el usuario final y para el comercio, estrategia unisex y ventajas competitivas.
 - [Diseño de la app](https://plataforma-belleza-estetica.pages.dev/#diseno): paleta unisex, pantallas principales y principios de neurociencia comercial.
-- [Modelo de negocio y rentabilidad](https://plataforma-belleza-estetica.pages.dev/#negocio): planes para comercios, publicidad para marcas, costos, proyección y hoja de ruta.
+- [Modelo de negocio y rentabilidad](https://plataforma-belleza-estetica.pages.dev/#negocio): planes para comercios, publicidad para marcas, infraestructura (Google Cloud Run y Supabase), costos, proyección y hoja de ruta.
 
 ## Planes para comercios
 
 - Básico: USD 0 por mes durante 60 días. Perfil en el marketplace, agenda online y hasta 50 reservas por mes.
-- Pro: USD 25 por mes, sin comisiones. Reservas ilimitadas, promociones relámpago, micrositio en la app, posición destacada, sincronización de calendarios, CRM avanzado, generador automático de promociones y tablero de ingresos.
+- Pro: USD 25 por mes, sin comisiones. Reservas ilimitadas, recordatorios por WhatsApp y email, bandeja Meta (Instagram, Facebook, Marketplace vía Página y WhatsApp) con bot de agenda y CRM, asistente de ventas, micrositio 24/7, tarjeta para redes, email marketing, caja, sucursales, comisiones, rentabilidad, reseñas, videos y tablero de ingresos.
+
+## Circuito Meta
+
+El comercio hace su pauta en su cuenta de Meta. Messenger e Instagram no tienen tarifa de integración. WhatsApp Cloud API se cobra por mensaje entregado (tarifario oficial, 1 julio 2026): en Colombia marketing USD 0,0125 y utilidad/servicio USD 0,0008. Desde el 1 de octubre de 2026, 1.000 mensajes de servicio gratis por número y mes. El chat de un perfil personal de Marketplace no tiene API pública.
+
+## Infraestructura
+
+- Servidor: Google Cloud Run, pago por uso. Capa gratuita de hasta 2 millones de peticiones al mes; se apaga sin tráfico y escala ante picos de promociones.
+- Base de datos: Supabase, con mapa espacial (PostGIS), login y almacenamiento de fotos. Acelera el MVP y concentra datos, cuentas y archivos en un solo servicio.
 
 ## Enlaces
 

@@ -573,8 +573,8 @@ El usuario que pregunta: "¿a dónde voy hoy?" tiene que encontrar la respuesta,
   Nequi, PSE, tarjeta. Seña online para eliminar no-shows. Pago total desde la app. Sin salir de la plataforma.
 - 🔔
 
-  Recordatorio WhatsApp automático\
-  Sin registro previo del usuario. 24h y 1h antes de la cita. Confirmación con un clic.
+  Confirmación y recordatorios automáticos\
+  Al reservar, confirmación. Luego aviso 24 horas antes y otro 2 horas antes, por WhatsApp y email. Incluidos en el plan. No es un chat abierto.
 
 🛠️
 
@@ -596,16 +596,20 @@ El comercio paga una suscripción fija. A cambio tiene la herramienta completa d
   Cobro de seña automático. Lista de espera. Recordatorios secuenciales. Historial de inasistencias por cliente. El comercio decide su política.
 - 📊
 
-  Dashboard de negocio\
-  Ingresos, ocupación, servicios más vendidos, profesional más productivo. Vista semanal, mensual. Comparable con el benchmark del sector.
+  Agenda online, siempre abierta\
+  Citas por profesional, bloqueos y micrositio de reservas 24/7. Se vincula con Google Calendar y Outlook.
+- 📊
+
+  Control completo del negocio\
+  Caja del día, ingresos y egresos, comisiones del equipo, rentabilidad por producto y servicio, y varias sucursales en un mismo panel.
 - 👤
 
-  Ficha de cliente con historial\
-  Servicio anterior, notas, formula capilar, preferencias. El profesional sabe lo que le gusta antes de que llegue el cliente.
+  CRM, marketing y asistente comercial\
+  Cada reserva actualiza la ficha. El asistente sugiere el próximo turno, el siguiente servicio y una promo. Instagram, Facebook, Marketplace y WhatsApp alimentan el mismo CRM.
 - 🏪
 
-  Página del negocio en la plataforma\
-  Portfolio visual, equipo, servicios y precios, horarios, mapa. Es la "home" pública del comercio dentro del marketplace. Sin necesitar sitio web propio.
+  Micrositio, galería y reputación\
+  Servicios, precios, equipo, fotos, videos, reseñas y mapa. Vitrina pública sin dominio ni hosting propio.
 
 ✂️
 
@@ -634,45 +638,50 @@ El mercado está segmentado artificialmente: barberías vs. estética. El usuari
 
 ### Modelo de Monetización
 
-El único modelo que alinea los incentivos de los tres actores: la plataforma, el comercio y el usuario.
+Ingresos recurrentes de comercios y marcas. El usuario final reserva sin costo.
 
-- 🏢
-
-  Suscripción fija B2B (sin comisión)\
-  El comercio paga plan mensual fijo por visibilidad en el marketplace + herramientas de gestión. Nunca pierde % por cada cliente nuevo.
-- 🎁
-
-  Beneficio diferencial para el usuario\
-  Reservar via la app = puntos + descuentos. El comercio financia parte del beneficio. El usuario tiene razón clara para no ir directo al local.
-- ⭐
-
-  Planes freemium → premium\
-  Plan básico gratuito para el comercio (hasta X reservas/mes). Plan pago desbloquea promos relámpago, analytics y posición en el mapa.
-- 📣
-
-  Publicidad interna opcional\
-  Posición destacada en mapa o feed a cambio de inversión adicional. Siempre transparente para el usuario.
+- Plan Básico: 60 días gratis. Perfil, agenda y hasta 50 reservas al mes. Sin promociones.
+- Plan Pro: USD 25 al mes, sin comisiones. Agenda, CRM, caja, marketing, IA comercial, micrositio, reputación, bandeja Meta y posición destacada.
+- Espacios publicitarios para marcas del sector: segunda fuente de ingresos, sin números en la propuesta.
+- Beneficios para el usuario: puntos y promociones exclusivas por reservar en la app.
 
 ### Ventajas competitivas — Ellos vs. Nosotros
 
 | Dimensión | Competidores (todos) | Nuestra plataforma |
 | --- | --- | --- |
-| Modelo de negocio | Comisión 20-30% por cliente nuevo (castiga al comercio) | Suscripción fija. El comercio no pierde dinero por cada cliente |
-| Incentivo al usuario | Ninguno: reservar en la app = igual que llamar por WhatsApp | Puntos, descuentos, servicios gratis. Reservar en app = siempre vale la pena |
-| Discovery | Lista o mapa sin contexto. El usuario no sabe qué elegir | Feed visual de tendencias + mapa con promos activas en tiempo real |
-| Urgencia / off-peak | No existe: las horas muertas quedan vacías | Promos relámpago automáticas para horas de baja demanda |
-| Segmento | Barbería OR estética. Nunca los dos | Unisex por diseño. Una sola app para todo tipo de autocuidado |
-| WhatsApp | Opcional, de pago, o inexistente (mercados anglosajones) | Nativo, gratuito, automático. Estándar desde el día 1 |
-| Pagos locales (CO) | PSE/Nequi limitados o ausentes | Nequi, PSE, tarjeta, y seña online como estándar |
-| UX / Diseño | Funcional pero no inspiracional (excepción: GlossGenius) | Nivel GlossGenius: premium, visual, cero esfuerzo cognitivo |
-| Portafolio del profesional | Fotos estáticas en perfil, sin contexto de servicio | Feed deslizable de trabajos por servicio, desde el que se puede reservar directamente |
-| No-shows | Aviso pero sin costo real para quien falta | Seña obligatoria + historial + política configurable por el comercio |
+| Modelo de negocio | Comisión 20-30% por cliente nuevo | Suscripción fija. El comercio no pierde por cada cliente |
+| Incentivo al usuario | Reservar en la app = igual que llamar por WhatsApp | Puntos, descuentos, servicios gratis |
+| Discovery | Lista o mapa sin contexto | Feed visual + mapa con promos en tiempo real |
+| Urgencia / off-peak | Horas muertas vacías | Promos relámpago automáticas |
+| Segmento | Barbería o estética, no las dos | Unisex por diseño |
+| Aviso de turno | Opcional, de pago o inexistente | Confirmación + recordatorios WhatsApp y email, incluidos |
+| Gestión del comercio | Marketplace o software interno, con add-ons | Todo en uno, sin comisión por cliente |
+| Pagos locales (CO) | PSE/Nequi limitados | Nequi, PSE, tarjeta y seña online |
+| UX / Diseño | Funcional, poco inspiracional | Premium, visual, una acción por pantalla |
+| No-shows | Aviso sin costo real | Seña + historial + política del comercio |
+
+### Infraestructura
+
+- Servidor: Google Cloud Run. Pago por uso. Hasta 2 millones de peticiones gratis al mes. Se apaga sin tráfico y escala ante picos.
+- Base de datos: Supabase. Mapa espacial (PostGIS), login y fotos. Acelera el MVP.
+
+### Circuito Meta
+
+El comercio pauta en su cuenta. Instagram y Messenger: USD 0 por mensaje. WhatsApp: tarifario oficial de Meta por mensaje entregado (Colombia: marketing USD 0,0125; utilidad/servicio USD 0,0008). Desde el 1 oct 2026, 1.000 mensajes de servicio gratis por número y mes. Marketplace solo entra si el aviso usa la Página o un botón a WhatsApp.
+
+### Planes, costos y hoja de ruta
+
+- Lanzamiento (300 Pro): ingresos USD 7.500, costos USD 1.275, margen USD 6.225.
+- Mes 12 (1.500 Pro): ingresos USD 37.500, costos USD 4.325, margen USD 33.175.
+- Año 2 (5.000 Pro): ingresos USD 125.000, costos USD 12.450, margen USD 112.550.
+- Costos: Cloud Run 0 / 50 / 200; Supabase 25 / 75 / 250; software y soporte.
+- Siete etapas: base (Cloud Run + Supabase), CRM, marketplace, monetización, automatizaciones y Meta, publicidad para marcas, fidelización.
 
 ### Conclusión estratégica
 
-El mercado está vacío en el punto que más importa: **el incentivo del usuario a usar la plataforma en lugar de llamar directamente al salón**. Ningún competidor resuelve eso. Todos se pelean por la suscripción del comercio, y nadie construyó el hábito en el consumidor. Quien primero instale ese loop — *reservo vía app → acumulo beneficio → me conviene más que ir directo* — va a capturar retención masiva. Ese es el diferenciador que no tiene precio.
+El diferencial es concreto: precio fijo sin comisiones, prueba gratuita, gestión completa del salón, recordatorios automáticos y un solo circuito para lo que llega por la app, WhatsApp y Meta.
 
-La ventaja táctica en Colombia es concreta: **WhatsApp nativo + Nequi/PSE + modelo sin comisión** ya resuelven las tres quejas más frecuentes de los comercios vs. Fresha y Booksy. No necesitamos ser mejores en todo — necesitamos ser claramente superiores en lo que más duele hoy.
+Presentación: https://plataforma-belleza-estetica.pages.dev/
 
 Propuesta comercial · Septiembre 2026\
-Investigación basada en navegación directa, Capterra, Trustpilot, App Store y Play Store
+Investigación basada en navegación directa, Capterra, Trustpilot, App Store y Play Store. Tarifas de WhatsApp: documentación oficial de Meta, julio y octubre 2026.
