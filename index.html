@@ -939,7 +939,11 @@
       <ul class="feature-list">
         <li>
           <span class="fi">🗺️</span>
-          <div><span class="label">Mapa interactivo en tiempo real</span><br><span class="desc">Filtros: precio, rating, disponibilidad hoy/ahora, tipo de servicio. Vista lista o mapa. Lo que Fresha hace, pero con urgencia de disponibilidad.</span></div>
+          <div><span class="label">Mapa interactivo en tiempo real</span><br><span class="desc">Vista lista o mapa, con pines de precio y de promo. El usuario no recorre el directorio: filtra y ve qué encaja ahora.</span></div>
+        </li>
+        <li>
+          <span class="fi">🔎</span>
+          <div><span class="label">Filtros que deciden por el usuario</span><br><span class="desc">No solo zona y servicio. También rango de precio, promos relámpago, ofertas del día, disponible ahora, puntuación y comercios destacados. Se combinan: “corte a menos de 2 km, menos de USD 20, con promo hoy”.</span></div>
         </li>
         <li>
           <span class="fi">⚡</span>
@@ -1105,7 +1109,7 @@
       <tr>
         <td>Discovery</td>
         <td class="ellos">Lista o mapa sin contexto. El usuario no sabe qué elegir</td>
-        <td class="nosotros">Feed visual de tendencias + mapa con promos activas en tiempo real</td>
+        <td class="nosotros">Feed visual + mapa, y filtros de precio, promo, oferta, disponibilidad y puntuación</td>
       </tr>
       <tr>
         <td>Urgencia / off-peak</td>
@@ -1206,10 +1210,10 @@
             <p class="app-title">¿Qué servicio buscas hoy?</p>
             <div class="app-search">Corte, color, uñas, barba…</div>
             <div class="app-chips">
-              <span class="app-chip app-chip--on">Todo</span>
-              <span class="app-chip">Corte</span>
-              <span class="app-chip">Uñas</span>
-              <span class="app-chip">Piel</span>
+              <span class="app-chip app-chip--on">Filtros</span>
+              <span class="app-chip">Promos</span>
+              <span class="app-chip">Hasta USD 20</span>
+              <span class="app-chip">Hoy</span>
             </div>
             <div class="app-featured">
               <div class="app-featured__img app-img app-img--1"></div>
@@ -1235,7 +1239,7 @@
         </div>
       </div>
       <figcaption class="phones__caption">
-        <strong>Inicio y destacados.</strong> Una pregunta, un buscador y pocas categorías. El comercio Pro aparece primero, con su sello dorado, justo donde el usuario decide.
+        <strong>Inicio y destacados.</strong> El atajo no es solo el servicio: filtros, promos, tope de precio y “hoy”. El comercio Pro aparece primero, con su sello dorado.
       </figcaption>
     </figure>
 
@@ -1247,9 +1251,9 @@
             <div class="app-map__park"></div>
             <div class="app-map__river"></div>
             <div class="app-chips app-chips--floating">
-              <span class="app-chip app-chip--on">Disponible ahora</span>
-              <span class="app-chip">Promos</span>
-              <span class="app-chip">★ 4,5+</span>
+              <span class="app-chip app-chip--on">Promos</span>
+              <span class="app-chip">USD 10–25</span>
+              <span class="app-chip">Ahora</span>
             </div>
             <span class="map-pin map-pin--a">USD 18</span>
             <span class="map-pin map-pin--b">USD 25</span>
@@ -1278,7 +1282,41 @@
         </div>
       </div>
       <figcaption class="phones__caption">
-        <strong>Mapa con pines.</strong> Cada pin muestra el precio y destaca en color las promociones activas. El comercio destacado tiene un pin propio, más visible que el resto.
+        <strong>Mapa con pines.</strong> Los chips filtran por promo, rango de precio y disponibilidad. Cada pin muestra el precio o el descuento; el destacado se ve primero.
+      </figcaption>
+    </figure>
+
+    <figure class="phones__item">
+      <div class="phone" aria-hidden="true">
+        <div class="phone__screen">
+          <div class="app-status"><span>9:41</span><span>●●●</span></div>
+          <div class="app-body">
+            <p class="app-step">12 resultados cerca</p>
+            <p class="app-title">Afiná la búsqueda</p>
+            <p class="app-label">Ubicación y servicio</p>
+            <div class="app-chips">
+              <span class="app-chip app-chip--on">Hasta 2 km</span>
+              <span class="app-chip app-chip--on">Corte</span>
+            </div>
+            <p class="app-label">Precio</p>
+            <div class="app-range">
+              <span class="app-range__track"><i></i></span>
+              <span>USD 10</span>
+              <span>USD 25</span>
+            </div>
+            <p class="app-label">Ofertas</p>
+            <ul class="app-list">
+              <li class="app-list__row"><span>Solo con promo relámpago</span><b class="app-switch app-switch--on"></b></li>
+              <li class="app-list__row"><span>Ofertas del día</span><b class="app-switch app-switch--on"></b></li>
+              <li class="app-list__row"><span>Disponible ahora</span><b class="app-switch"></b></li>
+              <li class="app-list__row"><span>Puntuación 4,5 o más</span><b class="app-switch app-switch--on"></b></li>
+            </ul>
+          </div>
+          <div class="app-footer-cta"><span class="app-cta">Ver 8 opciones</span></div>
+        </div>
+      </div>
+      <figcaption class="phones__caption">
+        <strong>Filtros de descubrimiento.</strong> Zona y servicio son el punto de partida. Precio, promos, ofertas del día, disponibilidad y puntuación se cruzan para dejar pocas opciones buenas, no un listado infinito.
       </figcaption>
     </figure>
 
@@ -1793,7 +1831,7 @@
       <h3>App y web para el usuario</h3>
       <p>Una experiencia de descubrimiento que convierte la inspiración en una reserva.</p>
       <ul>
-        <li>Búsqueda por zona, servicio, precio y disponibilidad.</li>
+        <li>Filtros combinables: zona, servicio, precio, promos, ofertas, disponibilidad y puntuación.</li>
         <li>Reserva y confirmación sin salir de la plataforma.</li>
         <li>Confirmación y recordatorios automáticos por WhatsApp y email.</li>
         <li>Reseñas, puntuación y videos de trabajos reales.</li>

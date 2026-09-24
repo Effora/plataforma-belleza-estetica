@@ -7,7 +7,7 @@
 - [Benchmark Colombia](https://plataforma-belleza-estetica.pages.dev/#colombia): análisis de Fresha, AgendaPro, Booksy, Bewe, Turnito y otros players activos.
 - [Benchmark Latinoamérica](https://plataforma-belleza-estetica.pages.dev/#latam): Treatwell, BeautyDate, Cuponatic y FeeL Beauty.
 - [Benchmark global](https://plataforma-belleza-estetica.pages.dev/#global): StyleSeat, Vagaro, Mindbody, theCut y GlossGenius.
-- [Producto](https://plataforma-belleza-estetica.pages.dev/#blueprint): módulos para el usuario final y para el comercio, estrategia unisex y ventajas competitivas.
+- [Producto](https://plataforma-belleza-estetica.pages.dev/#blueprint): módulos para el usuario final y para el comercio, filtros de precio, promo y disponibilidad, estrategia unisex y ventajas competitivas.
 - [Diseño de la app](https://plataforma-belleza-estetica.pages.dev/#diseno): paleta unisex, pantallas principales y principios de neurociencia comercial.
 - [Modelo de negocio y rentabilidad](https://plataforma-belleza-estetica.pages.dev/#negocio): planes para comercios, publicidad para marcas, infraestructura (Google Cloud Run y Supabase), costos, proyección y hoja de ruta.
 
