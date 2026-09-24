@@ -1,7 +1,11 @@
 {
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Plataforma de belleza y estética",
+    "documentationUrl": "https://plataforma-belleza-estetica.pages.dev/llms.txt"
+  },
   "entries": [
     {
-      "@context": "https://agenticresourcediscovery.org/context/v1",
       "identifier": "urn:air:plataforma-belleza-estetica.pages.dev:document:propuesta-comercial",
       "displayName": "Plataforma de belleza y estética — propuesta comercial 2026",
       "type": "text/html",
@@ -16,7 +20,6 @@
       ]
     },
     {
-      "@context": "https://agenticresourcediscovery.org/context/v1",
       "identifier": "urn:air:plataforma-belleza-estetica.pages.dev:document:llms-txt",
       "displayName": "Resumen para modelos de lenguaje",
       "type": "text/markdown",
