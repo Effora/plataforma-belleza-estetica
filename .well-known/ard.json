@@ -1,0 +1,31 @@
+{
+  "entries": [
+    {
+      "@context": "https://agenticresourcediscovery.org/context/v1",
+      "identifier": "urn:air:plataforma-belleza-estetica.pages.dev:document:propuesta-comercial",
+      "displayName": "Plataforma de belleza y estética — propuesta comercial 2026",
+      "type": "text/html",
+      "url": "https://plataforma-belleza-estetica.pages.dev/",
+      "description": "Propuesta comercial de una plataforma global de reservas para belleza y estética: benchmark competitivo, diseño de la app, planes para comercios, publicidad para marcas, rentabilidad y hoja de ruta.",
+      "tags": ["belleza", "estética", "marketplace", "reservas", "CRM", "plan de negocio"],
+      "representativeQueries": [
+        "cuánto cuesta la suscripción para comercios de la plataforma de belleza",
+        "cuál es el modelo de negocio de la app de reservas de estética",
+        "cómo se compara la plataforma con Fresha y Booksy",
+        "qué etapas tiene la hoja de ruta de desarrollo"
+      ]
+    },
+    {
+      "@context": "https://agenticresourcediscovery.org/context/v1",
+      "identifier": "urn:air:plataforma-belleza-estetica.pages.dev:document:llms-txt",
+      "displayName": "Resumen para modelos de lenguaje",
+      "type": "text/markdown",
+      "url": "https://plataforma-belleza-estetica.pages.dev/llms.txt",
+      "description": "Resumen en Markdown de la propuesta, con las secciones principales y los planes para comercios.",
+      "representativeQueries": [
+        "resumen de la propuesta de la plataforma de belleza",
+        "qué incluye el plan Pro para comercios"
+      ]
+    }
+  ]
+}

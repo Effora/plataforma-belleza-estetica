@@ -1,0 +1,22 @@
+# Plataforma de belleza y estética — propuesta comercial 2026
+
+> Propuesta de una plataforma global de reservas para belleza y estética: marketplace para usuarios, panel de gestión y CRM para comercios, y espacios publicitarios para marcas del sector. Incluye benchmark competitivo, diseño de la app, modelo de negocio, proyección de rentabilidad y hoja de ruta.
+
+## Secciones
+
+- [Benchmark Colombia](https://plataforma-belleza-estetica.pages.dev/#colombia): análisis de Fresha, AgendaPro, Booksy, Bewe, Turnito y otros players activos.
+- [Benchmark Latinoamérica](https://plataforma-belleza-estetica.pages.dev/#latam): Treatwell, BeautyDate, Cuponatic y FeeL Beauty.
+- [Benchmark global](https://plataforma-belleza-estetica.pages.dev/#global): StyleSeat, Vagaro, Mindbody, theCut y GlossGenius.
+- [Producto](https://plataforma-belleza-estetica.pages.dev/#blueprint): módulos para el usuario final y para el comercio, estrategia unisex y ventajas competitivas.
+- [Diseño de la app](https://plataforma-belleza-estetica.pages.dev/#diseno): paleta unisex, pantallas principales y principios de neurociencia comercial.
+- [Modelo de negocio y rentabilidad](https://plataforma-belleza-estetica.pages.dev/#negocio): planes para comercios, publicidad para marcas, costos, proyección y hoja de ruta.
+
+## Planes para comercios
+
+- Básico: USD 0 por mes durante 60 días. Perfil en el marketplace, agenda online y hasta 50 reservas por mes.
+- Pro: USD 25 por mes, sin comisiones. Reservas ilimitadas, promociones relámpago, micrositio en la app, posición destacada, sincronización de calendarios, CRM avanzado, generador automático de promociones y tablero de ingresos.
+
+## Enlaces
+
+- [Presentación completa](https://plataforma-belleza-estetica.pages.dev/)
+- [Versión en inglés (traducción automática)](https://plataforma--belleza--estetica-pages-dev.translate.goog/?_x_tr_sl=es&_x_tr_tl=en&_x_tr_hl=en)
