@@ -1,18 +1,23 @@
 :root {
-  /* Paleta neurociencia (misma de la propuesta) */
-  --sand: #F6F2EC;
+  /* Paleta neurociencia unisex (misma familia de la propuesta/mockup).
+     Roles: petróleo = calma/confianza (permanecer + usabilidad);
+     arena = descanso visual; terracota = solo consumo/CTA;
+     oro = recompensa/valor percibido. Sin rosa Airbnb/IG. */
+  --sand: #F5EFE6;
   --sand-deep: #EDE4D7;
   --surface: #FFFFFF;
-  --ink: #1F2A2B;
-  --muted: #5B6667;
+  --ink: #2C2C2C;
+  --muted: #555555;
   --line: #E6E0D7;
-  --petrol: #1F5F5B;
-  --petrol-soft: #DDEBE8;
-  --petrol-glow: #2F7A74;
-  --terra: #BF4E2B;
-  --terra-soft: #F7E1D8;
-  --terra-ink: #9A3B1E;
-  --gold: #E7C766;
+  --petrol: #2D6A5E;
+  --petrol-soft: #E4F0ED;
+  --petrol-glow: #3D8A7A;
+  --petrol-deep: #1D4A40;
+  --terra: #C1603A;
+  --terra-soft: #F5E4DB;
+  --terra-ink: #9A4A2E;
+  --gold: #C8A84B;
+  --gold-light: #E2C86A;
   --gold-ink: #5A4510;
 
   /* A · estructura Airbnb, colores nuestros */
@@ -25,17 +30,17 @@
   --air-cta-ink: var(--terra-ink);
   --air-trust: var(--petrol);
   --air-reward: var(--gold);
-  --air-shadow: 0 2px 16px rgba(31, 42, 43, 0.10);
+  --air-shadow: 0 2px 16px rgba(45, 106, 94, 0.12);
 
-  /* B · inmersión Reels: fondo oscuro reduce ruido periférico;
-     acentos siguen la misma familia (no rosa IG) */
+  /* B · inmersión: fondo cálido-oscuro baja ruido periférico;
+     like = terracota (acercamiento), match = petróleo (confianza) */
   --ig-bg: #141210;
   --ig-panel: #1C1A17;
-  --ig-text: #F6F2EC;
+  --ig-text: #F5EFE6;
   --ig-muted: #B8B0A4;
   --ig-like: var(--terra);
   --ig-match: var(--petrol-glow);
-  --ig-pass: var(--terra-ink);
+  --ig-pass: #6B6560;
 
   --shell: #121110;
   --shell-2: #1A1917;
@@ -1126,20 +1131,20 @@ body.is-desktop .device-grid--desktop { display: grid; }
 
 .swipe-btn--pass {
   background: var(--sand);
-  color: var(--terra-ink);
+  color: var(--ig-pass);
 }
 
 .swipe-btn--info {
   width: 48px;
   height: 48px;
-  background: rgba(246, 242, 236, 0.18);
+  background: rgba(245, 239, 230, 0.18);
   color: var(--sand);
   backdrop-filter: blur(8px);
 }
 
 .swipe-btn--like {
   background: var(--sand);
-  color: var(--petrol);
+  color: var(--terra);
 }
 
 .reel-nav {

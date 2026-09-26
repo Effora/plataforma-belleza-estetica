@@ -668,17 +668,19 @@
 
   /* APP MOCKUPS */
   :root {
-    --app-bg: #F6F2EC;
+    /* Paleta neurociencia: petróleo calma, arena descanso,
+       terracota solo CTA, oro recompensa */
+    --app-bg: #F5EFE6;
     --app-surface: #FFFFFF;
-    --app-ink: #1F2A2B;
-    --app-muted: #5B6667;
+    --app-ink: #2C2C2C;
+    --app-muted: #555555;
     --app-line: #E6E0D7;
-    --app-primary: #1F5F5B;
-    --app-primary-soft: #DDEBE8;
-    --app-accent: #BF4E2B;
-    --app-accent-soft: #F7E1D8;
-    --app-accent-ink: #9A3B1E;
-    --app-gold: #E7C766;
+    --app-primary: #2D6A5E;
+    --app-primary-soft: #E4F0ED;
+    --app-accent: #C1603A;
+    --app-accent-soft: #F5E4DB;
+    --app-accent-ink: #9A4A2E;
+    --app-gold: #C8A84B;
     --app-gold-ink: #5A4510;
   }
 
@@ -816,9 +818,9 @@
   .app-chip--on { background: var(--app-primary); border-color: var(--app-primary); color: #fff; }
 
   .app-img { display: block; border-radius: 12px; }
-  .app-img--1 { background: linear-gradient(135deg, #2F7A74, #9CC7BE 60%, #F0D9B5); }
+  .app-img--1 { background: linear-gradient(135deg, #3D8A7A, #9CC7BE 60%, #F0D9B5); }
   .app-img--2 { background: linear-gradient(135deg, #C98A6B, #EBCDB6 55%, #7FA9A2); }
-  .app-img--3 { background: linear-gradient(135deg, #3E4A4B, #8E9C9A 60%, #E7C766); }
+  .app-img--3 { background: linear-gradient(135deg, #3E4A4B, #8E9C9A 60%, #C8A84B); }
 
   .app-featured {
     position: relative;
@@ -1307,7 +1309,7 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #2F7A74;
+    background: #3D8A7A;
     display: grid;
     place-items: center;
     font-weight: 700;
