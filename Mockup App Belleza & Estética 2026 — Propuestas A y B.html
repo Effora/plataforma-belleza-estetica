@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mockup App Belleza & Estética 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --petrol: #2D6A5E;
+  --petrol-light: #3D8A7A;
+  --petrol-dark: #1D4A40;
+  --arena: #F5EFE6;
+  --arena-dark: #EDE4D7;
+  --terra: #C1603A;
+  --terra-light: #D4754E;
+  --gold: #C8A84B;
+  --gold-light: #E2C86A;
+  --grafito: #2C2C2C;
+  --grafito-soft: #555;
+  --grafito-muted: #888;
+  --white: #fff;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 4px 20px rgba(44,44,44,.10);
+  --shadow-lg: 0 8px 40px rgba(44,44,44,.18);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body {
+  background: #1A1A1A;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--grafito);
+  min-height: 100vh;
+}
+
+/* ── LAYOUT SHELL ── */
+.shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.doc-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.doc-tag {
+  display: inline-block;
+  background: rgba(200,168,75,.15);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(200,168,75,.3);
+  margin-bottom: 20px;
+}
+.doc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 46px);
+  color: #F0EBE3;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.doc-sub {
+  color: #888;
+  font-size: 15px;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── PROPOSAL LABEL ── */
+.proposal-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.proposal-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.badge-a { background: var(--petrol); color: #fff; }
+.badge-b { background: var(--terra); color: #fff; }
+.proposal-label h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: #F0EBE3;
+  line-height: 1.2;
+}
+.proposal-label p { color: #888; font-size: 13px; margin-top: 2px; }
+
+.section-block {
+  margin-bottom: 80px;
+}
+
+/* ── DEVICE FRAME ── */
+.device-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.device-col { flex: 1; min-width: 280px; }
+.device-col--wide { flex: 2; min-width: 400px; }
+
+.device-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.device-label::before { content: ''; display: block; width: 24px; height: 1px; background: #333; }
+
+/* PHONE SHELL */
+.phone {
+  width: 320px;
+  max-width: 100%;
+  background: #fff;
+  border-radius: 44px;
+  overflow: hidden;
+  box-shadow: 0 0 0 8px #111, 0 0 0 10px #2a2a2a, var(--shadow-lg);
+  position: relative;
+}
+.phone-notch {
+  background: #111;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.phone-notch-pill {
+  width: 80px; height: 22px;
+  background: #000;
+  border-radius: 20px;
+}
+.phone-status {
+  background: #111;
+  padding: 4px 20px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #fff;
+  font-weight: 500;
+}
+.phone-body {
+  background: var(--arena);
+  overflow: hidden;
+}
+
+/* DESKTOP SHELL */
+.desktop {
+  background: #1E1E1E;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.desktop-bar {
+  background: #2A2A2A;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.desktop-dots { display: flex; gap: 6px; }
+.desktop-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.dot-r { background: #FF5F56; }
+.dot-y { background: #FFBD2E; }
+.dot-g { background: #27C93F; }
+.desktop-url {
+  flex: 1;
+  background: #383838;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: #aaa;
+  font-family: monospace;
+}
+.desktop-body { background: var(--arena); }
+
+/* ── PALETA ── */
+.palette-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.color-swatch {
+  border-radius: 10px;
+  overflow: hidden;
+  width: 120px;
+  box-shadow: var(--shadow);
+}
+.swatch-block { height: 56px; }
+.swatch-info { padding: 8px 10px; background: #1E1E1E; }
+.swatch-name { font-size: 11px; font-weight: 600; color: #eee; }
+.swatch-hex { font-size: 10px; color: #777; font-family: monospace; }
+.swatch-role { font-size: 10px; color: #666; margin-top: 2px; }
+
+/* ═══════════════════════════════
+   PROPUESTA A — HOME AIRBNB
+═══════════════════════════════ */
+
+/* STATUS BAR */
+.status-bar {
+  background: var(--arena);
+  padding: 6px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--grafito);
+}
+
+/* SEARCH PILL */
+.search-section {
+  background: var(--arena);
+  padding: 12px 16px 0;
+}
+.greeting {
+  font-size: 12px;
+  color: var(--grafito-muted);
+  margin-bottom: 2px;
+}
+.greeting-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--grafito);
+  margin-bottom: 12px;
+}
+.search-pill {
+  background: var(--white);
+  border-radius: 30px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 12px rgba(44,44,44,.14);
+  margin-bottom: 14px;
+}
+.search-icon { font-size: 14px; flex-shrink: 0; }
+.search-text { flex: 1; }
+.search-text-main { font-size: 12px; font-weight: 600; color: var(--grafito); }
+.search-text-sub { font-size: 10px; color: var(--grafito-muted); }
+.filter-btn {
+  width: 32px; height: 32px;
+  background: var(--petrol);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+/* CHIPS */
+.chips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 0 0 12px;
+  scrollbar-width: none;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  background: var(--white);
+  border: 1.5px solid var(--arena-dark);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--grafito-soft);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.chip.active {
+  background: var(--petrol);
+  border-color: var(--petrol);
+  color: #fff;
+}
+.chip.promo {
+  background: rgba(193,96,58,.1);
+  border-color: var(--terra);
+  color: var(--terra);
+}
+
+/* CATEGORIES */
+.categories {
+  background: var(--arena);
+  padding: 8px 16px 4px;
+}
+.cat-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--grafito-muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.cat-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 12px;
+}
+.cat-row::-webkit-scrollbar { display: none; }
+.cat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.cat-icon {
+  width: 44px; height: 44px;
+  background: var(--white);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(44,44,44,.08);
+}
+.cat-item.active .cat-icon {
+  background: var(--petrol);
+}
+.cat-icon-text { font-size: 10px; font-weight: 600; color: var(--grafito-soft); }
+.cat-item.active .cat-icon-text { color: var(--petrol); }
+
+/* PROMO BANNER */
+.promo-banner {
+  margin: 8px 16px;
+  background: linear-gradient(110deg, var(--petrol-dark), var(--petrol));
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.promo-badge {
+  background: var(--terra);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.promo-text { flex: 1; }
+.promo-title { font-size: 12px; font-weight: 700; color: #fff; }
+.promo-sub { font-size: 10px; color: rgba(255,255,255,.7); }
+.promo-timer {
+  background: rgba(255,255,255,.15);
+  border-radius: 8px;
+  padding: 4px 8px;
+  text-align: center;
+}
+.promo-timer-num { font-size: 14px; font-weight: 800; color: #fff; }
+.promo-timer-label { font-size: 8px; color: rgba(255,255,255,.7); }
+
+/* CARDS SECTION */
+.cards-section {
+  background: var(--arena);
+  padding: 8px 16px 16px;
+}
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--grafito);
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-title-link {
+  font-size: 11px;
+  color: var(--petrol);
+  font-weight: 600;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 12px rgba(44,44,44,.08);
+}
+.card-img {
+  width: 100%;
+  height: 140px;
+  position: relative;
+  overflow: hidden;
+}
+.card-img-bg {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+.card-badge-featured {
+  position: absolute;
+  top: 10px; left: 10px;
+  background: var(--gold);
+  color: var(--grafito);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.card-badge-promo {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: var(--terra);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+.card-info {
+  padding: 12px 14px;
+}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+.card-name { font-size: 13px; font-weight: 700; color: var(--grafito); }
+.card-rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--grafito);
+}
+.card-meta { font-size: 10px; color: var(--grafito-muted); margin-bottom: 8px; }
+.card-available {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--petrol);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.dot-green { width: 6px; height: 6px; background: #4CAF50; border-radius: 50%; }
+.card-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price-text { font-size: 12px; color: var(--grafito-soft); }
+.price-val { font-size: 14px; font-weight: 700; color: var(--grafito); }
+.price-old { font-size: 11px; color: var(--grafito-muted); text-decoration: line-through; }
+.price-new { font-size: 14px; font-weight: 700; color: var(--terra); }
+.btn-small {
+  background: var(--terra);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+  background: var(--white);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 16px;
+  border-top: 1px solid var(--arena-dark);
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 8px;
+  color: var(--grafito-muted);
+  font-weight: 600;
+}
+.nav-item.active { color: var(--petrol); }
+.nav-icon { font-size: 16px; }
+.map-fab {
+  position: relative;
+  margin: 0 -16px;
+}
+.map-fab-btn {
+  background: var(--grafito);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: -4px auto 0;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+/* ═══════════════════════════════
+   PANTALLA DETALLE COMERCIO
+═══════════════════════════════ */
+
+.detail-hero {
+  width: 100%;
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+.detail-hero-bg {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+}
+.detail-back {
+  position: absolute;
+  top: 12px; left: 12px;
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.detail-save {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.detail-featured-badge {
+  position: absolute;
+  bottom: 10px; left: 12px;
+  background: var(--gold);
+  color: var(--grafito);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.detail-body { padding: 14px 16px; background: var(--arena); }
+.detail-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+.detail-name { font-size: 17px; font-weight: 700; color: var(--grafito); }
+.detail-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.detail-meta { font-size: 11px; color: var(--grafito-muted); margin-bottom: 10px; }
+.detail-tabs {
+  display: flex;
+  gap: 0;
+  background: var(--arena-dark);
+  border-radius: 10px;
+  padding: 3px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.detail-tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--grafito-muted);
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tab.active {
+  background: var(--white);
+  color: var(--petrol);
+  box-shadow: 0 1px 4px rgba(44,44,44,.1);
+}
+
+.service-list { margin-bottom: 12px; }
+.service-item {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.service-name { font-size: 12px; font-weight: 600; color: var(--grafito); }
+.service-duration { font-size: 10px; color: var(--grafito-muted); margin-top: 2px; }
+.service-price {
+  text-align: right;
+}
+.service-price-val { font-size: 13px; font-weight: 700; color: var(--grafito); }
+.service-price-promo { font-size: 10px; color: var(--terra); font-weight: 600; }
+
+.detail-cta {
+  background: var(--terra);
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.points-hint {
+  text-align: center;
+  font-size: 10px;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════
+   PANEL B2B — COMERCIO
+═══════════════════════════════ */
+
+.b2b-screen { background: var(--arena); }
+.b2b-header {
+  background: var(--petrol);
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.b2b-header-title { font-size: 15px; font-weight: 700; color: #fff; }
+.b2b-header-sub { font-size: 10px; color: rgba(255,255,255,.7); }
+.b2b-header-avatar {
+  width: 34px; height: 34px;
+  background: rgba(255,255,255,.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.b2b-kpi-row {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px 8px;
+}
+.b2b-kpi {
+  flex: 1;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 2px 8px rgba(44,44,44,.07);
+}
+.b2b-kpi-val { font-size: 16px; font-weight: 800; color: var(--grafito); }
+.b2b-kpi-label { font-size: 9px; color: var(--grafito-muted); font-weight: 600; margin-top: 2px; }
+.b2b-kpi-trend { font-size: 9px; color: #4CAF50; font-weight: 600; }
+
+.b2b-section { padding: 8px 16px; }
+.b2b-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--grafito-muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.b2b-feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.b2b-feature {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(44,44,44,.07);
+}
+.b2b-feat-icon { font-size: 20px; margin-bottom: 6px; }
+.b2b-feat-name { font-size: 11px; font-weight: 700; color: var(--grafito); }
+.b2b-feat-desc { font-size: 9px; color: var(--grafito-muted); margin-top: 2px; line-height: 1.4; }
+
+.b2b-agenda { background: var(--white); border-radius: 12px; overflow: hidden; margin-bottom: 8px; }
+.b2b-agenda-header {
+  background: var(--petrol);
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.b2b-agenda-slot {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--arena);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.b2b-slot-time { font-size: 10px; font-weight: 700; color: var(--grafito-muted); width: 36px; flex-shrink: 0; }
+.b2b-slot-card {
+  flex: 1;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 10px;
+}
+.b2b-slot-card.confirmed { background: rgba(45,106,94,.1); border-left: 3px solid var(--petrol); }
+.b2b-slot-card.pending { background: rgba(200,168,75,.1); border-left: 3px solid var(--gold); }
+.b2b-slot-card.empty { background: var(--arena); border-left: 3px solid var(--arena-dark); color: var(--grafito-muted); }
+.b2b-slot-name { font-weight: 700; color: var(--grafito); }
+.b2b-slot-service { color: var(--grafito-muted); }
+
+.b2b-alert {
+  background: rgba(193,96,58,.1);
+  border: 1.5px solid rgba(193,96,58,.25);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.b2b-alert-icon { font-size: 16px; flex-shrink: 0; }
+.b2b-alert-title { font-size: 11px; font-weight: 700; color: var(--terra); }
+.b2b-alert-desc { font-size: 10px; color: var(--grafito-muted); margin-top: 2px; }
+.b2b-alert-btn {
+  background: var(--terra);
+  color: #fff;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+/* ═══════════════════════════════
+   PANTALLA WHATSAPP
+═══════════════════════════════ */
+
+.wsp-screen { background: #ECE5DD; }
+.wsp-header {
+  background: #1E7E34;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wsp-avatar {
+  width: 36px; height: 36px;
+  background: var(--petrol);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.wsp-name { font-size: 13px; font-weight: 700; color: #fff; }
+.wsp-online { font-size: 10px; color: rgba(255,255,255,.8); }
+.wsp-body { padding: 12px; }
+
+.wsp-msg {
+  max-width: 85%;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  padding: 8px 12px;
+  position: relative;
+}
+.wsp-msg.received {
+  background: #fff;
+  border-radius: 2px 10px 10px 10px;
+  margin-right: auto;
+}
+.wsp-msg.sent {
+  background: #DCF8C6;
+  border-radius: 10px 10px 2px 10px;
+  margin-left: auto;
+}
+.wsp-msg-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.label-confirm { color: #1E7E34; }
+.label-remind1 { color: #F57F17; }
+.label-remind2 { color: var(--terra); }
+.wsp-msg-text { font-size: 11px; color: var(--grafito); line-height: 1.5; }
+.wsp-msg-text strong { color: var(--grafito); }
+.wsp-msg-time {
+  font-size: 9px;
+  color: #aaa;
+  text-align: right;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+}
+.wsp-ticks { color: #34B7F1; }
+.wsp-date-sep {
+  text-align: center;
+  margin: 8px 0;
+}
+.wsp-date-pill {
+  display: inline-block;
+  background: rgba(0,0,0,.15);
+  color: #555;
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+/* ═══════════════════════════════
+   PROPUESTA B — DISRUPTIVO
+═══════════════════════════════ */
+
+.tiktok-screen { background: #000; }
+.tiktok-card {
+  width: 100%;
+  height: 420px;
+  position: relative;
+  overflow: hidden;
+}
+.tiktok-bg {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 100px;
+}
+.tiktok-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.85) 40%, transparent 70%);
+}
+.tiktok-sidebar {
+  position: absolute;
+  right: 12px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.tiktok-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.tiktok-action-icon {
+  width: 42px; height: 42px;
+  background: rgba(255,255,255,.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  backdrop-filter: blur(4px);
+}
+.tiktok-action-label { font-size: 9px; color: rgba(255,255,255,.8); font-weight: 600; }
+
+.tiktok-info {
+  position: absolute;
+  bottom: 70px;
+  left: 12px;
+  right: 70px;
+}
+.tiktok-salon-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+.tiktok-service { font-size: 12px; color: rgba(255,255,255,.8); margin-bottom: 8px; }
+.tiktok-promo-chip {
+  background: var(--terra);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.tiktok-reserve-btn {
+  background: var(--terra);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 24px;
+  font-size: 12px;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+}
+
+.tiktok-nav {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 16px;
+}
+.tiktok-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 8px;
+  color: rgba(255,255,255,.5);
+  font-weight: 600;
+}
+.tiktok-nav-item.active { color: #fff; }
+.tiktok-nav-icon { font-size: 18px; }
+
+/* GAMIFICATION */
+.game-screen { background: var(--arena); }
+.game-header {
+  background: linear-gradient(135deg, var(--petrol-dark), var(--petrol));
+  padding: 14px 16px;
+}
+.game-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.game-title { font-size: 14px; font-weight: 700; color: #fff; }
+.game-level {
+  background: var(--gold);
+  color: var(--grafito);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.points-display {
+  background: rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.points-icon { font-size: 28px; }
+.points-val { font-size: 28px; font-weight: 800; color: var(--gold); }
+.points-label { font-size: 11px; color: rgba(255,255,255,.7); }
+.points-next { font-size: 10px; color: rgba(255,255,255,.5); margin-top: 4px; }
+.progress-bar {
+  background: rgba(255,255,255,.15);
+  border-radius: 20px;
+  height: 6px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.progress-fill {
+  background: var(--gold);
+  height: 100%;
+  border-radius: 20px;
+  width: 68%;
+}
+
+.rewards-grid {
+  padding: 12px 16px;
+}
+.reward-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(44,44,44,.07);
+}
+.reward-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.reward-icon.unlocked { background: rgba(45,106,94,.1); }
+.reward-icon.locked { background: var(--arena); }
+.reward-name { font-size: 12px; font-weight: 700; color: var(--grafito); }
+.reward-desc { font-size: 10px; color: var(--grafito-muted); margin-top: 2px; }
+.reward-pts {
+  margin-left: auto;
+  text-align: right;
+  flex-shrink: 0;
+}
+.reward-pts-val { font-size: 12px; font-weight: 800; color: var(--gold); }
+.reward-pts-label { font-size: 9px; color: var(--grafito-muted); }
+.reward-unlocked-badge {
+  background: var(--petrol);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+/* ── DESKTOP LAYOUT ── */
+.desktop-inner {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 420px;
+}
+.desktop-sidebar {
+  background: var(--petrol-dark);
+  padding: 20px 0;
+}
+.desktop-logo {
+  padding: 0 20px 20px;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 12px;
+}
+.desktop-logo span { color: var(--gold); }
+.desktop-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  font-size: 13px;
+  color: rgba(255,255,255,.65);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .15s;
+}
+.desktop-nav-item.active {
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  border-right: 3px solid var(--gold);
+}
+.desktop-nav-icon { font-size: 16px; width: 20px; text-align: center; }
+
+.desktop-content { background: var(--arena); padding: 24px; overflow: auto; }
+.desktop-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.desktop-content-title { font-size: 18px; font-weight: 700; color: var(--grafito); }
+.desktop-content-date { font-size: 12px; color: var(--grafito-muted); }
+.desktop-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.desktop-kpi {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(44,44,44,.07);
+}
+.desktop-kpi-val { font-size: 22px; font-weight: 800; color: var(--grafito); }
+.desktop-kpi-label { font-size: 11px; color: var(--grafito-muted); margin-top: 4px; }
+.desktop-kpi-trend { font-size: 11px; margin-top: 4px; font-weight: 600; }
+.trend-up { color: #4CAF50; }
+.trend-dn { color: var(--terra); }
+
+.desktop-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.desktop-panel {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(44,44,44,.07);
+}
+.desktop-panel-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--grafito);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--arena);
+}
+.mini-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 60px;
+  padding: 0 4px;
+}
+.mini-bar {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+}
+.mini-bar-label {
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  color: var(--grafito-muted);
+  white-space: nowrap;
+}
+
+.mini-crm-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--arena);
+}
+.mini-crm-avatar {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: var(--arena-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.mini-crm-name { font-size: 11px; font-weight: 600; color: var(--grafito); }
+.mini-crm-service { font-size: 9px; color: var(--grafito-muted); }
+.mini-crm-time { margin-left: auto; font-size: 10px; font-weight: 700; color: var(--petrol); }
+
+/* ── SECTION DIVIDER ── */
+.section-divider {
+  border: none;
+  border-top: 1px solid #2A2A2A;
+  margin: 60px 0;
+}
+
+/* ── FEATURE TABLE ── */
+.feature-section {
+  background: #1A1A1A;
+  border: 1px solid #2A2A2A;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 40px;
+}
+.feature-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #F0EBE3;
+  margin-bottom: 6px;
+}
+.feature-section p {
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.feature-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.feature-list li {
+  background: #222;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.feature-list li .fi { font-size: 14px; flex-shrink: 0; }
+.feature-check { color: #4CAF50; font-size: 12px; margin-left: auto; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .device-row { flex-direction: column; }
+  .phone { width: 100%; border-radius: 32px; }
+  .desktop-inner { grid-template-columns: 1fr; }
+  .desktop-sidebar { display: none; }
+  .desktop-kpi-row { grid-template-columns: 1fr 1fr; }
+  .desktop-grid-2 { grid-template-columns: 1fr; }
+  .feature-list { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="doc-tag">Mockup Conceptual · Confidencial · 2026</div>
+    <h1 class="doc-title">Plataforma Belleza & Estética<br><em>Propuestas de diseño A y B</em></h1>
+    <p class="doc-sub">Dos propuestas de experiencia de usuario para el mismo producto: la opción segura y la opción disruptiva. Paleta neurociencia aplicada, gestión completa del comercio integrada.</p>
+  </div>
+
+  <!-- PALETA -->
+  <div class="palette-row">
+    <div class="color-swatch">
+      <div class="swatch-block" style="background:#2D6A5E"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Verde petróleo</div>
+        <div class="swatch-hex">#2D6A5E</div>
+        <div class="swatch-role">Marca · Nav · Confianza</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-block" style="background:#F5EFE6"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Arena</div>
+        <div class="swatch-hex">#F5EFE6</div>
+        <div class="swatch-role">Fondo · Calidez</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-block" style="background:#C1603A"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Terracota</div>
+        <div class="swatch-hex">#C1603A</div>
+        <div class="swatch-role">Solo CTA · Reservar</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-block" style="background:#C8A84B"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Dorado suave</div>
+        <div class="swatch-hex">#C8A84B</div>
+        <div class="swatch-role">Destacados · Puntos</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-block" style="background:#2C2C2C"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Grafito</div>
+        <div class="swatch-hex">#2C2C2C</div>
+        <div class="swatch-role">Texto · Legibilidad</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ════════════════════════════
+       PROPUESTA A
+  ════════════════════════════ -->
+
+  <div class="section-block" id="propuesta-a">
+    <div class="proposal-label">
+      <div class="proposal-badge badge-a">A</div>
+      <div>
+        <h2>El Clon Exacto de Airbnb</h2>
+        <p>Estructura Airbnb adaptada · Paleta neurociencia · Gestión completa integrada</p>
+      </div>
+    </div>
+
+    <!-- HOME MOBILE -->
+    <div class="device-row" style="margin-bottom:32px">
+      <div class="device-col">
+        <div class="device-label">Mobile · Home / Buscador</div>
+        <div class="phone">
+          <div class="phone-notch"><div class="phone-notch-pill"></div></div>
+          <div class="phone-status"><span>9:41</span><span>●●● 5G 🔋</span></div>
+          <div class="phone-body">
+            <!-- SEARCH PILL (Airbnb style) -->
+            <div class="search-section">
+              <div class="greeting">Hola, Carolina 👋</div>
+              <div class="greeting-name">¿Qué te hacés hoy?</div>
+              <div class="search-pill">
+                <div class="search-icon">🔍</div>
+                <div class="search-text">
+                  <div class="search-text-main">Corte, color, uñas, barba…</div>
+                  <div class="search-text-sub">Cerca tuyo · Hoy</div>
+                </div>
+                <div class="filter-btn">⚙️</div>
+              </div>
+              <!-- CHIPS FILTROS -->
+              <div class="chips">
+                <div class="chip active">Promos ⚡</div>
+                <div class="chip">Hasta USD 20</div>
+                <div class="chip">Disponible ahora</div>
+                <div class="chip">⭐ 4.5+</div>
+                <div class="chip">Cerca</div>
+              </div>
+            </div>
+
+            <!-- CATEGORÍAS (Airbnb iconos) -->
+            <div class="categories">
+              <div class="cat-row">
+                <div class="cat-item active">
+                  <div class="cat-icon">✂️</div>
+                  <div class="cat-icon-text">Corte</div>
+                </div>
+                <div class="cat-item">
+                  <div class="cat-icon">💅</div>
+                  <div class="cat-icon-text">Uñas</div>
+                </div>
+                <div class="cat-item">
+                  <div class="cat-icon">🎨</div>
+                  <div class="cat-icon-text">Color</div>
+                </div>
+                <div class="cat-item">
+                  <div class="cat-icon">💆</div>
+                  <div class="cat-icon-text">Masaje</div>
+                </div>
+                <div class="cat-item">
+                  <div class="cat-icon">🪒</div>
+                  <div class="cat-icon-text">Barba</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PROMO RELÁMPAGO BANNER -->
+            <div class="promo-banner">
+              <div class="promo-badge">⚡ AHORA</div>
+              <div class="promo-text">
+                <div class="promo-title">−30% color completo</div>
+                <div class="promo-sub">Hoy 15–17 h · Casa Olivo Studio</div>
+              </div>
+              <div class="promo-timer">
+                <div class="promo-timer-num">2:14</div>
+                <div class="promo-timer-label">horas</div>
+              </div>
+            </div>
+
+            <!-- CARDS (Airbnb style) -->
+            <div class="cards-section">
+              <div class="section-title">
+                <span>Cerca tuyo</span>
+                <span class="section-title-link">Ver mapa →</span>
+              </div>
+
+              <div class="card">
+                <div class="card-img">
+                  <div class="card-img-bg" style="background:linear-gradient(135deg,#2D6A5E22,#C8A84B22)">✂️</div>
+                  <div class="card-badge-featured">⭐ Destacado</div>
+                  <div class="card-badge-promo">−20%</div>
+                </div>
+                <div class="card-info">
+                  <div class="card-top">
+                    <div class="card-name">Estudio Norte</div>
+                    <div class="card-rating">★ 4,9</div>
+                  </div>
+                  <div class="card-meta">312 reseñas · 600 m · Centro</div>
+                  <div class="card-available"><div class="dot-green"></div> Turnos disponibles hoy</div>
+                  <div class="card-price">
+                    <div>
+                      <div class="price-old">USD 25</div>
+                      <div class="price-new">USD 18</div>
+                    </div>
+                    <button class="btn-small">Reservar</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-img">
+                  <div class="card-img-bg" style="background:linear-gradient(135deg,#C1603A22,#F5EFE6)">💅</div>
+                </div>
+                <div class="card-info">
+                  <div class="card-top">
+                    <div class="card-name">Nail Lab</div>
+                    <div class="card-rating">★ 4,7</div>
+                  </div>
+                  <div class="card-meta">86 reseñas · 1,2 km · Chapinero</div>
+                  <div class="card-available"><div class="dot-green"></div> 3 turnos libres hoy</div>
+                  <div class="card-price">
+                    <div class="price-val">USD 15</div>
+                    <button class="btn-small">Reservar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOTTOM NAV (Airbnb) -->
+            <div class="bottom-nav">
+              <div class="nav-item active">
+                <div class="nav-icon">🏠</div>
+                <span>Inicio</span>
+              </div>
+              <div class="nav-item">
+                <div class="nav-icon">🗺️</div>
+                <span>Mapa</span>
+              </div>
+              <div class="nav-item">
+                <div class="nav-icon" style="background:var(--terra);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;margin-top:-14px;box-shadow:0 4px 14px rgba(193,96,58,.4)">📅</div>
+                <span style="margin-top:4px">Turnos</span>
+              </div>
+              <div class="nav-item">
+                <div class="nav-icon">❤️</div>
+                <span>Guardados</span>
+              </div>
+              <div class="nav-item">
+                <div class="nav-icon">👤</div>
+                <span>Perfil</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DETALLE COMERCIO MOBILE -->
+      <div class="device-col">
+        <div class="device-label">Mobile · Perfil del comercio</div>
+        <div class="phone">
+          <div class="phone-notch"><div class="phone-notch-pill"></div></div>
+          <div class="phone-status"><span>9:41</span><span>●●● 5G 🔋</span></div>
+          <div class="phone-body">
+            <div class="detail-hero">
+              <div class="detail-hero-bg" style="background:linear-gradient(135deg,#2D6A5E33,#C8A84B22)">💇</div>
+              <div class="detail-back">←</div>
+              <div class="detail-save">♡</div>
+              <div class="detail-featured-badge">⭐ Comercio Pro</div>
+            </div>
+            <div class="detail-body">
+              <div class="detail-top">
+                <div class="detail-name">Estudio Norte</div>
+                <div class="detail-rating">★ 4,9 <span style="color:#888;font-weight:400">(312)</span></div>
+              </div>
+              <div class="detail-meta">📍 Centro · 600 m · Abierto hasta las 20:00</div>
+              <div class="detail-tabs">
+                <div class="tab active">Servicios</div>
+                <div class="tab">Equipo</div>
+                <div class="tab">Videos</div>
+                <div class="tab">Reseñas</div>
+              </div>
+              <div class="service-list">
+                <div class="service-item">
+                  <div>
+                    <div class="service-name">Corte y lavado</div>
+                    <div class="service-duration">⏱ 45 min</div>
+                  </div>
+                  <div class="service-price">
+                    <div class="service-price-val">USD 18</div>
+                  </div>
+                </div>
+                <div class="service-item">
+                  <div>
+                    <div class="service-name">Color completo</div>
+                    <div class="service-duration">⏱ 2 h</div>
+                  </div>
+                  <div class="service-price">
+                    <div class="service-price-val">USD 38</div>
+                    <div class="service-price-promo">⚡ −30% hoy</div>
+                  </div>
+                </div>
+                <div class="service-item">
+                  <div>
+                    <div class="service-name">Perfilado de barba</div>
+                    <div class="service-duration">⏱ 30 min</div>
+                  </div>
+                  <div class="service-price">
+                    <div class="service-price-val">USD 10</div>
+                  </div>
+                </div>
+              </div>
+              <button class="detail-cta">📅 Reservar turno</button>
+              <div class="points-hint">⭐ Ganás 40 puntos con esta reserva</div>
+            </div>
+            <div class="bottom-nav">
+              <div class="nav-item active"><div class="nav-icon">🏠</div><span>Inicio</span></div>
+              <div class="nav-item"><div class="nav-icon">🗺️</div><span>Mapa</span></div>
+              <div class="nav-item"><div class="nav-icon">📅</div><span>Turnos</span></div>
+              <div class="nav-item"><div class="nav-icon">❤️</div><span>Guardados</span></div>
+              <div class="nav-item"><div class="nav-icon">👤</div><span>Perfil</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHATSAPP MOBILE -->
+      <div class="device-col">
+        <div class="device-label">Mobile · Recordatorios WhatsApp</div>
+        <div class="phone">
+          <div class="phone-notch"><div class="phone-notch-pill"></div></div>
+          <div class="phone-status" style="background:#1E7E34;color:#fff"><span>10:25</span><span>●●● 4G 🔋</span></div>
+          <div class="phone-body" style="background:#ECE5DD">
+            <div class="wsp-header">
+              <div class="wsp-avatar">💅</div>
+              <div>
+                <div class="wsp-name">Estudio Norte</div>
+                <div class="wsp-online">en línea</div>
+              </div>
+            </div>
+            <div class="wsp-body">
+              <div class="wsp-date-sep"><div class="wsp-date-pill">Jueves 10 de abril</div></div>
+
+              <div class="wsp-msg received">
+                <div class="wsp-msg-label label-confirm">✅ CONFIRMACIÓN</div>
+                <div class="wsp-msg-text">
+                  Tu turno fue confirmado<br>
+                  <strong>Corte + barba</strong><br>
+                  📅 Viernes 11 de abril<br>
+                  ⏰ 10:00 hs<br>
+                  📍 Estudio Norte
+                </div>
+                <div class="wsp-msg-time">10:32 <span class="wsp-ticks">✓✓</span></div>
+              </div>
+
+              <div class="wsp-date-sep"><div class="wsp-date-pill">Jueves 10 de abril</div></div>
+
+              <div class="wsp-msg received">
+                <div class="wsp-msg-label label-remind1">⏰ RECORDATORIO 24 HS</div>
+                <div class="wsp-msg-text">
+                  🔔 ¡Mañana es tu turno! Te esperamos el viernes a las 10:00 hs.<br>
+                  ¿Necesitás cancelar o reprogramar?
+                </div>
+                <div class="wsp-msg-time">Jue 10:00 <span class="wsp-ticks">✓✓</span></div>
+              </div>
+
+              <div class="wsp-date-sep"><div class="wsp-date-pill">Viernes 11 de abril</div></div>
+
+              <div class="wsp-msg received">
+                <div class="wsp-msg-label label-remind2">🔔 RECORDATORIO 2 HS</div>
+                <div class="wsp-msg-text">
+                  Tu turno es en 2 horas (10:00 hs).<br>¡Te esperamos!
+                </div>
+                <div class="wsp-msg-time">08:00 <span class="wsp-ticks">✓✓</span></div>
+              </div>
+
+              <div class="wsp-msg sent">
+                <div class="wsp-msg-text">¡Gracias! Ya voy para allá ✂️</div>
+                <div class="wsp-msg-time">08:05 <span class="wsp-ticks">✓✓</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESKTOP PROPUESTA A -->
+    <div class="device-label" style="margin-bottom:14px">Desktop · Panel del comercio — Vista web</div>
+    <div class="desktop" style="margin-bottom:32px">
+      <div class="desktop-bar">
+        <div class="desktop-dots">
+          <div class="desktop-dot dot-r"></div>
+          <div class="desktop-dot dot-y"></div>
+          <div class="desktop-dot dot-g"></div>
+        </div>
+        <div class="desktop-url">app.belleza.co/panel</div>
+      </div>
+      <div class="desktop-inner">
+        <div class="desktop-sidebar">
+          <div class="desktop-logo">bello<span>.</span></div>
+          <div class="desktop-nav-item active"><div class="desktop-nav-icon">📊</div>Dashboard</div>
+          <div class="desktop-nav-item"><div class="desktop-nav-icon">📅</div>Agenda</div>
+          <div class="desktop-nav-item"><div class="desktop-nav-icon">👥</div>Clientes CRM</div>
+          <div class="desktop-nav-item"><div class="desktop-nav-icon">💰</div>Ingresos y caja</div>
+          <div class="desktop-nav-item"><div class="desktop-nav-icon">⚡</div>Promos</div>
+          <div class="desktop-nav-item"><div class="desktop-nav-icon">📣</div>Marketing</div>
+          <div class="desktop-nav-item"><div class="desktop-nav-icon">⭐</div>Reseñas</div>
+          <div class="desktop-nav-item"><div class="desktop-nav-icon">🏪</div>Micrositio</div>
+          <div class="desktop-nav-item"><div class="desktop-nav-icon">🤖</div>Asistente IA</div>
+          <div class="desktop-nav-item"><div class="desktop-nav-icon">⚙️</div>Configuración</div>
+        </div>
+        <div class="desktop-content">
+          <div class="desktop-content-header">
+            <div>
+              <div class="desktop-content-title">Panel del comercio</div>
+              <div class="desktop-content-date">Viernes 25 de septiembre 2026 · Estudio Norte</div>
+            </div>
+            <button style="background:var(--terra);color:#fff;border:none;padding:8px 16px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer">+ Nueva promo ⚡</button>
+          </div>
+          <div class="desktop-kpi-row">
+            <div class="desktop-kpi">
+              <div class="desktop-kpi-val">USD 1.240</div>
+              <div class="desktop-kpi-label">Ingresos del mes</div>
+              <div class="desktop-kpi-trend trend-up">↑ 18% vs. mes anterior</div>
+            </div>
+            <div class="desktop-kpi">
+              <div class="desktop-kpi-val">18</div>
+              <div class="desktop-kpi-label">Turnos hoy</div>
+              <div class="desktop-kpi-trend trend-up">↑ 3 vs. ayer</div>
+            </div>
+            <div class="desktop-kpi">
+              <div class="desktop-kpi-val">94%</div>
+              <div class="desktop-kpi-label">Asistencia</div>
+              <div class="desktop-kpi-trend trend-up">↑ Sin no-shows hoy</div>
+            </div>
+            <div class="desktop-kpi">
+              <div class="desktop-kpi-val">★ 4,9</div>
+              <div class="desktop-kpi-label">Reputación</div>
+              <div class="desktop-kpi-trend trend-up">312 reseñas verificadas</div>
+            </div>
+          </div>
+          <div class="desktop-grid-2">
+            <div class="desktop-panel">
+              <div class="desktop-panel-title">Ingresos por día — Esta semana</div>
+              <div class="mini-chart" style="margin-bottom:20px">
+                <div class="mini-bar" style="height:30%;background:var(--arena-dark)"><span class="mini-bar-label">L</span></div>
+                <div class="mini-bar" style="height:55%;background:var(--arena-dark)"><span class="mini-bar-label">M</span></div>
+                <div class="mini-bar" style="height:40%;background:var(--arena-dark)"><span class="mini-bar-label">X</span></div>
+                <div class="mini-bar" style="height:80%;background:var(--petrol)"><span class="mini-bar-label">J</span></div>
+                <div class="mini-bar" style="height:100%;background:var(--petrol)"><span class="mini-bar-label">V</span></div>
+                <div class="mini-bar" style="height:90%;background:var(--petrol-light)"><span class="mini-bar-label">S</span></div>
+                <div class="mini-bar" style="height:20%;background:var(--arena-dark)"><span class="mini-bar-label">D</span></div>
+              </div>
+              <div style="background:rgba(193,96,58,.08);border:1px solid rgba(193,96,58,.2);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--terra)">
+                ⚡ Martes con baja demanda — <strong>Crear promo automática</strong>
+              </div>
+            </div>
+            <div class="desktop-panel">
+              <div class="desktop-panel-title">Próximos turnos — Hoy</div>
+              <div class="mini-crm-item">
+                <div class="mini-crm-avatar">LP</div>
+                <div><div class="mini-crm-name">Lucas P.</div><div class="mini-crm-service">Corte + barba</div></div>
+                <div class="mini-crm-time">10:00</div>
+              </div>
+              <div class="mini-crm-item">
+                <div class="mini-crm-avatar">MR</div>
+                <div><div class="mini-crm-name">Martina R.</div><div class="mini-crm-service">Color completo</div></div>
+                <div class="mini-crm-time">11:30</div>
+              </div>
+              <div class="mini-crm-item">
+                <div class="mini-crm-avatar">SG</div>
+                <div><div class="mini-crm-name">Sam G.</div><div class="mini-crm-service">Manicura gel</div></div>
+                <div class="mini-crm-time">14:00</div>
+              </div>
+              <div class="mini-crm-item">
+                <div class="mini-crm-avatar">AN</div>
+                <div><div class="mini-crm-name">Ana N.</div><div class="mini-crm-service">Lifting pestañas</div></div>
+                <div class="mini-crm-time">16:30</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURES B2B -->
+    <div class="feature-section">
+      <h3>Gestión completa del comercio — Plan Pro</h3>
+      <p>Todo lo que AgendaPro ofrece, integrado en la misma plataforma que trae nuevos clientes. Sin apps separadas, sin add-ons.</p>
+      <ul class="feature-list">
+        <li><span class="fi">📅</span>Agenda online multi-profesional<span class="feature-check">✓</span></li>
+        <li><span class="fi">📆</span>Sincronización Google Calendar / Outlook<span class="feature-check">✓</span></li>
+        <li><span class="fi">💬</span>Recordatorios automáticos WhatsApp<span class="feature-check">✓</span></li>
+        <li><span class="fi">📧</span>Recordatorios por email<span class="feature-check">✓</span></li>
+        <li><span class="fi">✅</span>Confirmación automática de turno<span class="feature-check">✓</span></li>
+        <li><span class="fi">🤖</span>IA para agendar (huecos automáticos)<span class="feature-check">✓</span></li>
+        <li><span class="fi">📈</span>IA para ventas (sugiere promo)<span class="feature-check">✓</span></li>
+        <li><span class="fi">🏪</span>Micrositio 24/7 (reservas sin app)<span class="feature-check">✓</span></li>
+        <li><span class="fi">📲</span>Tarjeta para redes sociales<span class="feature-check">✓</span></li>
+        <li><span class="fi">📣</span>Email marketing integrado<span class="feature-check">✓</span></li>
+        <li><span class="fi">⚡</span>Promos personalizadas off-peak<span class="feature-check">✓</span></li>
+        <li><span class="fi">💰</span>Control de caja diaria<span class="feature-check">✓</span></li>
+        <li><span class="fi">📊</span>Reportes de ingresos con IA<span class="feature-check">✓</span></li>
+        <li><span class="fi">🏢</span>Control de múltiples sucursales<span class="feature-check">✓</span></li>
+        <li><span class="fi">📉</span>Reporte ingresos y egresos<span class="feature-check">✓</span></li>
+        <li><span class="fi">💼</span>Reporte de comisiones del equipo<span class="feature-check">✓</span></li>
+        <li><span class="fi">📋</span>Rentabilidad por producto/servicio<span class="feature-check">✓</span></li>
+        <li><span class="fi">⭐</span>Reseñas verificadas post-visita<span class="feature-check">✓</span></li>
+        <li><span class="fi">📝</span>Encuestas de satisfacción<span class="feature-check">✓</span></li>
+        <li><span class="fi">🏆</span>Puntuación pública del comercio<span class="feature-check">✓</span></li>
+        <li><span class="fi">📸</span>Galería de trabajos realizados<span class="feature-check">✓</span></li>
+        <li><span class="fi">🎬</span>Sector para videos antes/después<span class="feature-check">✓</span></li>
+        <li><span class="fi">👥</span>CRM: ficha del cliente con historial<span class="feature-check">✓</span></li>
+        <li><span class="fi">🔗</span>Meta: Instagram, Facebook, WhatsApp<span class="feature-check">✓</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ════════════════════════════
+       PROPUESTA B
+  ════════════════════════════ -->
+
+  <div class="section-block" id="propuesta-b">
+    <div class="proposal-label">
+      <div class="proposal-badge badge-b">B</div>
+      <div>
+        <h2>El Efecto Wow — Disruptivo</h2>
+        <p>Feed TikTok · Pantalla completa · Gamificación real · Antes/después en video</p>
+      </div>
+    </div>
+
+    <div class="device-row">
+
+      <!-- TIKTOK FEED -->
+      <div class="device-col">
+        <div class="device-label">Mobile · Feed de descubrimiento (TikTok/Reels)</div>
+        <div class="phone">
+          <div class="phone-notch"><div class="phone-notch-pill"></div></div>
+          <div class="phone-status" style="background:#000;color:#fff"><span>9:41</span><span>●●● 5G 🔋</span></div>
+          <div class="phone-body" style="background:#000;padding:0">
+            <div class="tiktok-card">
+              <div class="tiktok-bg" style="background:linear-gradient(160deg,#1D4A40,#2D6A5E,#C8A84B44)">💇‍♀️</div>
+              <div class="tiktok-overlay"></div>
+
+              <!-- SIDEBAR ACCIONES -->
+              <div class="tiktok-sidebar">
+                <div class="tiktok-action">
+                  <div class="tiktok-action-icon">❤️</div>
+                  <div class="tiktok-action-label">2.4k</div>
+                </div>
+                <div class="tiktok-action">
+                  <div class="tiktok-action-icon">💬</div>
+                  <div class="tiktok-action-label">87</div>
+                </div>
+                <div class="tiktok-action">
+                  <div class="tiktok-action-icon">↗️</div>
+                  <div class="tiktok-action-label">Compartir</div>
+                </div>
+                <div class="tiktok-action">
+                  <div class="tiktok-action-icon" style="background:var(--gold);border-radius:50%">⭐</div>
+                  <div class="tiktok-action-label" style="color:var(--gold)">+40 pts</div>
+                </div>
+              </div>
+
+              <!-- INFO INFERIOR -->
+              <div class="tiktok-info">
+                <div class="tiktok-salon-name">✂️ Estudio Norte · 600 m</div>
+                <div class="tiktok-service">Balayage completo — antes y después</div>
+                <div class="tiktok-promo-chip">⚡ −30% HOY · 2:14 hs</div>
+                <button class="tiktok-reserve-btn">📅 Reservar con descuento</button>
+              </div>
+
+              <!-- BOTTOM NAV TIKTOK -->
+              <div class="tiktok-nav">
+                <div class="tiktok-nav-item"><div class="tiktok-nav-icon">🏠</div><span>Para vos</span></div>
+                <div class="tiktok-nav-item"><div class="tiktok-nav-icon">🔍</div><span>Explorar</span></div>
+                <div class="tiktok-nav-item active"><div class="tiktok-nav-icon" style="background:var(--terra);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;margin:-8px auto 0">📅</div><span style="margin-top:4px">Reservar</span></div>
+                <div class="tiktok-nav-item"><div class="tiktok-nav-icon">⭐</div><span>Puntos</span></div>
+                <div class="tiktok-nav-item"><div class="tiktok-nav-icon">👤</div><span>Perfil</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAMIFICACIÓN -->
+      <div class="device-col">
+        <div class="device-label">Mobile · Gamificación — Mi cuenta de puntos</div>
+        <div class="phone">
+          <div class="phone-notch"><div class="phone-notch-pill"></div></div>
+          <div class="phone-status"><span>9:41</span><span>●●● 5G 🔋</span></div>
+          <div class="phone-body">
+            <div class="game-header">
+              <div class="game-header-top">
+                <div>
+                  <div class="game-title">Mis puntos ⭐</div>
+                </div>
+                <div class="game-level">Nivel Oro 🥇</div>
+              </div>
+              <div class="points-display">
+                <div class="points-icon">⭐</div>
+                <div>
+                  <div class="points-val">680</div>
+                  <div class="points-label">puntos acumulados</div>
+                  <div class="points-next">Faltan 320 para tu servicio gratis</div>
+                  <div class="progress-bar"><div class="progress-fill"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="rewards-grid">
+              <div style="font-size:11px;font-weight:700;color:var(--grafito-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px">Mis beneficios</div>
+              <div class="reward-card">
+                <div class="reward-icon unlocked">🎁</div>
+                <div>
+                  <div class="reward-name">−15% en tu próximo servicio</div>
+                  <div class="reward-desc">Válido hasta el 30 de oct.</div>
+                </div>
+                <div class="reward-pts"><div class="reward-unlocked-badge">Listo ✓</div></div>
+              </div>
+              <div class="reward-card">
+                <div class="reward-icon unlocked">☕</div>
+                <div>
+                  <div class="reward-name">Manicura express gratis</div>
+                  <div class="reward-desc">Con reserva de color</div>
+                </div>
+                <div class="reward-pts"><div class="reward-unlocked-badge">Listo ✓</div></div>
+              </div>
+              <div class="reward-card">
+                <div class="reward-icon locked">🏆</div>
+                <div>
+                  <div class="reward-name">Servicio 100% gratis</div>
+                  <div class="reward-desc">Cualquier servicio hasta USD 30</div>
+                </div>
+                <div class="reward-pts">
+                  <div class="reward-pts-val">1000 ⭐</div>
+                  <div class="reward-pts-label">faltan 320</div>
+                </div>
+              </div>
+              <div class="reward-card">
+                <div class="reward-icon locked">👑</div>
+                <div>
+                  <div class="reward-name">Cliente VIP</div>
+                  <div class="reward-desc">Acceso anticipado a promos</div>
+                </div>
+                <div class="reward-pts">
+                  <div class="reward-pts-val">2000 ⭐</div>
+                  <div class="reward-pts-label">faltan 1320</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- B2B MÓVIL PANEL COMERCIO -->
+      <div class="device-col">
+        <div class="device-label">Mobile · Panel comercio — Gestión B2B</div>
+        <div class="phone">
+          <div class="phone-notch"><div class="phone-notch-pill"></div></div>
+          <div class="phone-status"><span>9:41</span><span>●●● 5G 🔋</span></div>
+          <div class="phone-body">
+            <div class="b2b-screen">
+              <div class="b2b-header">
+                <div>
+                  <div class="b2b-header-title">Estudio Norte</div>
+                  <div class="b2b-header-sub">Panel del comercio · Hoy</div>
+                </div>
+                <div class="b2b-header-avatar">🏪</div>
+              </div>
+              <div class="b2b-kpi-row">
+                <div class="b2b-kpi">
+                  <div class="b2b-kpi-val">USD 340</div>
+                  <div class="b2b-kpi-label">Caja hoy</div>
+                  <div class="b2b-kpi-trend">↑ 18%</div>
+                </div>
+                <div class="b2b-kpi">
+                  <div class="b2b-kpi-val">8</div>
+                  <div class="b2b-kpi-label">Turnos hoy</div>
+                  <div class="b2b-kpi-trend">↑ 3</div>
+                </div>
+                <div class="b2b-kpi">
+                  <div class="b2b-kpi-val">★4,9</div>
+                  <div class="b2b-kpi-label">Rating</div>
+                </div>
+              </div>
+
+              <!-- ALERTA IA -->
+              <div class="b2b-section">
+                <div class="b2b-alert">
+                  <div class="b2b-alert-icon">🤖</div>
+                  <div>
+                    <div class="b2b-alert-title">Sugerencia IA — Promo off-peak</div>
+                    <div class="b2b-alert-desc">El martes 10–12 h tiene 3 huecos libres. Un descuento del 25% puede llenarlos.</div>
+                    <button class="b2b-alert-btn">⚡ Crear promo</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AGENDA HOY -->
+              <div class="b2b-section">
+                <div class="b2b-section-title">Agenda de hoy</div>
+                <div class="b2b-agenda">
+                  <div class="b2b-agenda-header"><span>Viernes 25/9</span><span>📆 Google Cal ✓</span></div>
+                  <div class="b2b-agenda-slot">
+                    <div class="b2b-slot-time">10:00</div>
+                    <div class="b2b-slot-card confirmed">
+                      <div class="b2b-slot-name">Lucas P.</div>
+                      <div class="b2b-slot-service">Corte + barba · Cami</div>
+                    </div>
+                  </div>
+                  <div class="b2b-agenda-slot">
+                    <div class="b2b-slot-time">11:30</div>
+                    <div class="b2b-slot-card confirmed">
+                      <div class="b2b-slot-name">Martina R.</div>
+                      <div class="b2b-slot-service">Color completo · Leo</div>
+                    </div>
+                  </div>
+                  <div class="b2b-agenda-slot">
+                    <div class="b2b-slot-time">13:00</div>
+                    <div class="b2b-slot-card empty">Horario libre ⚡</div>
+                  </div>
+                  <div class="b2b-agenda-slot">
+                    <div class="b2b-slot-time">14:00</div>
+                    <div class="b2b-slot-card pending">
+                      <div class="b2b-slot-name">Sam G. (nuevo)</div>
+                      <div class="b2b-slot-service">Manicura gel · pendiente</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FEATURES RÁPIDO -->
+              <div class="b2b-section">
+                <div class="b2b-section-title">Herramientas</div>
+                <div class="b2b-feature-grid">
+                  <div class="b2b-feature">
+                    <div class="b2b-feat-icon">💰</div>
+                    <div class="b2b-feat-name">Caja</div>
+                    <div class="b2b-feat-desc">Ingresos, egresos y comisiones</div>
+                  </div>
+                  <div class="b2b-feature">
+                    <div class="b2b-feat-icon">👥</div>
+                    <div class="b2b-feat-name">CRM</div>
+                    <div class="b2b-feat-desc">Historial y ficha de clientes</div>
+                  </div>
+                  <div class="b2b-feature">
+                    <div class="b2b-feat-icon">📣</div>
+                    <div class="b2b-feat-name">Marketing</div>
+                    <div class="b2b-feat-desc">Email y tarjeta para redes</div>
+                  </div>
+                  <div class="b2b-feature">
+                    <div class="b2b-feat-icon">⭐</div>
+                    <div class="b2b-feat-name">Reseñas</div>
+                    <div class="b2b-feat-desc">Encuestas y puntuación</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BOTTOM NAV -->
+              <div class="bottom-nav" style="background:#fff">
+                <div class="nav-item active"><div class="nav-icon">📊</div><span>Panel</span></div>
+                <div class="nav-item"><div class="nav-icon">📅</div><span>Agenda</span></div>
+                <div class="nav-item"><div class="nav-icon">👥</div><span>Clientes</span></div>
+                <div class="nav-item"><div class="nav-icon">💰</div><span>Caja</span></div>
+                <div class="nav-item"><div class="nav-icon">⚡</div><span>Promos</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div style="text-align:center;padding:40px 20px;border-top:1px solid #2A2A2A;margin-top:20px">
+    <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#555;margin-bottom:8px">Plataforma Belleza & Estética · 2026</div>
+    <div style="font-size:13px;color:#444;max-width:500px;margin:0 auto;line-height:1.6">Mockup conceptual para presentación. Todos los features están incluidos en el Plan Pro de USD 25/mes. Sin comisiones por cliente.</div>
+  </div>
+
+</div>
+</body>
+</html>

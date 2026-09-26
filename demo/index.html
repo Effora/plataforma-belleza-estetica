@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo UX Belleza — Glowgo A y B</title>
+  <meta name="description" content="Demo viva: Airbnb-like y Reels más Tinder. Fotos reales, iconos, likes y mensajes. Mobile y desktop.">
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#demo">Saltar al demo</a>
+
+  <svg xmlns="http://www.w3.org/2000/svg" class="sprite" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M2 14h4"/><path d="M10 8h4"/><path d="M18 16h4"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-heart-fill" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 2.4 7.2H22l-6 4.8 2.3 7L12 16.8 5.7 21 8 14 2 9.2h7.6Z"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Z"/><path d="M9 3v15"/><path d="M15 6v15"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 10v10h14V10"/></symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><path d="m5.6 5.6 2.1 2.1"/><path d="m16.3 16.3 2.1 2.1"/><path d="m16.3 5.6-2.1 2.1"/><path d="m5.6 16.3 2.1-2.1"/></symbol>
+    <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 2.7c.3 0 6 6.2 6 11a6 6 0 1 1-12 0c0-4.8 5.7-11 6-11Z"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 1 0-4 0"/><path d="M14 10V4a2 2 0 1 0-4 0v8"/><path d="M10 10.5V6a2 2 0 1 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-5.8-2.3L3 16"/></symbol>
+    <symbol id="i-beard" viewBox="0 0 24 24"><path d="M12 4c-3 0-5 2.2-5 5v2c0 4 2.5 7 5 8 2.5-1 5-4 5-8V9c0-2.8-2-5-5-5Z"/><path d="M8 10h8"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4"/><path d="m15.4 6.5-6.8 4"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  </svg>
+
+  <div class="shell">
+    <header class="doc-header">
+      <p class="doc-tag">Demo UX · Glowgo</p>
+      <h1 class="doc-title">Dos formas de descubrir belleza</h1>
+      <p class="doc-sub">A se siente como Airbnb: buscar, filtrar, elegir. B se siente como Reels: mirás el trabajo, descartás o hacés match, y reservás. Probá mobile y desktop.</p>
+    </header>
+
+    <div class="controls" id="demo">
+      <div class="control-group">
+        <span class="control-label">Versión</span>
+        <div class="segment" role="group" aria-label="Elegir propuesta">
+          <button type="button" class="segment__btn is-on" data-version="a" aria-pressed="true">A · Airbnb</button>
+          <button type="button" class="segment__btn segment__btn--b" data-version="b" aria-pressed="false">B · Reels + match</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <span class="control-label">Dispositivo</span>
+        <div class="segment" role="group" aria-label="Elegir dispositivo">
+          <button type="button" class="segment__btn is-on" data-device="mobile" aria-pressed="true">Mobile</button>
+          <button type="button" class="segment__btn" data-device="desktop" aria-pressed="false">Desktop</button>
+        </div>
+      </div>
+    </div>
+    <p class="hint" id="hint-text">Tocá una tarjeta o el corazón. En B: descartá, likeá o abrí el chat.</p>
+
+    <section class="stage is-active" id="stage-a" aria-label="Propuesta A estilo Airbnb">
+      <div class="device-grid device-grid--mobile">
+        <div>
+          <p class="device-label">Mobile · Home / buscador</p>
+          <div class="phone">
+            <div class="phone__screen">
+              <div class="phone__notch"></div>
+              <div class="screen is-on" data-screen="a-home">
+                <div class="phone__status"><span>9:41</span><span>5G</span></div>
+                <div class="app-a">
+                  <div class="app-a__scroll">
+                    <div class="app-a__head">
+                      <p class="app-a__hello">Hola, Carolina</p>
+                      <h2 class="app-a__title">¿Qué te hacés hoy?</h2>
+                      <button type="button" class="search-pill" aria-label="Buscar servicio cerca">
+                        <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
+                        <span class="search-pill__copy">
+                          <span class="search-pill__main">Corte, color, uñas…</span>
+                          <span class="search-pill__sub">Cerca · Cualquier día · Filtros</span>
+                        </span>
+                        <span class="search-pill__filter" aria-hidden="true">
+                          <svg class="icon icon--sm"><use href="#i-sliders"></use></svg>
+                        </span>
+                      </button>
+                      <div class="chips" role="group" aria-label="Filtros rápidos">
+                        <button type="button" class="chip is-on">Promos</button>
+                        <button type="button" class="chip">Hasta USD 20</button>
+                        <button type="button" class="chip">Ahora</button>
+                        <button type="button" class="chip">4,5+</button>
+                      </div>
+                    </div>
+                    <nav aria-label="Categorías">
+                      <ul class="cats">
+                        <li>
+                          <button type="button" class="cat is-on">
+                            <span class="cat__icon-wrap"><svg class="icon"><use href="#i-scissors"></use></svg></span>
+                            Corte
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" class="cat">
+                            <span class="cat__icon-wrap"><svg class="icon"><use href="#i-spark"></use></svg></span>
+                            Uñas
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" class="cat">
+                            <span class="cat__icon-wrap"><svg class="icon"><use href="#i-droplet"></use></svg></span>
+                            Color
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" class="cat">
+                            <span class="cat__icon-wrap"><svg class="icon"><use href="#i-hand"></use></svg></span>
+                            Piel
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" class="cat">
+                            <span class="cat__icon-wrap"><svg class="icon"><use href="#i-beard"></use></svg></span>
+                            Barba
+                          </button>
+                        </li>
+                      </ul>
+                    </nav>
+                    <div class="section-row">
+                      <p class="section-row__title">Cerca tuyo</p>
+                      <button type="button" class="section-row__link">Mapa</button>
+                    </div>
+                    <div class="cards">
+                      <article class="card">
+                        <button type="button" class="card__media" data-open-detail="a" aria-label="Ver Estudio Norte">
+                          <img src="media/salon-1.jpg" alt="Interior de salón con sillones y espejos" width="400" height="260" loading="lazy">
+                          <span class="card__badge">Destacado</span>
+                          <span class="card__promo">−20% hoy</span>
+                        </button>
+                        <button type="button" class="card__heart" data-like aria-label="Guardar Estudio Norte" aria-pressed="false">
+                          <svg class="icon icon--heart-outline" aria-hidden="true"><use href="#i-heart"></use></svg>
+                          <svg class="icon icon--fill icon--heart-fill hidden" aria-hidden="true"><use href="#i-heart-fill"></use></svg>
+                        </button>
+                        <div class="card__body">
+                          <div class="card__top">
+                            <span class="card__name">Estudio Norte</span>
+                            <span class="card__rating"><svg class="icon icon--sm icon--fill" aria-hidden="true"><use href="#i-star"></use></svg> 4,9</span>
+                          </div>
+                          <span class="card__meta">Centro · a 600 m</span>
+                          <span class="card__avail">Turnos disponibles hoy</span>
+                          <div class="card__price-row">
+                            <span class="card__price"><span class="card__old">USD 25</span>USD 18</span>
+                            <button type="button" class="btn" data-open-detail="a">Reservar</button>
+                          </div>
+                        </div>
+                      </article>
+                      <article class="card">
+                        <button type="button" class="card__media" data-open-detail="a" aria-label="Ver Nail Lab">
+                          <img src="media/nails.jpg" alt="Manicura con esmalte en tonos nude" width="400" height="260" loading="lazy">
+                        </button>
+                        <button type="button" class="card__heart" data-like aria-label="Guardar Nail Lab" aria-pressed="false">
+                          <svg class="icon icon--heart-outline" aria-hidden="true"><use href="#i-heart"></use></svg>
+                          <svg class="icon icon--fill icon--heart-fill hidden" aria-hidden="true"><use href="#i-heart-fill"></use></svg>
+                        </button>
+                        <div class="card__body">
+                          <div class="card__top">
+                            <span class="card__name">Nail Lab</span>
+                            <span class="card__rating"><svg class="icon icon--sm icon--fill" aria-hidden="true"><use href="#i-star"></use></svg> 4,7</span>
+                          </div>
+                          <span class="card__meta">Chapinero · 1,2 km</span>
+                          <span class="card__avail">3 turnos libres hoy</span>
+                          <div class="card__price-row">
+                            <span class="card__price">USD 15</span>
+                            <button type="button" class="btn" data-open-detail="a">Reservar</button>
+                          </div>
+                        </div>
+                      </article>
+                    </div>
+                  </div>
+                  <nav class="nav" aria-label="Navegación principal">
+                    <span class="nav__item is-on"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-home"></use></svg>Inicio</span>
+                    <span class="nav__item"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-map"></use></svg>Mapa</span>
+                    <span class="nav__item"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-calendar"></use></svg>Turnos</span>
+                    <span class="nav__item"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-heart"></use></svg>Guardados</span>
+                    <span class="nav__item"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-user"></use></svg>Perfil</span>
+                  </nav>
+                </div>
+              </div>
+
+              <div class="screen" data-screen="a-detail">
+                <div class="phone__status"><span>9:41</span><span>5G</span></div>
+                <div class="app-a">
+                  <div class="app-a__scroll">
+                    <div class="detail-hero">
+                      <img src="media/detail.jpg" alt="Estilista peinando a una clienta" width="400" height="280" loading="lazy">
+                      <button type="button" class="detail-hero__back" data-back="a" aria-label="Volver">
+                        <svg class="icon"><use href="#i-back"></use></svg>
+                      </button>
+                      <button type="button" class="detail-hero__save" data-like aria-label="Guardar" aria-pressed="false">
+                        <svg class="icon icon--heart-outline"><use href="#i-heart"></use></svg>
+                        <svg class="icon icon--fill icon--heart-fill hidden"><use href="#i-heart-fill"></use></svg>
+                      </button>
+                    </div>
+                    <div class="detail-body">
+                      <h2 class="detail-name">Estudio Norte</h2>
+                      <p class="detail-rating">
+                        <svg class="icon icon--sm icon--fill" aria-hidden="true"><use href="#i-star"></use></svg>
+                        4,9 <span>(312 reseñas)</span>
+                      </p>
+                      <p class="detail-meta">Centro · 600 m · Abierto hasta 20:00</p>
+                      <div class="tabs" role="tablist">
+                        <button type="button" class="tab is-on" role="tab" aria-selected="true">Servicios</button>
+                        <button type="button" class="tab" role="tab" aria-selected="false">Equipo</button>
+                        <button type="button" class="tab" role="tab" aria-selected="false">Fotos</button>
+                        <button type="button" class="tab" role="tab" aria-selected="false">Reseñas</button>
+                      </div>
+                      <div class="service">
+                        <div>
+                          <p class="service__name">Corte y lavado</p>
+                          <p class="service__dur">45 min</p>
+                        </div>
+                        <p class="service__price">USD 18</p>
+                      </div>
+                      <div class="service">
+                        <div>
+                          <p class="service__name">Color completo</p>
+                          <p class="service__dur">2 h</p>
+                        </div>
+                        <div class="service__price">
+                          USD 38
+                          <span class="service__promo">−30% hoy</span>
+                        </div>
+                      </div>
+                      <div class="service">
+                        <div>
+                          <p class="service__name">Perfilado de barba</p>
+                          <p class="service__dur">30 min</p>
+                        </div>
+                        <p class="service__price">USD 10</p>
+                      </div>
+                      <p class="points-hint">Ganás 40 puntos si reservás en Glowgo</p>
+                      <button type="button" class="btn btn--full btn--dark">Reservar turno</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="device-label">Mobile · Detalle del comercio</p>
+          <div class="phone">
+            <div class="phone__screen">
+              <div class="phone__notch"></div>
+              <div class="phone__status"><span>9:41</span><span>5G</span></div>
+              <div class="app-a">
+                <div class="app-a__scroll">
+                  <div class="detail-hero">
+                    <img src="media/salon-2.jpg" alt="Coloración profesional en salón" width="400" height="280" loading="lazy">
+                  </div>
+                  <div class="detail-body">
+                    <h2 class="detail-name">Estudio Norte</h2>
+                    <p class="detail-rating">
+                      <svg class="icon icon--sm icon--fill" aria-hidden="true"><use href="#i-star"></use></svg>
+                      4,9 <span>(312)</span>
+                    </p>
+                    <p class="detail-meta">Centro · 600 m · Abierto hasta 20:00</p>
+                    <div class="tabs">
+                      <span class="tab is-on">Servicios</span>
+                      <span class="tab">Equipo</span>
+                      <span class="tab">Fotos</span>
+                      <span class="tab">Reseñas</span>
+                    </div>
+                    <div class="service">
+                      <div>
+                        <p class="service__name">Corte y lavado</p>
+                        <p class="service__dur">45 min</p>
+                      </div>
+                      <p class="service__price">USD 18</p>
+                    </div>
+                    <div class="service">
+                      <div>
+                        <p class="service__name">Color completo</p>
+                        <p class="service__dur">2 h</p>
+                      </div>
+                      <div class="service__price">USD 38<span class="service__promo">−30% hoy</span></div>
+                    </div>
+                    <button type="button" class="btn btn--full btn--dark">Reservar turno</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="device-grid device-grid--desktop">
+        <div>
+          <p class="device-label">Desktop · Explorar</p>
+          <div class="desktop">
+            <div class="desktop__bar">
+              <div class="desktop__dots" aria-hidden="true">
+                <span class="desktop__dot desktop__dot--r"></span>
+                <span class="desktop__dot desktop__dot--y"></span>
+                <span class="desktop__dot desktop__dot--g"></span>
+              </div>
+              <div class="desktop__url">glowgo.app / explorar</div>
+            </div>
+            <div class="desktop__body">
+              <div class="desk-a">
+                <aside class="desk-a__side">
+                  <p class="desk-a__brand">
+                    <img src="logos/logo-glowgo.png" width="36" height="36" alt="">
+                    Glowgo
+                  </p>
+                  <nav class="desk-a__nav" aria-label="Menú desktop">
+                    <button type="button" class="desk-a__link is-on"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-search"></use></svg>Explorar</button>
+                    <button type="button" class="desk-a__link"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-map"></use></svg>Mapa</button>
+                    <button type="button" class="desk-a__link"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-calendar"></use></svg>Mis turnos</button>
+                    <button type="button" class="desk-a__link"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-heart"></use></svg>Guardados</button>
+                    <button type="button" class="desk-a__link"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-user"></use></svg>Perfil</button>
+                  </nav>
+                </aside>
+                <div class="desk-a__main">
+                  <div class="desk-a__top">
+                    <h2 class="app-a__title">Belleza cerca tuyo</h2>
+                    <button type="button" class="search-pill" aria-label="Buscar">
+                      <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
+                      <span class="search-pill__copy">
+                        <span class="search-pill__main">Corte · Hoy · Hasta USD 25</span>
+                        <span class="search-pill__sub">Promos y 4,5+ activos</span>
+                      </span>
+                      <span class="search-pill__filter" aria-hidden="true"><svg class="icon icon--sm"><use href="#i-sliders"></use></svg></span>
+                    </button>
+                    <div class="chips">
+                      <button type="button" class="chip is-on">Promos</button>
+                      <button type="button" class="chip is-on">Hasta USD 20</button>
+                      <button type="button" class="chip">Disponible ahora</button>
+                      <button type="button" class="chip">Destacados</button>
+                    </div>
+                  </div>
+                  <div class="desk-a__grid">
+                    <article class="card">
+                      <button type="button" class="card__media" data-open-detail="a-desk" aria-label="Ver Estudio Norte">
+                        <img src="media/salon-1.jpg" alt="Salón Estudio Norte" width="420" height="240" loading="lazy">
+                        <span class="card__badge">Destacado</span>
+                      </button>
+                      <div class="card__body">
+                        <div class="card__top">
+                          <span class="card__name">Estudio Norte</span>
+                          <span class="card__rating"><svg class="icon icon--sm icon--fill" aria-hidden="true"><use href="#i-star"></use></svg> 4,9</span>
+                        </div>
+                        <span class="card__meta">600 m · Centro</span>
+                        <div class="card__price-row">
+                          <span class="card__price">USD 18</span>
+                          <button type="button" class="btn" data-open-detail="a-desk">Ver</button>
+                        </div>
+                      </div>
+                    </article>
+                    <article class="card">
+                      <button type="button" class="card__media" data-open-detail="a-desk" aria-label="Ver Nail Lab">
+                        <img src="media/nails.jpg" alt="Trabajo de uñas" width="420" height="240" loading="lazy">
+                      </button>
+                      <div class="card__body">
+                        <div class="card__top">
+                          <span class="card__name">Nail Lab</span>
+                          <span class="card__rating"><svg class="icon icon--sm icon--fill" aria-hidden="true"><use href="#i-star"></use></svg> 4,7</span>
+                        </div>
+                        <span class="card__meta">1,2 km</span>
+                        <div class="card__price-row">
+                          <span class="card__price">USD 15</span>
+                          <button type="button" class="btn" data-open-detail="a-desk">Ver</button>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="a-desk-detail-wrap">
+          <p class="device-label">Desktop · Detalle</p>
+          <div class="desktop">
+            <div class="desktop__bar">
+              <div class="desktop__dots" aria-hidden="true">
+                <span class="desktop__dot desktop__dot--r"></span>
+                <span class="desktop__dot desktop__dot--y"></span>
+                <span class="desktop__dot desktop__dot--g"></span>
+              </div>
+              <div class="desktop__url">glowgo.app / estudio-norte</div>
+            </div>
+            <div class="desktop__body">
+              <div class="desk-a-detail">
+                <div class="desk-a-detail__media">
+                  <img src="media/detail.jpg" alt="Detalle del salón" width="640" height="600" loading="lazy">
+                  <button type="button" class="detail-hero__back" data-scroll-home="a" aria-label="Volver">
+                    <svg class="icon"><use href="#i-back"></use></svg>
+                  </button>
+                </div>
+                <div class="desk-a-detail__panel">
+                  <h2 class="detail-name">Estudio Norte</h2>
+                  <p class="detail-rating">
+                    <svg class="icon icon--sm icon--fill" aria-hidden="true"><use href="#i-star"></use></svg>
+                    4,9 <span>(312 reseñas)</span>
+                  </p>
+                  <p class="detail-meta">Centro · 600 m · Abierto hasta 20:00</p>
+                  <div class="tabs">
+                    <span class="tab is-on">Servicios</span>
+                    <span class="tab">Equipo</span>
+                    <span class="tab">Fotos</span>
+                    <span class="tab">Reseñas</span>
+                  </div>
+                  <div class="service">
+                    <div>
+                      <p class="service__name">Corte y lavado</p>
+                      <p class="service__dur">45 min</p>
+                    </div>
+                    <p class="service__price">USD 18</p>
+                  </div>
+                  <div class="service">
+                    <div>
+                      <p class="service__name">Color completo</p>
+                      <p class="service__dur">2 h</p>
+                    </div>
+                    <div class="service__price">USD 38<span class="service__promo">−30% hoy</span></div>
+                  </div>
+                  <button type="button" class="btn btn--full btn--dark">Reservar turno</button>
+                  <p class="points-hint">Beneficio y puntos solo si reservás en la app</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" id="stage-b" aria-label="Propuesta B estilo Reels y Tinder" hidden>
+      <div class="device-grid device-grid--mobile">
+        <div>
+          <p class="device-label">Mobile · Reels · match o descarte</p>
+          <div class="phone">
+            <div class="phone__screen">
+              <div class="phone__notch"></div>
+              <div class="screen is-on" data-screen="b-home">
+                <div class="app-b" id="reel-stack">
+                  <article class="reel" data-reel="0">
+                    <div class="reel__media">
+                      <img src="media/salon-2.jpg" alt="Trabajo de color en el salón" width="360" height="720">
+                      <div class="reel__gradient"></div>
+                      <div class="reel__progress" aria-hidden="true"><span class="is-on"></span><span></span><span></span></div>
+                      <p class="reel__stamp reel__stamp--like">MATCH</p>
+                      <p class="reel__stamp reel__stamp--pass">NOPE</p>
+                      <div class="reel__top">
+                        <p class="reel__mode">Para vos <span>|</span> Cerca</p>
+                        <button type="button" class="reel__search" aria-label="Buscar">
+                          <svg class="icon"><use href="#i-search"></use></svg>
+                        </button>
+                      </div>
+                      <div class="reel__side">
+                        <div class="reel__action">
+                          <button type="button" class="reel__action-btn" data-like aria-label="Me gusta" aria-pressed="false">
+                            <svg class="icon icon--lg icon--heart-outline"><use href="#i-heart"></use></svg>
+                            <svg class="icon icon--lg icon--fill icon--heart-fill"><use href="#i-heart-fill"></use></svg>
+                          </button>
+                          2.4k
+                        </div>
+                        <div class="reel__action">
+                          <button type="button" class="reel__action-btn" data-message aria-label="Enviar mensaje">
+                            <svg class="icon icon--lg"><use href="#i-message"></use></svg>
+                          </button>
+                          Chat
+                        </div>
+                        <div class="reel__action">
+                          <button type="button" class="reel__action-btn" aria-label="Compartir">
+                            <svg class="icon icon--lg"><use href="#i-share"></use></svg>
+                          </button>
+                          Share
+                        </div>
+                      </div>
+                      <div class="reel__info">
+                        <p class="reel__salon">Estudio Norte · 600 m</p>
+                        <p class="reel__desc">Balayage real · promo cerca tuyo</p>
+                        <span class="reel__chip">−30% HOY · match de ubicación</span>
+                        <button type="button" class="btn reel__cta" data-open-detail="b">Reservar con descuento</button>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="reel hidden" data-reel="1">
+                    <div class="reel__media">
+                      <img src="media/nails.jpg" alt="Detalle de manicura" width="360" height="720">
+                      <div class="reel__gradient"></div>
+                      <div class="reel__progress" aria-hidden="true"><span></span><span class="is-on"></span><span></span></div>
+                      <p class="reel__stamp reel__stamp--like">MATCH</p>
+                      <p class="reel__stamp reel__stamp--pass">NOPE</p>
+                      <div class="reel__top">
+                        <p class="reel__mode">Para vos <span>|</span> Promos</p>
+                        <button type="button" class="reel__search" aria-label="Buscar"><svg class="icon"><use href="#i-search"></use></svg></button>
+                      </div>
+                      <div class="reel__side">
+                        <div class="reel__action">
+                          <button type="button" class="reel__action-btn" data-like aria-label="Me gusta" aria-pressed="false">
+                            <svg class="icon icon--lg icon--heart-outline"><use href="#i-heart"></use></svg>
+                            <svg class="icon icon--lg icon--fill icon--heart-fill"><use href="#i-heart-fill"></use></svg>
+                          </button>
+                          1.1k
+                        </div>
+                        <div class="reel__action">
+                          <button type="button" class="reel__action-btn" data-message aria-label="Enviar mensaje">
+                            <svg class="icon icon--lg"><use href="#i-message"></use></svg>
+                          </button>
+                          Chat
+                        </div>
+                        <div class="reel__action">
+                          <button type="button" class="reel__action-btn" aria-label="Compartir">
+                            <svg class="icon icon--lg"><use href="#i-share"></use></svg>
+                          </button>
+                          Share
+                        </div>
+                      </div>
+                      <div class="reel__info">
+                        <p class="reel__salon">Nail Lab · 1,2 km</p>
+                        <p class="reel__desc">Gel en 40 min · disponible ahora</p>
+                        <span class="reel__chip">Promo cerca · match</span>
+                        <button type="button" class="btn reel__cta" data-open-detail="b">Reservar</button>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="reel hidden" data-reel="2">
+                    <div class="reel__media">
+                      <img src="media/barber.jpg" alt="Corte de barba en barbería" width="360" height="720">
+                      <div class="reel__gradient"></div>
+                      <div class="reel__progress" aria-hidden="true"><span></span><span></span><span class="is-on"></span></div>
+                      <p class="reel__stamp reel__stamp--like">MATCH</p>
+                      <p class="reel__stamp reel__stamp--pass">NOPE</p>
+                      <div class="reel__top">
+                        <p class="reel__mode">Para vos <span>|</span> Cerca</p>
+                        <button type="button" class="reel__search" aria-label="Buscar"><svg class="icon"><use href="#i-search"></use></svg></button>
+                      </div>
+                      <div class="reel__side">
+                        <div class="reel__action">
+                          <button type="button" class="reel__action-btn" data-like aria-label="Me gusta" aria-pressed="false">
+                            <svg class="icon icon--lg icon--heart-outline"><use href="#i-heart"></use></svg>
+                            <svg class="icon icon--lg icon--fill icon--heart-fill"><use href="#i-heart-fill"></use></svg>
+                          </button>
+                          890
+                        </div>
+                        <div class="reel__action">
+                          <button type="button" class="reel__action-btn" data-message aria-label="Enviar mensaje">
+                            <svg class="icon icon--lg"><use href="#i-message"></use></svg>
+                          </button>
+                          Chat
+                        </div>
+                        <div class="reel__action">
+                          <button type="button" class="reel__action-btn" aria-label="Compartir">
+                            <svg class="icon icon--lg"><use href="#i-share"></use></svg>
+                          </button>
+                          Share
+                        </div>
+                      </div>
+                      <div class="reel__info">
+                        <p class="reel__salon">Casa Olivo · 900 m</p>
+                        <p class="reel__desc">Fade + barba · resultado real</p>
+                        <span class="reel__chip">USD 18 · hoy cerca</span>
+                        <button type="button" class="btn reel__cta" data-open-detail="b">Reservar</button>
+                      </div>
+                    </div>
+                  </article>
+                  <div class="swipe-bar">
+                    <button type="button" class="swipe-btn swipe-btn--pass" data-swipe="pass" aria-label="Descartar promo">
+                      <svg class="icon icon--lg"><use href="#i-x"></use></svg>
+                    </button>
+                    <button type="button" class="swipe-btn swipe-btn--info" data-open-detail="b" aria-label="Ver detalle">
+                      <svg class="icon"><use href="#i-info"></use></svg>
+                    </button>
+                    <button type="button" class="swipe-btn swipe-btn--like" data-swipe="like" aria-label="Hacer match">
+                      <svg class="icon icon--lg"><use href="#i-check"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="screen" data-screen="b-detail">
+                <div class="b-detail">
+                  <div class="b-detail__media">
+                    <img src="media/detail.jpg" alt="Detalle del trabajo" width="360" height="280" loading="lazy">
+                    <button type="button" class="b-detail__back" data-back="b" aria-label="Volver al feed">
+                      <svg class="icon"><use href="#i-back"></use></svg>
+                    </button>
+                  </div>
+                  <div class="b-detail__body">
+                    <h2 class="b-detail__name">Estudio Norte</h2>
+                    <p class="b-detail__meta">★ 4,9 · 600 m · match de promo</p>
+                    <div class="story">
+                      <p class="story__label">Por qué matcheaste</p>
+                      <p class="story__text">Te gustó el balayage y la ubicación. El −30% sigue activo. Escribiles o reservá ya.</p>
+                    </div>
+                    <div class="service">
+                      <div>
+                        <p class="service__name">Color completo</p>
+                        <p class="service__dur">2 h · hoy 15–17</p>
+                      </div>
+                      <div class="service__price">USD 38<span class="service__promo">−30%</span></div>
+                    </div>
+                    <div class="service">
+                      <div>
+                        <p class="service__name">Corte y lavado</p>
+                        <p class="service__dur">45 min</p>
+                      </div>
+                      <p class="service__price">USD 18</p>
+                    </div>
+                    <div class="b-detail__actions">
+                      <button type="button" class="btn btn--ghost" data-message>Mensaje</button>
+                      <button type="button" class="btn">Reservar ahora</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="screen" data-screen="b-chat">
+                <div class="b-chat">
+                  <button type="button" class="b-chat__back" data-back="b" aria-label="Volver">
+                    <svg class="icon"><use href="#i-back"></use></svg>
+                  </button>
+                  <h2 class="b-detail__name">Chat · Estudio Norte</h2>
+                  <p class="b-detail__meta">Responden en minutos · bot de agenda activo</p>
+                  <div class="story">
+                    <p class="story__label">Vos</p>
+                    <p class="story__text">Hola, vi el −30% de color. ¿Tienen lugar hoy a la tarde?</p>
+                  </div>
+                  <div class="story">
+                    <p class="story__label">Estudio Norte</p>
+                    <p class="story__text">Sí. 15:30 o 16:45 con Cami. ¿Te reservo?</p>
+                  </div>
+                  <button type="button" class="btn btn--full" data-open-detail="b">Confirmar 15:30</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="device-label">Mobile · Detalle tras el match</p>
+          <div class="phone">
+            <div class="phone__screen">
+              <div class="phone__notch"></div>
+              <div class="b-detail">
+                <div class="b-detail__media">
+                  <img src="media/salon-1.jpg" alt="Salón" width="360" height="280" loading="lazy">
+                </div>
+                <div class="b-detail__body">
+                  <h2 class="b-detail__name">Estudio Norte</h2>
+                  <p class="b-detail__meta">Match · promo + ubicación</p>
+                  <div class="story">
+                    <p class="story__label">Próximo paso</p>
+                    <p class="story__text">Reservá o mandá mensaje. Confirmación por WhatsApp incluida.</p>
+                  </div>
+                  <button type="button" class="btn btn--full">Reservar turno</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="device-grid device-grid--desktop">
+        <div>
+          <p class="device-label">Desktop · Feed + matches</p>
+          <div class="desktop">
+            <div class="desktop__bar">
+              <div class="desktop__dots" aria-hidden="true">
+                <span class="desktop__dot desktop__dot--r"></span>
+                <span class="desktop__dot desktop__dot--y"></span>
+                <span class="desktop__dot desktop__dot--g"></span>
+              </div>
+              <div class="desktop__url">glowgo.app / feed</div>
+            </div>
+            <div class="desktop__body">
+              <div class="desk-b">
+                <div class="desk-b__feed">
+                  <article class="reel reel--desk">
+                    <div class="reel__media reel__media--desk">
+                      <img src="media/salon-2.jpg" alt="Feed desktop" width="380" height="640">
+                      <div class="reel__gradient"></div>
+                      <div class="reel__info reel__info--desk">
+                        <p class="reel__salon">Estudio Norte · 600 m</p>
+                        <p class="reel__desc">Balayage · promo cerca</p>
+                        <span class="reel__chip">−30% HOY</span>
+                        <button type="button" class="btn reel__cta" data-open-detail="b-desk">Reservar con descuento</button>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+                <div class="desk-b__panel">
+                  <h3>Mirás. Matcheás. Reservás.</h3>
+                  <p>A la izquierda, el reel. A la derecha, tus matches de promo y ubicación — misma lógica Tinder, sin perder claridad.</p>
+                  <div class="desk-b__list">
+                    <button type="button" class="desk-b__item" data-open-detail="b-desk">
+                      <img class="desk-b__thumb" src="media/salon-2.jpg" alt="" width="52" height="52">
+                      <span><strong>Estudio Norte</strong><span>Balayage · −30%</span></span>
+                      <span class="btn">Ver</span>
+                    </button>
+                    <button type="button" class="desk-b__item" data-open-detail="b-desk">
+                      <img class="desk-b__thumb" src="media/nails.jpg" alt="" width="52" height="52">
+                      <span><strong>Nail Lab</strong><span>Gel · ahora</span></span>
+                      <span class="btn">Ver</span>
+                    </button>
+                    <button type="button" class="desk-b__item" data-open-detail="b-desk">
+                      <img class="desk-b__thumb" src="media/barber.jpg" alt="" width="52" height="52">
+                      <span><strong>Casa Olivo</strong><span>Fade · USD 18</span></span>
+                      <span class="btn">Ver</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="brand-block" aria-labelledby="names-title">
+      <h2 id="names-title">Marca: Glowgo y dos hermanas</h2>
+      <p>Queda Glowgo. Sumamos dos nombres en la misma familia. Lookly y Booklo salieron.</p>
+      <div class="names">
+        <article class="name-card">
+          <h3>Glowgo</h3>
+          <p>Nombre principal. Glow + go: salir a buscar el look cerca. Sirve para mapa, feed y reserva.</p>
+        </article>
+        <article class="name-card">
+          <h3>Glowly</h3>
+          <p>Misma raíz, tono más suave. Ideal si querés una variante más “friendly” sin perder el brillo de Glowgo.</p>
+        </article>
+        <article class="name-card">
+          <h3>Glowpin</h3>
+          <p>Glow + pin. Remarca ubicación y descubrimiento en el mapa: la belleza que está a menos de 2 km.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand-block" aria-labelledby="logos-title">
+      <h2 id="logos-title">Logos</h2>
+      <p>Misma paleta. Glowgo se mantiene; Glowly y Glowpin son nuevos.</p>
+      <div class="logos">
+        <article class="logo-card">
+          <img src="logos/logo-glowgo.png" width="128" height="128" alt="Logo Glowgo: pin con destello">
+          <h3>Glowgo</h3>
+          <p>Pin con destello. Mapa + brillo.</p>
+        </article>
+        <article class="logo-card">
+          <img src="logos/logo-glowly.png" width="128" height="128" alt="Logo Glowly: letra G con destello suave">
+          <h3>Glowly</h3>
+          <p>G con glow suave. Cercano y premium.</p>
+        </article>
+        <article class="logo-card">
+          <img src="logos/logo-glowpin.png" width="128" height="128" alt="Logo Glowpin: pin de ubicación con halo">
+          <h3>Glowpin</h3>
+          <p>Pin con halo. Descubrir cerca.</p>
+        </article>
+      </div>
+      <p class="hint">Tipografías: A usa Plus Jakarta Sans (equivalente web abierto a Airbnb Cereal/Circular, que es propietaria). B usa Figtree (aproximación abierta a Instagram Sans, también propietaria).</p>
+    </section>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
