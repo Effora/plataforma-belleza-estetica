@@ -16,7 +16,9 @@
     es: {
       docTag: "Demo UX · Glowgo",
       docTitle: "Dos formas de descubrir belleza",
-      docSub: "Paleta neurociencia unisex. A = Airbnb. B = Reels + Like / Pass. App internacional · ES · EN · PT.",
+      docSub: "Sensualidad y delicadeza · paleta unisex. A = Airbnb. B = Reels + Like / Pass. App internacional · ES · EN · PT.",
+      brandTag: "Encontrá tu centro de Estética y Bienestar — Unisex",
+      brandTagShort: "Estética y Bienestar — Unisex",
       labelLang: "Idioma",
       labelVersion: "Versión",
       labelDevice: "Dispositivo",
@@ -50,7 +52,9 @@
     en: {
       docTag: "UX Demo · Glowgo",
       docTitle: "Two ways to discover beauty",
-      docSub: "Unisex neuroscience palette. A = Airbnb flow. B = Reels + Like / Pass. International app · ES · EN · PT.",
+      docSub: "Sensuality and delicacy · unisex palette. A = Airbnb. B = Reels + Like / Pass. International app · ES · EN · PT.",
+      brandTag: "Find your Aesthetics & Wellness center — Unisex",
+      brandTagShort: "Aesthetics & Wellness — Unisex",
       labelLang: "Language",
       labelVersion: "Version",
       labelDevice: "Device",
@@ -84,7 +88,9 @@
     pt: {
       docTag: "Demo UX · Glowgo",
       docTitle: "Duas formas de descobrir beleza",
-      docSub: "Paleta de neurociência unissex. A = Airbnb. B = Reels + Like / Pass. App internacional · ES · EN · PT.",
+      docSub: "Sensualidade e delicadeza · paleta unissex. A = Airbnb. B = Reels + Like / Pass. App internacional · ES · EN · PT.",
+      brandTag: "Encontre seu centro de Estética e Bem-estar — Unissex",
+      brandTagShort: "Estética e Bem-estar — Unissex",
       labelLang: "Idioma",
       labelVersion: "Versão",
       labelDevice: "Dispositivo",
