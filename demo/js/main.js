@@ -3,9 +3,11 @@
   const stageA = document.getElementById("stage-a");
   const stageB = document.getElementById("stage-b");
   const hint = document.getElementById("hint-text");
+  const swipeToast = document.getElementById("swipe-toast");
   const versionButtons = document.querySelectorAll("[data-version]");
   const deviceButtons = document.querySelectorAll("[data-device]");
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const compactScrollThreshold = 28;
 
   const setVersion = (version) => {
     const isA = version === "a";
@@ -21,8 +23,8 @@
     });
 
     hint.textContent = isA
-      ? "Tocá una tarjeta o el corazón para guardar. Flujo tipo Airbnb."
-      : "En B: descartá, hacé match, likeá o abrí el mensaje.";
+      ? "Scrolleá: los iconos empiezan grandes y se achican. Tocá una tarjeta o el corazón."
+      : "En B: pasá (X), me gusta (✓) o deslizá. El corazón del costado también suma like.";
   };
 
   const setDevice = (device) => {
@@ -100,6 +102,9 @@
       const on = !button.classList.contains("is-on");
       button.classList.toggle("is-on", on);
       button.setAttribute("aria-pressed", on ? "true" : "false");
+      if (on && button.closest(".app-b")) {
+        showSwipeToast("like", "ME GUSTA");
+      }
     });
   });
 
@@ -134,7 +139,28 @@
     });
   });
 
+  const bindAirbnbScrollShrink = () => {
+    document.querySelectorAll(".app-a__scroll").forEach((scrollRoot) => {
+      const app = scrollRoot.closest(".app-a");
+      const catsBar = scrollRoot.querySelector(".cats-bar");
+
+      const updateCompactState = () => {
+        const compact = scrollRoot.scrollTop > compactScrollThreshold;
+        if (app) {
+          app.classList.toggle("is-scrolled", compact);
+        }
+        if (catsBar) {
+          catsBar.classList.toggle("is-compact", compact);
+        }
+      };
+
+      scrollRoot.addEventListener("scroll", updateCompactState, { passive: true });
+      updateCompactState();
+    });
+  };
+
   let reelIndex = 0;
+  let swipeBusy = false;
   const reels = Array.from(document.querySelectorAll("#reel-stack > .reel[data-reel]"));
 
   const showReel = (index) => {
@@ -145,28 +171,56 @@
     });
   };
 
+  const showSwipeToast = (kind, label) => {
+    if (!swipeToast) {
+      return;
+    }
+    swipeToast.textContent = label;
+    swipeToast.className = `swipe-toast swipe-toast--${kind} is-on`;
+    window.setTimeout(() => {
+      swipeToast.classList.remove("is-on");
+    }, prefersReducedMotion ? 400 : 700);
+  };
+
+  const pulseSwipeButton = (direction) => {
+    const button = document.querySelector(`[data-swipe="${direction}"]`);
+    if (!button) {
+      return;
+    }
+    button.classList.remove("is-pulse");
+    void button.offsetWidth;
+    button.classList.add("is-pulse");
+  };
+
   const swipeReel = (direction) => {
-    if (reels.length === 0) {
+    if (swipeBusy || reels.length === 0) {
       return;
     }
     const current = reels[reelIndex];
     if (!current) {
       return;
     }
-    current.classList.add(direction === "like" ? "is-like" : "is-pass");
+
+    swipeBusy = true;
+    const isLike = direction === "like";
+    pulseSwipeButton(direction);
+    showSwipeToast(isLike ? "like" : "pass", isLike ? "ME GUSTA" : "PASAR");
+    current.classList.add(isLike ? "is-like" : "is-pass");
+
+    const stampDelay = prefersReducedMotion ? 0 : 180;
+    const exitDelay = prefersReducedMotion ? 0 : 300;
+
     window.setTimeout(() => {
-      current.classList.add(direction === "like" ? "is-out-right" : "is-out-left");
+      current.classList.add(isLike ? "is-out-right" : "is-out-left");
       window.setTimeout(() => {
         reelIndex = (reelIndex + 1) % reels.length;
         showReel(reelIndex);
-        if (direction === "like") {
-          const phone = current.closest(".phone__screen");
-          if (phone) {
-            showScreen(phone, "b-detail");
-          }
-        }
-      }, prefersReducedMotion ? 0 : 280);
-    }, prefersReducedMotion ? 0 : 160);
+        swipeBusy = false;
+        hint.textContent = isLike
+          ? "Me gusta ✓ · seguí pasando o tocá Reservar / i para el detalle."
+          : "Pasaste esta promo · viene la siguiente.";
+      }, exitDelay);
+    }, stampDelay);
   };
 
   document.querySelectorAll("[data-swipe]").forEach((button) => {
@@ -180,27 +234,57 @@
     let startX = 0;
     let tracking = false;
 
+    const beginTrack = (clientX) => {
+      tracking = true;
+      startX = clientX;
+    };
+
+    const endTrack = (clientX) => {
+      if (!tracking) {
+        return;
+      }
+      tracking = false;
+      const deltaX = clientX - startX;
+      if (Math.abs(deltaX) < 56) {
+        return;
+      }
+      swipeReel(deltaX > 0 ? "like" : "pass");
+    };
+
     reelStack.addEventListener("touchstart", (event) => {
       if (!event.changedTouches[0]) {
         return;
       }
-      tracking = true;
-      startX = event.changedTouches[0].clientX;
+      beginTrack(event.changedTouches[0].clientX);
     }, { passive: true });
 
     reelStack.addEventListener("touchend", (event) => {
-      if (!tracking || !event.changedTouches[0]) {
+      if (!event.changedTouches[0]) {
         return;
       }
-      tracking = false;
-      const deltaX = event.changedTouches[0].clientX - startX;
-      if (Math.abs(deltaX) < 60) {
-        return;
-      }
-      swipeReel(deltaX > 0 ? "like" : "pass");
+      endTrack(event.changedTouches[0].clientX);
     }, { passive: true });
+
+    reelStack.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "touch" || event.button !== 0) {
+        return;
+      }
+      if (event.target.closest("button")) {
+        return;
+      }
+      beginTrack(event.clientX);
+      reelStack.setPointerCapture(event.pointerId);
+    });
+
+    reelStack.addEventListener("pointerup", (event) => {
+      if (event.pointerType === "touch") {
+        return;
+      }
+      endTrack(event.clientX);
+    });
   }
 
+  bindAirbnbScrollShrink();
   showReel(0);
   setVersion("a");
   setDevice("mobile");

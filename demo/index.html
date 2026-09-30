@@ -38,7 +38,7 @@
     <header class="doc-header">
       <p class="doc-tag">Demo UX · Glowgo</p>
       <h1 class="doc-title">Dos formas de descubrir belleza</h1>
-      <p class="doc-sub">Paleta neurociencia unisex: petróleo para calma y confianza (permanecer), arena para descanso visual (usabilidad), terracota solo en reservar/confirmar (consumo), oro en destacados y puntos (recompensa). A = flujo Airbnb; B = Reels + match. Probá mobile y desktop.</p>
+      <p class="doc-sub">Paleta neurociencia unisex: petróleo, arena, terracota y oro. A = flujo Airbnb (iconos grandes que se achican al scrollear). B = Reels + pasar / me gusta. Probá mobile y desktop.</p>
     </header>
 
     <div class="controls" id="demo">
@@ -90,7 +90,7 @@
                         <button type="button" class="chip">4,5+</button>
                       </div>
                     </div>
-                    <nav aria-label="Categorías">
+                    <nav class="cats-bar" aria-label="Categorías">
                       <ul class="cats">
                         <li>
                           <button type="button" class="cat is-on">
@@ -449,8 +449,8 @@
                       <img src="media/salon-2.jpg" alt="Trabajo de color en el salón" width="360" height="720">
                       <div class="reel__gradient"></div>
                       <div class="reel__progress" aria-hidden="true"><span class="is-on"></span><span></span><span></span></div>
-                      <p class="reel__stamp reel__stamp--like">MATCH</p>
-                      <p class="reel__stamp reel__stamp--pass">NOPE</p>
+                      <p class="reel__stamp reel__stamp--like">ME GUSTA</p>
+                      <p class="reel__stamp reel__stamp--pass">PASAR</p>
                       <div class="reel__top">
                         <p class="reel__mode">Para vos <span>|</span> Cerca</p>
                         <button type="button" class="reel__search" aria-label="Buscar">
@@ -491,8 +491,8 @@
                       <img src="media/nails.jpg" alt="Detalle de manicura" width="360" height="720">
                       <div class="reel__gradient"></div>
                       <div class="reel__progress" aria-hidden="true"><span></span><span class="is-on"></span><span></span></div>
-                      <p class="reel__stamp reel__stamp--like">MATCH</p>
-                      <p class="reel__stamp reel__stamp--pass">NOPE</p>
+                      <p class="reel__stamp reel__stamp--like">ME GUSTA</p>
+                      <p class="reel__stamp reel__stamp--pass">PASAR</p>
                       <div class="reel__top">
                         <p class="reel__mode">Para vos <span>|</span> Promos</p>
                         <button type="button" class="reel__search" aria-label="Buscar"><svg class="icon"><use href="#i-search"></use></svg></button>
@@ -531,8 +531,8 @@
                       <img src="media/barber.jpg" alt="Corte de barba en barbería" width="360" height="720">
                       <div class="reel__gradient"></div>
                       <div class="reel__progress" aria-hidden="true"><span></span><span></span><span class="is-on"></span></div>
-                      <p class="reel__stamp reel__stamp--like">MATCH</p>
-                      <p class="reel__stamp reel__stamp--pass">NOPE</p>
+                      <p class="reel__stamp reel__stamp--like">ME GUSTA</p>
+                      <p class="reel__stamp reel__stamp--pass">PASAR</p>
                       <div class="reel__top">
                         <p class="reel__mode">Para vos <span>|</span> Cerca</p>
                         <button type="button" class="reel__search" aria-label="Buscar"><svg class="icon"><use href="#i-search"></use></svg></button>
@@ -567,16 +567,17 @@
                     </div>
                   </article>
                   <div class="swipe-bar">
-                    <button type="button" class="swipe-btn swipe-btn--pass" data-swipe="pass" aria-label="Descartar promo">
+                    <button type="button" class="swipe-btn swipe-btn--pass" data-swipe="pass" aria-label="Pasar / descartar">
                       <svg class="icon icon--lg"><use href="#i-x"></use></svg>
                     </button>
                     <button type="button" class="swipe-btn swipe-btn--info" data-open-detail="b" aria-label="Ver detalle">
                       <svg class="icon"><use href="#i-info"></use></svg>
                     </button>
-                    <button type="button" class="swipe-btn swipe-btn--like" data-swipe="like" aria-label="Hacer match">
+                    <button type="button" class="swipe-btn swipe-btn--like" data-swipe="like" aria-label="Me gusta">
                       <svg class="icon icon--lg"><use href="#i-check"></use></svg>
                     </button>
                   </div>
+                  <p class="swipe-toast" id="swipe-toast" aria-live="polite"></p>
                 </div>
               </div>
 
