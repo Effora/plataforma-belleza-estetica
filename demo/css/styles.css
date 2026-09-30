@@ -710,6 +710,9 @@ body.is-desktop .device-grid--desktop { display: flex; }
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 44px;
   padding: 0 18px;
   border-radius: 10px;
@@ -717,6 +720,8 @@ body.is-desktop .device-grid--desktop { display: flex; }
   color: #fff;
   font-weight: 700;
   font-size: 14px;
+  line-height: 1;
+  text-align: center;
 }
 
 .btn--full {
@@ -1474,6 +1479,17 @@ body.is-desktop .device-grid--desktop { display: flex; }
 .desk-b__item span {
   font-size: 13px;
   color: var(--muted);
+}
+
+.desk-b__item .btn {
+  flex-shrink: 0;
+  min-width: 64px;
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
 }
 
 .desk-b__thumb {
