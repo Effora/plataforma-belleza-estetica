@@ -3,12 +3,12 @@
   const stageA = document.getElementById("stage-a");
   const stageB = document.getElementById("stage-b");
   const hint = document.getElementById("hint-text");
-  const swipeToast = document.getElementById("swipe-toast");
+  const swipeToast = null;
   const versionButtons = document.querySelectorAll("[data-version]");
   const deviceButtons = document.querySelectorAll("[data-device]");
   const langButtons = document.querySelectorAll("[data-lang]");
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const compactScrollThreshold = 28;
+  const compactScrollThreshold = 12;
   const stampLike = "Like";
   const stampPass = "Pass";
 
@@ -302,22 +302,37 @@
   });
 
   const bindAirbnbScrollShrink = () => {
-    document.querySelectorAll(".app-a__scroll").forEach((scrollRoot) => {
-      const app = scrollRoot.closest(".app-a");
-      const catsBar = scrollRoot.querySelector(".cats-bar");
-
+    const bindScrollRoot = (scrollRoot, appNode, catsBar) => {
+      if (!scrollRoot) {
+        return;
+      }
       const updateCompactState = () => {
         const compact = scrollRoot.scrollTop > compactScrollThreshold;
-        if (app) {
-          app.classList.toggle("is-scrolled", compact);
+        if (appNode) {
+          appNode.classList.toggle("is-scrolled", compact);
         }
         if (catsBar) {
           catsBar.classList.toggle("is-compact", compact);
         }
       };
-
       scrollRoot.addEventListener("scroll", updateCompactState, { passive: true });
       updateCompactState();
+    };
+
+    document.querySelectorAll(".app-a__scroll").forEach((scrollRoot) => {
+      bindScrollRoot(
+        scrollRoot,
+        scrollRoot.closest(".app-a"),
+        scrollRoot.querySelector(".cats-bar")
+      );
+    });
+
+    document.querySelectorAll(".desk-a__main").forEach((scrollRoot) => {
+      bindScrollRoot(
+        scrollRoot,
+        scrollRoot.closest(".desk-a"),
+        scrollRoot.querySelector(".cats-bar")
+      );
     });
   };
 
@@ -333,15 +348,8 @@
     });
   };
 
-  const showSwipeToast = (kind, label) => {
-    if (!swipeToast) {
-      return;
-    }
-    swipeToast.textContent = label;
-    swipeToast.className = `swipe-toast swipe-toast--${kind} is-on`;
-    window.setTimeout(() => {
-      swipeToast.classList.remove("is-on");
-    }, prefersReducedMotion ? 400 : 700);
+  const showSwipeToast = () => {
+    /* Un solo cartel: el stamp grande del reel. */
   };
 
   const pulseSwipeButton = (direction) => {
