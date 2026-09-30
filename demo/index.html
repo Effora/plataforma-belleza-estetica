@@ -36,28 +36,36 @@
 
   <div class="shell">
     <header class="doc-header">
-      <p class="doc-tag">Demo UX · Glowgo</p>
-      <h1 class="doc-title">Dos formas de descubrir belleza</h1>
-      <p class="doc-sub">Paleta neurociencia unisex: petróleo, arena, terracota y oro. A = flujo Airbnb (iconos grandes que se achican al scrollear). B = Reels + pasar / me gusta. Probá mobile y desktop.</p>
+      <p class="doc-tag" data-i18n="docTag">Demo UX · Glowgo</p>
+      <h1 class="doc-title" data-i18n="docTitle">Dos formas de descubrir belleza</h1>
+      <p class="doc-sub" data-i18n="docSub">Paleta neurociencia unisex: petróleo, arena, terracota y oro. A = flujo Airbnb. B = Reels + Like / Pass. Probá mobile y desktop · app internacional.</p>
     </header>
 
     <div class="controls" id="demo">
       <div class="control-group">
-        <span class="control-label">Versión</span>
+        <span class="control-label" data-i18n="labelLang">Idioma</span>
+        <div class="segment segment--three" role="group" aria-label="Choose language">
+          <button type="button" class="segment__btn is-on" data-lang="es" aria-pressed="true">ES</button>
+          <button type="button" class="segment__btn" data-lang="en" aria-pressed="false">EN</button>
+          <button type="button" class="segment__btn" data-lang="pt" aria-pressed="false">PT</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <span class="control-label" data-i18n="labelVersion">Versión</span>
         <div class="segment" role="group" aria-label="Elegir propuesta">
           <button type="button" class="segment__btn is-on" data-version="a" aria-pressed="true">A · Airbnb</button>
           <button type="button" class="segment__btn segment__btn--b" data-version="b" aria-pressed="false">B · Reels + match</button>
         </div>
       </div>
       <div class="control-group">
-        <span class="control-label">Dispositivo</span>
+        <span class="control-label" data-i18n="labelDevice">Dispositivo</span>
         <div class="segment" role="group" aria-label="Elegir dispositivo">
           <button type="button" class="segment__btn is-on" data-device="mobile" aria-pressed="true">Mobile</button>
           <button type="button" class="segment__btn" data-device="desktop" aria-pressed="false">Desktop</button>
         </div>
       </div>
     </div>
-    <p class="hint" id="hint-text">Tocá una tarjeta o el corazón. En B: descartá, likeá o abrí el chat.</p>
+    <p class="hint" id="hint-text" data-i18n="hintA">Tocá una tarjeta o el corazón. En B: Pass, Like o abrí el chat.</p>
 
     <section class="stage is-active" id="stage-a" aria-label="Propuesta A estilo Airbnb">
       <div class="device-grid device-grid--mobile">
@@ -71,22 +79,22 @@
                 <div class="app-a">
                   <div class="app-a__scroll">
                     <div class="app-a__head">
-                      <p class="app-a__hello">Hola, Carolina</p>
-                      <h2 class="app-a__title">¿Qué te hacés hoy?</h2>
-                      <button type="button" class="search-pill" aria-label="Buscar servicio cerca">
+                      <p class="app-a__hello" data-i18n="hello">Hola, Carolina</p>
+                      <h2 class="app-a__title" data-i18n="homeTitle">¿Qué te hacés hoy?</h2>
+                      <button type="button" class="search-pill" aria-label="Buscar servicio cerca" data-i18n-aria="searchAria">
                         <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
                         <span class="search-pill__copy">
-                          <span class="search-pill__main">Corte, color, uñas…</span>
-                          <span class="search-pill__sub">Cerca · Cualquier día · Filtros</span>
+                          <span class="search-pill__main" data-i18n="searchMain">Corte, color, uñas…</span>
+                          <span class="search-pill__sub" data-i18n="searchSub">Cerca · Cualquier día · Filtros</span>
                         </span>
                         <span class="search-pill__filter" aria-hidden="true">
                           <svg class="icon icon--sm"><use href="#i-sliders"></use></svg>
                         </span>
                       </button>
                       <div class="chips" role="group" aria-label="Filtros rápidos">
-                        <button type="button" class="chip is-on">Promos</button>
-                        <button type="button" class="chip">Hasta USD 20</button>
-                        <button type="button" class="chip">Ahora</button>
+                        <button type="button" class="chip is-on" data-i18n="chipPromos">Promos</button>
+                        <button type="button" class="chip" data-i18n="chipPrice">Hasta USD 20</button>
+                        <button type="button" class="chip" data-i18n="chipNow">Ahora</button>
                         <button type="button" class="chip">4,5+</button>
                       </div>
                     </div>
@@ -95,37 +103,37 @@
                         <li>
                           <button type="button" class="cat is-on">
                             <span class="cat__icon-wrap"><svg class="icon"><use href="#i-scissors"></use></svg></span>
-                            Corte
+                            <span data-i18n="catCut">Corte</span>
                           </button>
                         </li>
                         <li>
                           <button type="button" class="cat">
                             <span class="cat__icon-wrap"><svg class="icon"><use href="#i-spark"></use></svg></span>
-                            Uñas
+                            <span data-i18n="catNails">Uñas</span>
                           </button>
                         </li>
                         <li>
                           <button type="button" class="cat">
                             <span class="cat__icon-wrap"><svg class="icon"><use href="#i-droplet"></use></svg></span>
-                            Color
+                            <span data-i18n="catColor">Color</span>
                           </button>
                         </li>
                         <li>
                           <button type="button" class="cat">
                             <span class="cat__icon-wrap"><svg class="icon"><use href="#i-hand"></use></svg></span>
-                            Piel
+                            <span data-i18n="catSkin">Piel</span>
                           </button>
                         </li>
                         <li>
                           <button type="button" class="cat">
                             <span class="cat__icon-wrap"><svg class="icon"><use href="#i-beard"></use></svg></span>
-                            Barba
+                            <span data-i18n="catBeard">Barba</span>
                           </button>
                         </li>
                       </ul>
                     </nav>
                     <div class="section-row">
-                      <p class="section-row__title">Cerca tuyo</p>
+                      <p class="section-row__title" data-i18n="nearYou">Cerca tuyo</p>
                       <button type="button" class="section-row__link">Mapa</button>
                     </div>
                     <div class="cards">
@@ -148,7 +156,7 @@
                           <span class="card__avail">Turnos disponibles hoy</span>
                           <div class="card__price-row">
                             <span class="card__price"><span class="card__old">USD 25</span>USD 18</span>
-                            <button type="button" class="btn" data-open-detail="a">Reservar</button>
+                            <button type="button" class="btn" data-open-detail="a" data-i18n="book">Reservar</button>
                           </div>
                         </div>
                       </article>
@@ -169,7 +177,7 @@
                           <span class="card__avail">3 turnos libres hoy</span>
                           <div class="card__price-row">
                             <span class="card__price">USD 15</span>
-                            <button type="button" class="btn" data-open-detail="a">Reservar</button>
+                            <button type="button" class="btn" data-open-detail="a" data-i18n="book">Reservar</button>
                           </div>
                         </div>
                       </article>
@@ -237,7 +245,7 @@
                         <p class="service__price">USD 10</p>
                       </div>
                       <p class="points-hint">Ganás 40 puntos si reservás en Glowgo</p>
-                      <button type="button" class="btn btn--full btn--dark">Reservar turno</button>
+                      <button type="button" class="btn btn--full btn--dark" data-i18n="bookSlot">Reservar turno</button>
                     </div>
                   </div>
                 </div>
@@ -284,7 +292,7 @@
                       </div>
                       <div class="service__price">USD 38<span class="service__promo">−30% hoy</span></div>
                     </div>
-                    <button type="button" class="btn btn--full btn--dark">Reservar turno</button>
+                    <button type="button" class="btn btn--full btn--dark" data-i18n="bookSlot">Reservar turno</button>
                   </div>
                 </div>
               </div>
@@ -425,7 +433,7 @@
                     </div>
                     <div class="service__price">USD 38<span class="service__promo">−30% hoy</span></div>
                   </div>
-                  <button type="button" class="btn btn--full btn--dark">Reservar turno</button>
+                  <button type="button" class="btn btn--full btn--dark" data-i18n="bookSlot">Reservar turno</button>
                   <p class="points-hint">Beneficio y puntos solo si reservás en la app</p>
                 </div>
               </div>
@@ -449,10 +457,10 @@
                       <img src="media/salon-2.jpg" alt="Trabajo de color en el salón" width="360" height="720">
                       <div class="reel__gradient"></div>
                       <div class="reel__progress" aria-hidden="true"><span class="is-on"></span><span></span><span></span></div>
-                      <p class="reel__stamp reel__stamp--like">ME GUSTA</p>
-                      <p class="reel__stamp reel__stamp--pass">PASAR</p>
+                      <p class="reel__stamp reel__stamp--like">Like</p>
+                      <p class="reel__stamp reel__stamp--pass">Pass</p>
                       <div class="reel__top">
-                        <p class="reel__mode">Para vos <span>|</span> Cerca</p>
+                        <p class="reel__mode"><span data-i18n="forYou">Para vos</span> <span>|</span> <span data-i18n="nearby">Cerca</span></p>
                         <button type="button" class="reel__search" aria-label="Buscar">
                           <svg class="icon"><use href="#i-search"></use></svg>
                         </button>
@@ -482,7 +490,7 @@
                         <p class="reel__salon">Estudio Norte · 600 m</p>
                         <p class="reel__desc">Balayage real · promo cerca tuyo</p>
                         <span class="reel__chip">−30% HOY · match de ubicación</span>
-                        <button type="button" class="btn reel__cta" data-open-detail="b">Reservar con descuento</button>
+                        <button type="button" class="btn reel__cta" data-open-detail="b" data-i18n="bookDiscount">Reservar con descuento</button>
                       </div>
                     </div>
                   </article>
@@ -491,10 +499,10 @@
                       <img src="media/nails.jpg" alt="Detalle de manicura" width="360" height="720">
                       <div class="reel__gradient"></div>
                       <div class="reel__progress" aria-hidden="true"><span></span><span class="is-on"></span><span></span></div>
-                      <p class="reel__stamp reel__stamp--like">ME GUSTA</p>
-                      <p class="reel__stamp reel__stamp--pass">PASAR</p>
+                      <p class="reel__stamp reel__stamp--like">Like</p>
+                      <p class="reel__stamp reel__stamp--pass">Pass</p>
                       <div class="reel__top">
-                        <p class="reel__mode">Para vos <span>|</span> Promos</p>
+                        <p class="reel__mode"><span data-i18n="forYou">Para vos</span> <span>|</span> <span data-i18n="chipPromos">Promos</span></p>
                         <button type="button" class="reel__search" aria-label="Buscar"><svg class="icon"><use href="#i-search"></use></svg></button>
                       </div>
                       <div class="reel__side">
@@ -522,7 +530,7 @@
                         <p class="reel__salon">Nail Lab · 1,2 km</p>
                         <p class="reel__desc">Gel en 40 min · disponible ahora</p>
                         <span class="reel__chip">Promo cerca · match</span>
-                        <button type="button" class="btn reel__cta" data-open-detail="b">Reservar</button>
+                        <button type="button" class="btn reel__cta" data-open-detail="b" data-i18n="book">Reservar</button>
                       </div>
                     </div>
                   </article>
@@ -531,10 +539,10 @@
                       <img src="media/barber.jpg" alt="Corte de barba en barbería" width="360" height="720">
                       <div class="reel__gradient"></div>
                       <div class="reel__progress" aria-hidden="true"><span></span><span></span><span class="is-on"></span></div>
-                      <p class="reel__stamp reel__stamp--like">ME GUSTA</p>
-                      <p class="reel__stamp reel__stamp--pass">PASAR</p>
+                      <p class="reel__stamp reel__stamp--like">Like</p>
+                      <p class="reel__stamp reel__stamp--pass">Pass</p>
                       <div class="reel__top">
-                        <p class="reel__mode">Para vos <span>|</span> Cerca</p>
+                        <p class="reel__mode"><span data-i18n="forYou">Para vos</span> <span>|</span> <span data-i18n="nearby">Cerca</span></p>
                         <button type="button" class="reel__search" aria-label="Buscar"><svg class="icon"><use href="#i-search"></use></svg></button>
                       </div>
                       <div class="reel__side">
@@ -562,18 +570,18 @@
                         <p class="reel__salon">Casa Olivo · 900 m</p>
                         <p class="reel__desc">Fade + barba · resultado real</p>
                         <span class="reel__chip">USD 18 · hoy cerca</span>
-                        <button type="button" class="btn reel__cta" data-open-detail="b">Reservar</button>
+                        <button type="button" class="btn reel__cta" data-open-detail="b" data-i18n="book">Reservar</button>
                       </div>
                     </div>
                   </article>
                   <div class="swipe-bar">
-                    <button type="button" class="swipe-btn swipe-btn--pass" data-swipe="pass" aria-label="Pasar / descartar">
+                    <button type="button" class="swipe-btn swipe-btn--pass" data-swipe="pass" aria-label="Pass">
                       <svg class="icon icon--lg"><use href="#i-x"></use></svg>
                     </button>
-                    <button type="button" class="swipe-btn swipe-btn--info" data-open-detail="b" aria-label="Ver detalle">
+                    <button type="button" class="swipe-btn swipe-btn--info" data-open-detail="b" aria-label="Info">
                       <svg class="icon"><use href="#i-info"></use></svg>
                     </button>
-                    <button type="button" class="swipe-btn swipe-btn--like" data-swipe="like" aria-label="Me gusta">
+                    <button type="button" class="swipe-btn swipe-btn--like" data-swipe="like" aria-label="Like">
                       <svg class="icon icon--lg"><use href="#i-check"></use></svg>
                     </button>
                   </div>
@@ -612,7 +620,7 @@
                     </div>
                     <div class="b-detail__actions">
                       <button type="button" class="btn btn--ghost" data-message>Mensaje</button>
-                      <button type="button" class="btn">Reservar ahora</button>
+                      <button type="button" class="btn" data-i18n="bookNow">Reservar ahora</button>
                     </div>
                   </div>
                 </div>
@@ -653,10 +661,10 @@
                   <h2 class="b-detail__name">Estudio Norte</h2>
                   <p class="b-detail__meta">Match · promo + ubicación</p>
                   <div class="story">
-                    <p class="story__label">Próximo paso</p>
+                    <p class="story__label" data-i18n="nextStep">Próximo paso</p>
                     <p class="story__text">Reservá o mandá mensaje. Confirmación por WhatsApp incluida.</p>
                   </div>
-                  <button type="button" class="btn btn--full">Reservar turno</button>
+                  <button type="button" class="btn btn--full" data-i18n="bookSlot">Reservar turno</button>
                 </div>
               </div>
             </div>
@@ -687,7 +695,7 @@
                         <p class="reel__salon">Estudio Norte · 600 m</p>
                         <p class="reel__desc">Balayage · promo cerca</p>
                         <span class="reel__chip">−30% HOY</span>
-                        <button type="button" class="btn reel__cta" data-open-detail="b-desk">Reservar con descuento</button>
+                        <button type="button" class="btn reel__cta" data-open-detail="b-desk" data-i18n="bookDiscount">Reservar con descuento</button>
                       </div>
                     </div>
                   </article>
