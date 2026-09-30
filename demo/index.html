@@ -36,15 +36,18 @@
 
   <div class="shell">
     <header class="doc-header">
-      <div class="brand-lockup">
-        <img class="brand-lockup__logo" src="logos/logo-glowgo.jpg" width="220" height="220" alt="Glowgo">
-        <p class="brand-lockup__name">Glowgo</p>
-        <p class="brand-lockup__tag" data-i18n="brandTag">Encontrá tu centro de Estética y Bienestar — Unisex</p>
-      </div>
       <p class="doc-tag" data-i18n="docTag">Demo UX · Glowgo</p>
       <h1 class="doc-title" data-i18n="docTitle">Dos formas de descubrir belleza</h1>
       <p class="doc-sub" data-i18n="docSub">Paleta neurociencia unisex · sensualidad y delicadeza. A = Airbnb. B = Reels + Like / Pass. App internacional · ES · EN · PT.</p>
     </header>
+
+    <div class="brand-banner" aria-label="Marca Glowgo">
+      <img class="brand-banner__logo" src="logos/logo-glowgo.jpg" width="200" height="200" alt="Glowgo">
+      <div class="brand-banner__copy">
+        <p class="brand-banner__name">Glowgo</p>
+        <p class="brand-banner__tag" data-i18n="brandTag">Encontrá tu centro de Estética y Bienestar — Unisex</p>
+      </div>
+    </div>
 
     <div class="controls" id="demo">
       <div class="control-group">
@@ -84,13 +87,6 @@
                 <div class="app-a">
                   <div class="app-a__scroll">
                     <div class="app-a__head">
-                      <div class="app-a__brand">
-                        <img src="logos/logo-glowgo.jpg" width="28" height="28" alt="">
-                        <span>
-                          <span class="app-a__brand-name">Glowgo</span>
-                          <span class="app-a__brand-tag" data-i18n="brandTagShort">Estética y Bienestar — Unisex</span>
-                        </span>
-                      </div>
                       <p class="app-a__hello" data-i18n="hello">Hola, Carolina</p>
                       <h2 class="app-a__title" data-i18n="homeTitle">¿Qué te hacés hoy?</h2>
                       <button type="button" class="search-pill" aria-label="Buscar servicio cerca" data-i18n-aria="searchAria">
@@ -510,12 +506,9 @@
                       <p class="reel__stamp reel__stamp--pass">Pass</p>
                       <div class="reel__top">
                         <p class="reel__mode"><span data-i18n="forYou">Para vos</span> <span>|</span> <span data-i18n="nearby">Cerca</span></p>
-                        <div class="reel__top-actions">
-                          <img class="reel__brand" src="logos/logo-glowgo.jpg" width="36" height="36" alt="Glowgo">
-                          <button type="button" class="reel__search" aria-label="Buscar">
+                        <button type="button" class="reel__search" aria-label="Buscar">
                             <svg class="icon"><use href="#i-search"></use></svg>
                           </button>
-                        </div>
                       </div>
                       <div class="reel__side">
                         <div class="reel__action">
@@ -555,10 +548,7 @@
                       <p class="reel__stamp reel__stamp--pass">Pass</p>
                       <div class="reel__top">
                         <p class="reel__mode"><span data-i18n="forYou">Para vos</span> <span>|</span> <span data-i18n="chipPromos">Promos</span></p>
-                        <div class="reel__top-actions">
-                          <img class="reel__brand" src="logos/logo-glowgo.jpg" width="36" height="36" alt="Glowgo">
-                          <button type="button" class="reel__search" aria-label="Buscar"><svg class="icon"><use href="#i-search"></use></svg></button>
-                        </div>
+                        <button type="button" class="reel__search" aria-label="Buscar"><svg class="icon"><use href="#i-search"></use></svg></button>
                       </div>
                       <div class="reel__side">
                         <div class="reel__action">
@@ -598,10 +588,7 @@
                       <p class="reel__stamp reel__stamp--pass">Pass</p>
                       <div class="reel__top">
                         <p class="reel__mode"><span data-i18n="forYou">Para vos</span> <span>|</span> <span data-i18n="nearby">Cerca</span></p>
-                        <div class="reel__top-actions">
-                          <img class="reel__brand" src="logos/logo-glowgo.jpg" width="36" height="36" alt="Glowgo">
-                          <button type="button" class="reel__search" aria-label="Buscar"><svg class="icon"><use href="#i-search"></use></svg></button>
-                        </div>
+                        <button type="button" class="reel__search" aria-label="Buscar"><svg class="icon"><use href="#i-search"></use></svg></button>
                       </div>
                       <div class="reel__side">
                         <div class="reel__action">
@@ -758,8 +745,6 @@
                   </article>
                 </div>
                 <div class="desk-b__panel">
-                  <img class="desk-b__logo" src="logos/logo-glowgo.jpg" width="72" height="72" alt="Glowgo">
-                  <p class="desk-b__tag" data-i18n="brandTag">Encontrá tu centro de Estética y Bienestar — Unisex</p>
                   <h3>Mirás. Matcheás. Reservás.</h3>
                   <p>A la izquierda, el reel. A la derecha, tus matches de promo y ubicación — misma lógica Tinder, sin perder claridad.</p>
                   <div class="desk-b__list">
