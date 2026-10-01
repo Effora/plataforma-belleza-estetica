@@ -17,8 +17,8 @@
       docTag: "Demo UX · Glowgo",
       docTitle: "Dos formas de descubrir belleza",
       docSub: "Sensualidad y delicadeza · paleta unisex. A = Airbnb. B = Reels + Like / Pass. App internacional · ES · EN · PT.",
-      brandTag: "Encontrá tu centro de Estética y Bienestar — Unisex",
-      brandTagShort: "Estética y Bienestar — Unisex",
+      brandTag: "Discover Beauty ✦ Everywhere",
+      brandTagShort: "Discover Beauty ✦ Everywhere",
       labelLang: "Idioma",
       labelVersion: "Versión",
       labelDevice: "Dispositivo",
@@ -53,8 +53,8 @@
       docTag: "UX Demo · Glowgo",
       docTitle: "Two ways to discover beauty",
       docSub: "Sensuality and delicacy · unisex palette. A = Airbnb. B = Reels + Like / Pass. International app · ES · EN · PT.",
-      brandTag: "Find your Aesthetics & Wellness center — Unisex",
-      brandTagShort: "Aesthetics & Wellness — Unisex",
+      brandTag: "Discover Beauty ✦ Everywhere",
+      brandTagShort: "Discover Beauty ✦ Everywhere",
       labelLang: "Language",
       labelVersion: "Version",
       labelDevice: "Device",
@@ -89,8 +89,8 @@
       docTag: "Demo UX · Glowgo",
       docTitle: "Duas formas de descobrir beleza",
       docSub: "Sensualidade e delicadeza · paleta unissex. A = Airbnb. B = Reels + Like / Pass. App internacional · ES · EN · PT.",
-      brandTag: "Encontre seu centro de Estética e Bem-estar — Unissex",
-      brandTagShort: "Estética e Bem-estar — Unissex",
+      brandTag: "Discover Beauty ✦ Everywhere",
+      brandTagShort: "Discover Beauty ✦ Everywhere",
       labelLang: "Idioma",
       labelVersion: "Versão",
       labelDevice: "Dispositivo",
@@ -285,6 +285,21 @@
       if (hint) {
         hint.textContent = getText("hintChat");
       }
+    });
+  });
+
+  document.querySelectorAll(".nav__item").forEach((button) => {
+    button.addEventListener("click", () => {
+      const nav = button.closest(".nav");
+      if (!nav) {
+        return;
+      }
+      nav.querySelectorAll(".nav__item").forEach((item) => {
+        item.classList.remove("is-on");
+        item.removeAttribute("aria-current");
+      });
+      button.classList.add("is-on");
+      button.setAttribute("aria-current", "page");
     });
   });
 

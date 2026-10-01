@@ -12,16 +12,98 @@
   <a class="skip-link" href="#demo">Saltar al demo</a>
 
   <svg xmlns="http://www.w3.org/2000/svg" class="sprite" aria-hidden="true">
+    <defs>
+      <linearGradient id="g-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFF3D6"/>
+        <stop offset="35%" stop-color="#F7D070"/>
+        <stop offset="70%" stop-color="#D49E35"/>
+        <stop offset="100%" stop-color="#B37D1E"/>
+      </linearGradient>
+      <linearGradient id="g-teal" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#3FA490"/>
+        <stop offset="45%" stop-color="#24584E"/>
+        <stop offset="100%" stop-color="#143A33"/>
+      </linearGradient>
+      <linearGradient id="g-coral" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FF9F7A"/>
+        <stop offset="100%" stop-color="#F25C54"/>
+      </linearGradient>
+    </defs>
+    <symbol id="g-sparkle-mini" viewBox="-10 -10 20 20">
+      <path d="M0-8Q0 0 8 0Q0 0 0 8Q0 0-8 0Q0 0 0-8Z" fill="#FFE28A"/>
+      <circle cx="0" cy="0" r="1.2" fill="#fff"/>
+    </symbol>
+    <symbol id="g-corte" viewBox="0 0 48 48" fill="none">
+      <circle cx="14" cy="34" r="7" stroke="currentColor" stroke-width="2.4"/>
+      <circle cx="34" cy="34" r="7" stroke="currentColor" stroke-width="2.4"/>
+      <path d="M19 28.5 36 10" stroke="url(#g-gold)" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M29 28.5 12 10" stroke="url(#g-gold)" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="24" cy="22" r="2.2" fill="#fff" stroke="currentColor" stroke-width="1"/>
+    </symbol>
+    <symbol id="g-unas" viewBox="0 0 48 48" fill="none">
+      <rect x="17" y="20" width="14" height="16" rx="4" fill="#fff" stroke="currentColor" stroke-width="2.2"/>
+      <rect x="20" y="10" width="8" height="10" rx="2" fill="currentColor"/>
+      <path d="M19 30q5 2.5 10 0v4q0 2-3 2h-4q-3 0-3-2z" fill="url(#g-coral)"/>
+      <path d="M24 6v4M34 14l3-3M14 14l-3-3M36 24h4M8 24H4" stroke="url(#g-gold)" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="g-color" viewBox="0 0 48 48" fill="none">
+      <path d="M24 8c10 12 12 18 12 24a12 12 0 0 1-24 0c0-6 2-12 12-24Z" fill="#EAF4F1" stroke="currentColor" stroke-width="2.3"/>
+      <path d="M18 30c0-4 2-8 6-14" stroke="url(#g-gold)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M17 34q7-4 14 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="g-piel" viewBox="0 0 48 48" fill="none">
+      <path d="M10 34c3-5 8-10 13-13 6-3 13-3 18 1-1 6-5 11-12 12-8 2-13 1-19 0Z" fill="#EAF4F1" stroke="currentColor" stroke-width="2.2"/>
+      <path d="M23 21c-1-7 5-13 9-16 2 4 2 10 1 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="20" cy="15" r="5" fill="url(#g-gold)"/>
+      <circle cx="18.5" cy="13.5" r="1.6" fill="#fff"/>
+    </symbol>
+    <symbol id="g-barba" viewBox="0 0 48 48" fill="none">
+      <path d="M12 34c5-6 14-14 24-20l5 4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M36 14 20 4c6-3 15-1 21 6l-5 4Z" fill="#FFF8EB" stroke="url(#g-gold)" stroke-width="2"/>
+      <circle cx="36" cy="14" r="2" fill="url(#g-gold)"/>
+      <path d="M14 30c5-4 10 2 12-1 2 3 7-3 12 1-5 3-9 1-12 0-3 1-7 3-12-1Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="g-nav-home" viewBox="0 0 32 32" fill="none">
+      <path d="M6 15 16 7l10 8v9a2 2 0 0 1-2 2h-5v-7h-6v7H8a2 2 0 0 1-2-2v-9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="g-nav-home-fill" viewBox="0 0 32 32">
+      <path fill="currentColor" d="M16 5.5 4.5 14.8A1.5 1.5 0 0 0 4 16v9.5A2.5 2.5 0 0 0 6.5 28H12v-8h8v8h5.5a2.5 2.5 0 0 0 2.5-2.5V16a1.5 1.5 0 0 0-.5-1.2L16 5.5Z"/>
+    </symbol>
+    <symbol id="g-nav-map" viewBox="0 0 32 32" fill="none">
+      <path d="m5 9 7-3 8 3 7-3v17l-7 3-8-3-7 3V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M12 6v17M20 9v17" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="20" cy="14" r="2.6" fill="url(#g-gold)"/>
+    </symbol>
+    <symbol id="g-nav-turnos" viewBox="0 0 32 32" fill="none">
+      <rect x="6" y="8" width="20" height="18" rx="4" stroke="currentColor" stroke-width="2"/>
+      <path d="M6 14h20M11 5v4M21 5v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="m12 21 3 3 6-7" stroke="url(#g-gold)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="g-nav-fav" viewBox="0 0 32 32" fill="none">
+      <path d="M16 26S6 19.5 6 12.5A5.5 5.5 0 0 1 16 9a5.5 5.5 0 0 1 10 3.5C26 19.5 16 26 16 26Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="g-nav-fav-fill" viewBox="0 0 32 32">
+      <path fill="currentColor" d="M16 27S4.5 20 4.5 12A6.5 6.5 0 0 1 16 7.2 6.5 6.5 0 0 1 27.5 12C27.5 20 16 27 16 27Z"/>
+    </symbol>
+    <symbol id="g-nav-profile" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="11" r="5" stroke="currentColor" stroke-width="2"/>
+      <path d="M7 26c1.5-4.2 5-6.2 9-6.2s7.5 2 9 6.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
     <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M2 14h4"/><path d="M10 8h4"/><path d="M18 16h4"/></symbol>
-    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
-    <symbol id="i-heart-fill" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
     <symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 2.4 7.2H22l-6 4.8 2.3 7L12 16.8 5.7 21 8 14 2 9.2h7.6Z"/></symbol>
     <symbol id="i-map" viewBox="0 0 24 24"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Z"/><path d="M9 3v15"/><path d="M15 6v15"/></symbol>
-    <symbol id="i-calendar" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
-    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></symbol>
-    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 10v10h14V10"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none"><path d="M4 10.5 12 4l8 6.5"/><path d="M6 9.8V19a1 1 0 0 0 1 1h3.2v-5.2h3.6V20H17a1 1 0 0 0 1-1V9.8"/><path d="M9.5 20h5"/></symbol>
+    <symbol id="i-home-fill" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 3.2 2.8 10.6a1 1 0 0 0-.3.7V19a2 2 0 0 0 2 2h4.7v-6.1h5.6V21H19.5a2 2 0 0 0 2-2v-7.7a1 1 0 0 0-.3-.7L12 3.2Z"/></symbol>
+    <symbol id="i-map-nav" viewBox="0 0 24 24" fill="none"><path d="M12 21.5s6.8-5.1 6.8-11.2A6.8 6.8 0 0 0 12 3.5a6.8 6.8 0 0 0-6.8 6.8C5.2 16.4 12 21.5 12 21.5Z"/><circle cx="12" cy="10.2" r="2.4"/><path d="M12 7.2v.01"/></symbol>
+    <symbol id="i-map-nav-fill" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2a8 8 0 0 0-8 8c0 6.5 6.4 11.2 7.7 12.1a.5.5 0 0 0 .6 0C13.6 21.2 20 16.5 20 10a8 8 0 0 0-8-8Zm0 11.2A3.2 3.2 0 1 1 12 6.8a3.2 3.2 0 0 1 0 6.4Z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3.5v3.2M16 3.5v3.2M3.5 10h17"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></symbol>
+    <symbol id="i-calendar-fill" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M18.5 3h-1.2V1.8h-2.1V3H8.8V1.8H6.7V3H5.5A2.5 2.5 0 0 0 3 5.5v13A2.5 2.5 0 0 0 5.5 21h13a2.5 2.5 0 0 0 2.5-2.5v-13A2.5 2.5 0 0 0 18.5 3Zm0 16.5h-13V10h13v9.5Zm0-11.2h-13V5.5h13v2.8Z"/><path fill="currentColor" stroke="none" d="M7.4 13.2h3.2v3.2H7.4zm5 0h3.2v3.2h-3.2z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none"><path d="M12 20.4S3.8 15.2 3.8 9.4A4.9 4.9 0 0 1 12 6.2a4.9 4.9 0 0 1 8.2 3.2c0 5.8-8.2 11-8.2 11Z"/></symbol>
+    <symbol id="i-heart-fill" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 21.2S2.5 15.4 2.5 9.2A5.7 5.7 0 0 1 12 5.1a5.7 5.7 0 0 1 9.5 4.1c0 6.2-9.5 12-9.5 12Z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M5 19.4c1.3-3.4 4.2-5.1 7-5.1s5.7 1.7 7 5.1"/></symbol>
+    <symbol id="i-user-fill" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2" fill="currentColor" stroke="none"/><path fill="currentColor" stroke="none" d="M4.1 20.3C5.7 16.4 8.6 14.4 12 14.4s6.3 2 7.9 5.9a1.1 1.1 0 0 1-1.1 1.5H5.2a1.1 1.1 0 0 1-1.1-1.5Z"/></symbol>
     <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></symbol>
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><path d="m5.6 5.6 2.1 2.1"/><path d="m16.3 16.3 2.1 2.1"/><path d="m16.3 5.6-2.1 2.1"/><path d="m5.6 16.3 2.1-2.1"/></symbol>
     <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 2.7c.3 0 6 6.2 6 11a6 6 0 1 1-12 0c0-4.8 5.7-11 6-11Z"/></symbol>
@@ -45,7 +127,7 @@
       <img class="brand-banner__logo" src="logos/logo-glowgo.jpg" width="200" height="200" alt="Glowgo">
       <div class="brand-banner__copy">
         <p class="brand-banner__name" id="brand-banner-title">Glowgo</p>
-        <p class="brand-banner__tag" data-i18n="brandTag">Encontrá tu centro de Estética y Bienestar — Unisex</p>
+        <p class="brand-banner__tag" data-i18n="brandTag">Discover Beauty ✦ Everywhere</p>
       </div>
     </section>
 
@@ -110,31 +192,51 @@
                       <ul class="cats">
                         <li>
                           <button type="button" class="cat is-on">
-                            <span class="cat__icon-wrap"><svg class="icon"><use href="#i-scissors"></use></svg></span>
+                            <span class="cat__icon-wrap cat__icon-wrap--cut">
+                              <span class="cat__halo" aria-hidden="true"></span>
+                              <svg class="icon"><use href="#g-corte"></use></svg>
+                              <svg class="cat__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                            </span>
                             <span data-i18n="catCut">Corte</span>
                           </button>
                         </li>
                         <li>
                           <button type="button" class="cat">
-                            <span class="cat__icon-wrap"><svg class="icon"><use href="#i-spark"></use></svg></span>
+                            <span class="cat__icon-wrap cat__icon-wrap--nails">
+                              <span class="cat__halo" aria-hidden="true"></span>
+                              <svg class="icon"><use href="#g-unas"></use></svg>
+                              <svg class="cat__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                            </span>
                             <span data-i18n="catNails">Uñas</span>
                           </button>
                         </li>
                         <li>
                           <button type="button" class="cat">
-                            <span class="cat__icon-wrap"><svg class="icon"><use href="#i-droplet"></use></svg></span>
+                            <span class="cat__icon-wrap cat__icon-wrap--color">
+                              <span class="cat__halo" aria-hidden="true"></span>
+                              <svg class="icon"><use href="#g-color"></use></svg>
+                              <svg class="cat__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                            </span>
                             <span data-i18n="catColor">Color</span>
                           </button>
                         </li>
                         <li>
                           <button type="button" class="cat">
-                            <span class="cat__icon-wrap"><svg class="icon"><use href="#i-hand"></use></svg></span>
+                            <span class="cat__icon-wrap cat__icon-wrap--skin">
+                              <span class="cat__halo" aria-hidden="true"></span>
+                              <svg class="icon"><use href="#g-piel"></use></svg>
+                              <svg class="cat__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                            </span>
                             <span data-i18n="catSkin">Piel</span>
                           </button>
                         </li>
                         <li>
                           <button type="button" class="cat">
-                            <span class="cat__icon-wrap"><svg class="icon"><use href="#i-beard"></use></svg></span>
+                            <span class="cat__icon-wrap cat__icon-wrap--beard">
+                              <span class="cat__halo" aria-hidden="true"></span>
+                              <svg class="icon"><use href="#g-barba"></use></svg>
+                              <svg class="cat__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                            </span>
                             <span data-i18n="catBeard">Barba</span>
                           </button>
                         </li>
@@ -192,11 +294,45 @@
                     </div>
                   </div>
                   <nav class="nav" aria-label="Navegación principal">
-                    <span class="nav__item is-on"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-home"></use></svg>Inicio</span>
-                    <span class="nav__item"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-map"></use></svg>Mapa</span>
-                    <span class="nav__item"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-calendar"></use></svg>Turnos</span>
-                    <span class="nav__item"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-heart"></use></svg>Guardados</span>
-                    <span class="nav__item"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-user"></use></svg>Perfil</span>
+                    <button type="button" class="nav__item is-on" aria-current="page">
+                      <span class="nav__glyph nav__glyph--home">
+                        <svg class="icon nav__svg nav__svg--outline" aria-hidden="true"><use href="#g-nav-home"></use></svg>
+                        <svg class="icon nav__svg nav__svg--fill" aria-hidden="true"><use href="#g-nav-home-fill"></use></svg>
+                        <svg class="nav__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                      </span>
+                      <span class="nav__label">Inicio</span>
+                    </button>
+                    <button type="button" class="nav__item">
+                      <span class="nav__glyph nav__glyph--map">
+                        <svg class="icon nav__svg nav__svg--outline" aria-hidden="true"><use href="#g-nav-map"></use></svg>
+                        <svg class="icon nav__svg nav__svg--fill" aria-hidden="true"><use href="#g-nav-map"></use></svg>
+                        <svg class="nav__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                      </span>
+                      <span class="nav__label">Mapa</span>
+                    </button>
+                    <button type="button" class="nav__item">
+                      <span class="nav__glyph nav__glyph--turnos">
+                        <svg class="icon nav__svg nav__svg--outline" aria-hidden="true"><use href="#g-nav-turnos"></use></svg>
+                        <svg class="icon nav__svg nav__svg--fill" aria-hidden="true"><use href="#g-nav-turnos"></use></svg>
+                      </span>
+                      <span class="nav__label">Turnos</span>
+                    </button>
+                    <button type="button" class="nav__item">
+                      <span class="nav__glyph nav__glyph--saved">
+                        <svg class="icon nav__svg nav__svg--outline" aria-hidden="true"><use href="#g-nav-fav"></use></svg>
+                        <svg class="icon nav__svg nav__svg--fill" aria-hidden="true"><use href="#g-nav-fav-fill"></use></svg>
+                        <svg class="nav__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                      </span>
+                      <span class="nav__label">Favoritos</span>
+                    </button>
+                    <button type="button" class="nav__item">
+                      <span class="nav__glyph nav__glyph--profile">
+                        <svg class="icon nav__svg nav__svg--outline" aria-hidden="true"><use href="#g-nav-profile"></use></svg>
+                        <svg class="icon nav__svg nav__svg--fill" aria-hidden="true"><use href="#g-nav-profile"></use></svg>
+                        <svg class="nav__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                      </span>
+                      <span class="nav__label">Perfil</span>
+                    </button>
                   </nav>
                 </div>
               </div>
@@ -252,7 +388,7 @@
                         </div>
                         <p class="service__price">USD 10</p>
                       </div>
-                      <p class="points-hint">Ganás 40 puntos si reservás en Glowgo · Estética y Bienestar Unisex</p>
+                      <p class="points-hint">Ganás 40 puntos si reservás en Glowgo · Discover Beauty ✦ Everywhere</p>
                       <button type="button" class="btn btn--full btn--dark" data-i18n="bookSlot">Reservar turno</button>
                     </div>
                   </div>
@@ -328,7 +464,7 @@
                     <img src="logos/logo-glowgo.jpg" width="44" height="44" alt="Glowgo">
                     <span>
                       <span class="desk-a__brand-name">Glowgo</span>
-                      <span class="desk-a__brand-tag">Estética y Bienestar — Unisex</span>
+                      <span class="desk-a__brand-tag">Discover Beauty ✦ Everywhere</span>
                     </span>
                   </p>
                   <nav class="desk-a__nav" aria-label="Menú desktop">
@@ -361,31 +497,51 @@
                     <ul class="cats">
                       <li>
                         <button type="button" class="cat is-on">
-                          <span class="cat__icon-wrap"><svg class="icon"><use href="#i-scissors"></use></svg></span>
+                          <span class="cat__icon-wrap cat__icon-wrap--cut">
+                            <span class="cat__halo" aria-hidden="true"></span>
+                            <svg class="icon"><use href="#g-corte"></use></svg>
+                            <svg class="cat__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                          </span>
                           <span data-i18n="catCut">Corte</span>
                         </button>
                       </li>
                       <li>
                         <button type="button" class="cat">
-                          <span class="cat__icon-wrap"><svg class="icon"><use href="#i-spark"></use></svg></span>
+                          <span class="cat__icon-wrap cat__icon-wrap--nails">
+                            <span class="cat__halo" aria-hidden="true"></span>
+                            <svg class="icon"><use href="#g-unas"></use></svg>
+                            <svg class="cat__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                          </span>
                           <span data-i18n="catNails">Uñas</span>
                         </button>
                       </li>
                       <li>
                         <button type="button" class="cat">
-                          <span class="cat__icon-wrap"><svg class="icon"><use href="#i-droplet"></use></svg></span>
+                          <span class="cat__icon-wrap cat__icon-wrap--color">
+                            <span class="cat__halo" aria-hidden="true"></span>
+                            <svg class="icon"><use href="#g-color"></use></svg>
+                            <svg class="cat__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                          </span>
                           <span data-i18n="catColor">Color</span>
                         </button>
                       </li>
                       <li>
                         <button type="button" class="cat">
-                          <span class="cat__icon-wrap"><svg class="icon"><use href="#i-hand"></use></svg></span>
+                          <span class="cat__icon-wrap cat__icon-wrap--skin">
+                            <span class="cat__halo" aria-hidden="true"></span>
+                            <svg class="icon"><use href="#g-piel"></use></svg>
+                            <svg class="cat__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                          </span>
                           <span data-i18n="catSkin">Piel</span>
                         </button>
                       </li>
                       <li>
                         <button type="button" class="cat">
-                          <span class="cat__icon-wrap"><svg class="icon"><use href="#i-beard"></use></svg></span>
+                          <span class="cat__icon-wrap cat__icon-wrap--beard">
+                            <span class="cat__halo" aria-hidden="true"></span>
+                            <svg class="icon"><use href="#g-barba"></use></svg>
+                            <svg class="cat__sparkle" aria-hidden="true"><use href="#g-sparkle-mini"></use></svg>
+                          </span>
                           <span data-i18n="catBeard">Barba</span>
                         </button>
                       </li>
@@ -778,7 +934,7 @@
       <div class="names">
         <article class="name-card name-card--glowgo">
           <h3>Glowgo</h3>
-          <p class="name-card__tag" data-i18n="brandTag">Encontrá tu centro de Estética y Bienestar — Unisex</p>
+          <p class="name-card__tag" data-i18n="brandTag">Discover Beauty ✦ Everywhere</p>
           <p>Marca principal. Glow + go: el brillo íntimo de descubrir belleza cerca. Sensualidad, delicadeza y bienestar unisex.</p>
         </article>
         <article class="name-card">
@@ -797,9 +953,9 @@
       <p>Glowgo estrena identidad sensual en oro y carbón. Glowly se mantiene. Glowpin hereda el pin original de Glowgo.</p>
       <div class="logos">
         <article class="logo-card logo-card--glowgo">
-          <img src="logos/logo-glowgo.jpg" width="280" height="280" alt="Logo Glowgo: perfiles en oro, Estética y Bienestar Unisex">
+          <img src="logos/logo-glowgo.jpg" width="280" height="280" alt="Logo Glowgo: rostros unisex en oro, Discover Beauty Everywhere">
           <h3>Glowgo</h3>
-          <p data-i18n="brandTag">Encontrá tu centro de Estética y Bienestar — Unisex</p>
+          <p data-i18n="brandTag">Discover Beauty ✦ Everywhere</p>
         </article>
         <article class="logo-card">
           <img src="logos/logo-glowly.png" width="128" height="128" alt="Logo Glowly: letra G con destello suave">
