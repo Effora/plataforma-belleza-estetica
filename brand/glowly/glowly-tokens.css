@@ -1,0 +1,20 @@
+/* Glowly · tokens de marca (crema + terracota, sin verde)
+   Contrastes verificados (WCAG): texto sobre crema 12,8:1 · terracota sobre crema 4,65:1
+   · blanco sobre terracota 4,95:1 (apto para botones y texto de 16px+). */
+:root {
+  --gl-cream:        #FFF7EA; /* fondo base */
+  --gl-sand:         #F6EBDA; /* superficies secundarias */
+  --gl-line:         #E8D8C3; /* bordes y divisores */
+  --gl-ink:          #3B2A22; /* texto principal */
+  --gl-muted:        #7A6558; /* texto secundario */
+  --gl-terra:        #B5532F; /* acción principal: reservar, confirmar */
+  --gl-terra-deep:   #8F3F22; /* hover, texto terracota chico */
+  --gl-terra-soft:   #F7E3D6; /* fondos suaves; el texto encima va en --gl-terra-deep (terracota normal da solo 3,99:1) */
+  --gl-terra-glow:   #E29874; /* destello del logo, detalles */
+  --gl-icon-cut:     var(--gl-cream); /* detalle interior de iconos rellenos */
+  --gl-radius: 16px;
+}
+.gl-icon { width: 24px; height: 24px; color: var(--gl-ink); }
+.gl-icon.is-active { color: var(--gl-terra); }
+/* Uso: <svg class="gl-icon"><use href="glowly-icons.svg#gl-inicio"/></svg>
+   Activo:  <svg class="gl-icon is-active"><use href="glowly-icons.svg#gl-inicio-fill"/></svg> */
