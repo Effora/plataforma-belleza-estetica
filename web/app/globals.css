@@ -142,10 +142,10 @@ a[href*="netlify.com"][style*="position"],a[href*="netlify.com"][style*="fixed"]
   .fbtn{margin:8px 0 0;width:auto;height:44px;padding:0 14px;display:inline-flex;align-items:center;gap:6px;grid:none}
   .fbtn::after{content:attr(title);font-weight:600;font-size:13px}
   .fbtn em{position:static}
-  .split{display:grid;grid-template-columns:minmax(0,1fr) 42%;align-items:start}
+  .split{display:grid;grid-template-columns:minmax(0,1fr) 56%;align-items:start}
   .list{padding:20px 40px}
   .grid{grid-template-columns:repeat(2,1fr)}
-  .mapcol,.showmap .mapcol{display:block;position:sticky;top:178px;height:calc(100dvh - 178px)}
+  .mapcol,.showmap .mapcol{display:block;position:sticky;top:var(--hdr,178px);height:calc(100dvh - var(--hdr,178px))}
   .showmap .list{display:block}
   .fab{display:none}
   .detail{grid-template-columns:1.5fr 1fr;gap:56px;padding:24px 40px}
@@ -153,7 +153,11 @@ a[href*="netlify.com"][style*="position"],a[href*="netlify.com"][style*="fixed"]
   .book .cta{width:100%;margin-top:8px}.pts{display:flex}
   .gate{place-items:center}.sheet{border-radius:20px}
   .panel{padding:32px 40px 40px}
-  .panel--map .panel__map{height:64dvh;min-height:420px}
+  .panel--map{max-width:none}
+  .panel--map .panel__map{height:calc(100dvh - var(--hdr,0px) - 150px);min-height:520px}
+  .ttm{overflow-y:auto}
+  .tt .panel{padding-top:72px}
+  .tt .panel--map .panel__map{height:calc(100dvh - 190px)}
 
   /* B desktop tipo Instagram: iconos | lista | feed */
   .tt{display:grid;grid-template-columns:72px 280px minmax(0,1fr);grid-template-rows:1fr;height:100dvh;flex-direction:unset;background:var(--bg)}
@@ -182,4 +186,57 @@ a[href*="netlify.com"][style*="position"],a[href*="netlify.com"][style*="fixed"]
   html[data-feed="1"] .reel-media{inset:56px 0 0}
   .info{bottom:28px}.rail{bottom:40px}
 }
-@media(min-width:1280px){.grid{grid-template-columns:repeat(3,1fr)}.tt{grid-template-columns:72px 300px minmax(0,1fr)}}
+@media(min-width:1280px){.tt{grid-template-columns:72px 300px minmax(0,1fr)}}
+@media(min-width:1800px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+
+/* ======== Solo móvil (<900px) ======== */
+html,body{max-width:100%;overflow-x:clip}
+@media(max-width:899px){
+  /* Barra inferior: fija y de tamaño constante, no se achica al scrollear */
+  .bottom{position:fixed;left:0;right:0;bottom:0;top:auto;box-sizing:border-box;height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));min-height:0;padding:8px 2px env(safe-area-inset-bottom,0px);transform:translate3d(0,0,0);will-change:transform;backface-visibility:hidden;z-index:60}
+  .bottom button{flex:1 1 0;height:52px;min-height:52px;max-height:52px}
+  .bottom .ic{width:28px;height:28px;flex:0 0 28px}
+  .bottom .ico{width:24px;height:24px;flex-shrink:0}
+  .bottom__lbl{font-size:11px}
+
+  /* Modelo A: buscador compacto al bajar (una sola píldora a ancho completo) */
+  .top.sc .r1{padding:8px 12px}
+  .top.sc .ctl{display:none}
+  .top.sc .mid{flex:1 1 auto;justify-content:stretch}
+  .top.sc .mini{width:100%;max-width:none;min-height:44px;gap:8px;padding:5px 5px 5px 14px;font-size:13px}
+  .top.sc .mini b{flex:1 1 0;max-width:none;min-width:0;text-align:center}
+
+  /* Modelo A: mapa a pantalla completa (debajo del header, arriba de la barra inferior) */
+  .showmap .mapcol{display:block;position:fixed;left:0;right:0;top:var(--hdr,120px);bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));height:auto;z-index:1}
+  body:has(.showmap) .top .big,body:has(.showmap) .top .cats,body:has(.showmap) .top .ctl,body:has(.showmap) .top .brand b{display:none}
+  body:has(.showmap) .top .mini{display:flex;width:100%;max-width:none;min-height:44px}
+  body:has(.showmap) .top .mid{flex:1 1 auto;justify-content:stretch}
+  body:has(.showmap) .top .mini b{flex:1 1 0;max-width:none;min-width:0;text-align:center}
+
+  /* Pestaña Mapa (A): sin hueco superior y mapa grande */
+  main:not(.ttm) .panel{padding-top:12px}
+  main:not(.ttm) .panel--map .panel__map{height:calc(100dvh - var(--hdr,130px) - var(--nav-h) - env(safe-area-inset-bottom,0px) - 64px)}
+
+  /* Modelo B: header en dos filas, todo dentro de la pantalla */
+  .btop{flex-wrap:wrap;row-gap:6px;padding:8px 10px}
+  .btop .tk{flex:1 1 100%;justify-content:center}
+  .btop .back-b{flex:0 0 auto}
+  .btop .ctl{flex:1 1 100%;justify-content:center;flex-wrap:wrap;gap:4px;margin:0}
+  .btop .seg button{padding:5px 9px;font-size:12px}
+  .btop .pill-sel{padding:4px 8px 4px 6px;font-size:12px}
+  .btop .login-chip{padding:5px 9px;font-size:12px}
+  .reel-media{inset:var(--btop-h,92px) 0 0}
+  .info{left:12px;right:64px;bottom:16px}
+  .info h2{font-size:20px}
+  .rail{right:8px;bottom:22px;gap:14px}
+  .tt .panel{padding-top:calc(var(--btop-h,92px) + 8px)}
+  .detail--b{padding-top:calc(var(--btop-h,92px) + 4px)}
+
+  /* Modelo B: mapa a todo el ancho y alto disponible */
+  .tt .panel--map{max-width:none;padding-left:0;padding-right:0}
+  .tt .panel--map .panel__head,.tt .panel--map .pad{padding:0 14px}
+  .tt .panel--map h1{font-size:22px;margin:0}
+  .tt .panel--map .panel__map{height:calc(100dvh - var(--btop-h,92px) - var(--nav-h) - env(safe-area-inset-bottom,0px) - 56px);min-height:340px;border-radius:0;border-left:0;border-right:0}
+  .tt .panel--map .panel__list{padding:12px 14px 0}
+}

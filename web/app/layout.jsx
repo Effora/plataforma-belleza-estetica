@@ -8,6 +8,8 @@ export const metadata = {
   icons: { icon: '/icon.png' },
 };
 
+export const viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover' };
+
 export default function Layout({ children }) {
   return (
     <html lang="es" data-v="a">

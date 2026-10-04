@@ -36,6 +36,8 @@ export default function MapView({ items, label, onPick, here, active = true }) {
   const layerRef = useRef(null);
   const tileRef = useRef(null);
   const tileIndex = useRef(0);
+  const boundsRef = useRef(null);
+  const needsFit = useRef(false);
   const onPickRef = useRef(onPick);
   const labelRef = useRef(label);
   const [err, setErr] = useState('');
@@ -117,6 +119,8 @@ export default function MapView({ items, label, onPick, here, active = true }) {
       if (items.length) {
         const bounds = L.latLngBounds(items.map((s) => s.ll));
         if (here) bounds.extend(here);
+        boundsRef.current = bounds;
+        needsFit.current = !el.current.offsetHeight;
         map.fitBounds(bounds.pad(0.18), { animate: false });
       } else if (here) {
         map.setView(here, 13, { animate: false });
@@ -134,6 +138,10 @@ export default function MapView({ items, label, onPick, here, active = true }) {
     const ro = new ResizeObserver(() => {
       if (mapRef.current && el.current?.offsetHeight > 0) {
         mapRef.current.invalidateSize(false);
+        if (needsFit.current && boundsRef.current) {
+          needsFit.current = false;
+          mapRef.current.fitBounds(boundsRef.current.pad(0.18), { animate: false });
+        }
       }
     });
     ro.observe(el.current);

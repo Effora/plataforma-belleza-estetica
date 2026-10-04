@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { t, rates, salons, cats, catIcon, BRAND, F0, applyF as filterSalons } from '../lib/data';
@@ -36,6 +36,8 @@ export default function Shell({ children }) {
   const [geoStatus, setGeoStatus] = useState('idle');
   const [favs, setFavs] = useState({});
   const [bookings, setBookings] = useState([]);
+  const topRef = useRef(null);
+  const btopRef = useRef(null);
   const path = usePathname();
   const router = useRouter();
   const home = path === '/';
@@ -75,6 +77,20 @@ export default function Shell({ children }) {
       localStorage.setItem('gl-user', user ? JSON.stringify(user) : '');
     } catch { /* ignore */ }
   }, [ver, lang, cur, favs, bookings, user]);
+
+  // Mide el alto real del header para que el mapa ocupe todo el resto de la pantalla.
+  useEffect(() => {
+    const root = document.documentElement;
+    const pairs = [[topRef.current, '--hdr'], [btopRef.current, '--btop-h']].filter(([el]) => el);
+    ['--hdr', '--btop-h'].forEach((v) => root.style.removeProperty(v));
+    if (!pairs.length) return undefined;
+    const set = () => pairs.forEach(([el, v]) => root.style.setProperty(v, `${Math.round(el.getBoundingClientRect().height)}px`));
+    set();
+    if (typeof ResizeObserver === 'undefined') return undefined;
+    const ro = new ResizeObserver(set);
+    pairs.forEach(([el]) => ro.observe(el));
+    return () => ro.disconnect();
+  }, [ver]);
 
   useEffect(() => {
     const feedOn = ver === 'b' && home && tab === 'inicio';
@@ -219,7 +235,7 @@ export default function Shell({ children }) {
     <Ctx.Provider value={ctx}>
       {ver === 'a' ? (
         <>
-          <header className={`top ${sc && !open ? 'sc' : ''}`}>
+          <header ref={topRef} className={`top ${sc && !open ? 'sc' : ''}`}>
             <div className="r1">
               <Link href="/" className="brand" onClick={() => goTab('inicio')}>
                 <img src="/logo.png" alt="" width="34" height="34" />
@@ -319,7 +335,7 @@ export default function Shell({ children }) {
             </aside>
           )}
           <div className="col">
-            <div className="btop">
+            <div className="btop" ref={btopRef}>
               {showFeedChrome && (
                 <div className="tk" role="tablist">
                   <button
