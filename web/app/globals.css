@@ -281,3 +281,26 @@ html,body{max-width:100%;overflow-x:clip}
   .cs{flex:1;justify-content:center}
   .fbtn{position:absolute;right:40px;top:0}
 }
+
+/* ======== Escritorio: mapa B sin scroll, A con más protagonismo a comercios, logo más grande ======== */
+@media(min-width:900px){
+  /* Logo */
+  .top .brand{font-size:26px;gap:10px}
+  .top .brand img{width:48px;height:48px;border-radius:12px}
+  .side .brand img{width:46px;height:46px;border-radius:12px}
+  .side .brand{margin-bottom:22px}
+
+  /* A: mapa más angosto, listado más grande */
+  .split{grid-template-columns:minmax(0,1fr) 32%}
+  .grid{grid-template-columns:repeat(3,1fr)}
+
+  /* B: pestaña Mapa ocupa toda la pantalla, sin barra de scroll */
+  .ttm:has(.panel--map){overflow:hidden}
+  .tt .panel--map{width:100%;margin:0;box-sizing:border-box;height:100dvh;max-width:none;padding:68px 20px 20px;display:grid;grid-template-columns:minmax(0,1fr) 320px;grid-template-rows:auto auto minmax(0,1fr);column-gap:16px;overflow:hidden}
+  .tt .panel--map .panel__head{grid-column:1/-1;grid-row:1;margin-bottom:8px}
+  .tt .panel--map .pad{grid-column:1/-1;grid-row:2;margin:0 0 8px;padding:0}
+  .tt .panel--map .panel__map{grid-column:1;grid-row:3;height:100%;min-height:0}
+  .tt .panel--map .panel__list{grid-column:2;grid-row:3;overflow:auto;padding:0;min-height:0;align-content:start}
+}
+@media(min-width:1700px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:900px){.tt .ttm{width:100%;align-self:stretch}}
