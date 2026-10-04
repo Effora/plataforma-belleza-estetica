@@ -34,22 +34,19 @@ function ReelMedia({ imgs, name }) {
 export default function Home() {
   const {
     ver, lang, tr, fmt, openBooking, filtered, here, favs, toggleFav, requestGeo, geoStatus,
-    feedMode,
+    feedMode, follows, toggleFollow, needLogin,
   } = useApp();
   const [map, setMap] = useState(false);
-  const [liked, setLiked] = useState({});
   const [pick, setPick] = useState(null);
   const [chat, setChat] = useState(null);
   const [draft, setDraft] = useState('');
   const [extra, setExtra] = useState({});
   const [toast, setToast] = useState('');
 
-  const list = useMemo(
-    () => (feedMode === 'following' ? reels.filter((r) => r.following) : reels),
-    [feedMode],
-  );
-
-  const lk = (id) => setLiked((x) => ({ ...x, [id]: !x[id] }));
+  const list = useMemo(() => {
+    const ids = new Set(filtered.map((x) => x.id));
+    return reels.filter((r) => ids.has(r.id) && (feedMode !== 'following' || follows[r.id]));
+  }, [feedMode, filtered, follows]);
 
   const shareReel = async (r) => {
     const url = `${window.location.origin}/salon/${r.id}/`;
@@ -72,7 +69,7 @@ export default function Home() {
 
   const sendComment = (key) => {
     const text = draft.trim();
-    if (!text) return;
+    if (!text || needLogin()) return;
     setExtra((x) => ({ ...x, [key]: [...(x[key] || []), { u: 'vos', t: text }] }));
     setDraft('');
   };
@@ -89,18 +86,19 @@ export default function Home() {
           {list.map((r, idx) => {
             const salon = salons.find((s) => s.id === r.id) || salons[0];
             const key = `${r.handle}-${idx}`;
-            const isLiked = !!liked[key];
+            const isLiked = !!favs[r.id];
+            const isFollow = !!follows[r.id];
             const comments = [...(demoComments[lang] || demoComments.es), ...(extra[key] || [])];
             return (
-              <section key={key} className="reel" onDoubleClick={() => lk(key)}>
+              <section key={key} className="reel" onDoubleClick={() => { if (!isLiked) toggleFav(r.id); }}>
                 <ReelMedia imgs={r.imgs} name={r.name} />
                 <div className="shade" />
                 <div className="rail">
-                  <button type="button" aria-pressed={isLiked} onClick={() => lk(key)} aria-label="like">
+                  <button type="button" aria-pressed={isLiked} onClick={() => toggleFav(r.id)} aria-label={tr.favs}>
                     <Icon n="favoritos" fill={isLiked} size={30} />
-                    <small>{isLiked ? r.likes + 1 : r.likes}</small>
+                    <small>{r.likes + (isLiked ? 1 : 0)}</small>
                   </button>
-                  <button type="button" aria-label={tr.comments} onClick={() => { setChat(key); setDraft(''); }}>
+                  <button type="button" aria-label={tr.comments} onClick={() => { if (needLogin()) return; setChat(key); setDraft(''); }}>
                     <Icon n="mensaje" size={30} />
                     <small>{r.chats + (extra[key]?.length || 0)}</small>
                   </button>
@@ -110,7 +108,12 @@ export default function Home() {
                   </button>
                 </div>
                 <div className="info">
-                  <Link href={`/salon/${r.id}/`}><b>@{r.handle}</b></Link>
+                  <div className="who">
+                    <Link href={`/salon/${r.id}/`}><b>@{r.handle}</b></Link>
+                    <button type="button" className="follow" aria-pressed={isFollow} onClick={() => toggleFollow(r.id)}>
+                      {isFollow ? tr.unfollow : tr.follow}
+                    </button>
+                  </div>
                   <h2>{r.name}</h2>
                   <p className="cap">{r.caption[lang] || r.caption.es}</p>
                   <p>★ {r.rating} · {r.zone} · {r.km} km{r.promo ? <em> {r.promo}</em> : null}</p>

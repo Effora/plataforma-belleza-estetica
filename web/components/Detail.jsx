@@ -4,7 +4,7 @@ import { useApp, Icon } from './Shell';
 import Carousel from './Carousel';
 
 export default function Detail({ s }) {
-  const { tr, fmt, openBooking, ver, favs, toggleFav, setTab } = useApp();
+  const { tr, fmt, openBooking, ver, favs, toggleFav, follows, toggleFollow, setTab } = useApp();
   if (!s) return null;
   return (
     <div className={`detail ${ver === 'b' ? 'detail--b' : ''}`}>
@@ -26,7 +26,12 @@ export default function Detail({ s }) {
             <Icon n="favoritos" fill={!!favs[s.id]} size={20} />
           </button>
         </div>
-        <h1>{s.name}</h1>
+        <div className="namerow">
+          <h1>{s.name}</h1>
+          <button type="button" className="follow follow--d" aria-pressed={!!follows[s.id]} onClick={() => toggleFollow(s.id)}>
+            {follows[s.id] ? tr.unfollow : tr.follow}
+          </button>
+        </div>
         <p className="mut">★ {s.rating} ({s.reviews} {tr.reviews}) · {s.zone} · {s.dist ?? s.km} km</p>
         <h2>{tr.services}</h2>
         <ul className="svc">

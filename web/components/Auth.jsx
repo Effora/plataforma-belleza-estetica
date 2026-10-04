@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useApp, Icon } from './Shell';
 
-export default function Auth({ onClose }) {
+export default function Auth({ onClose, reason }) {
   const { tr, setUser } = useApp();
   const [mode, setMode] = useState('landing'); // landing | email | signup
   const [email, setEmail] = useState('');
@@ -43,7 +43,7 @@ export default function Auth({ onClose }) {
         <div className="auth-brand">
           <img src="/logo.png" alt="" width="48" height="48" />
           <h2 id="auth-title">{mode === 'signup' ? tr.createAccount : tr.loginTitle}</h2>
-          <p className="mut">{tr.loginSub}</p>
+          <p className="mut">{reason || tr.loginSub}</p>
         </div>
 
         {mode === 'landing' && (

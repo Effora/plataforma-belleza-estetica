@@ -2,7 +2,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { t, rates, salons, cats, catIcon, BRAND, F0, applyF as filterSalons } from '../lib/data';
+import { t, rates, salons, cats, catIcon, BRAND, F0, applyF as filterSalons, matchQ } from '../lib/data';
 import { DEFAULT_HERE, withDistance } from '../lib/geo';
 import Booking from './Booking';
 import Auth from './Auth';
@@ -30,6 +30,9 @@ export default function Shell({ children }) {
   const [fm, setFm] = useState(false);
   const [user, setUser] = useState(null);
   const [authOpen, setAuthOpen] = useState(false);
+  const [sm, setSm] = useState(false);
+  const [q, setQ] = useState('');
+  const [follows, setFollows] = useState({});
   const [feedMode, setFeedMode] = useState('foryou'); // foryou | following
   const [tab, setTab] = useState('inicio');
   const [here, setHere] = useState(null);
@@ -52,6 +55,7 @@ export default function Shell({ children }) {
     setCur(localStorage.getItem('gl-cur') || { CO: 'COP', AR: 'ARS', MX: 'MXN', BR: 'BRL' }[r] || 'USD');
     try {
       setFavs(JSON.parse(localStorage.getItem('gl-favs') || '{}'));
+      setFollows(JSON.parse(localStorage.getItem('gl-follows') || '{}'));
       setBookings(JSON.parse(localStorage.getItem('gl-bookings') || '[]'));
       const saved = localStorage.getItem('gl-user');
       setUser(saved && saved !== '0' && saved !== '1' ? JSON.parse(saved) : null);
@@ -73,10 +77,11 @@ export default function Shell({ children }) {
       localStorage.setItem('gl-lang', lang);
       localStorage.setItem('gl-cur', cur);
       localStorage.setItem('gl-favs', JSON.stringify(favs));
+      localStorage.setItem('gl-follows', JSON.stringify(follows));
       localStorage.setItem('gl-bookings', JSON.stringify(bookings));
       localStorage.setItem('gl-user', user ? JSON.stringify(user) : '');
     } catch { /* ignore */ }
-  }, [ver, lang, cur, favs, bookings, user]);
+  }, [ver, lang, cur, favs, follows, bookings, user]);
 
   // Mide el alto real del header para que el mapa ocupe todo el resto de la pantalla.
   useEffect(() => {
@@ -136,7 +141,14 @@ export default function Shell({ children }) {
     window.scrollTo(0, 0);
   };
 
-  const toggleFav = (id) => setFavs((x) => ({ ...x, [id]: !x[id] }));
+  // Acciones que requieren cuenta: me gusta, seguir, comentar, reservar.
+  const needLogin = () => {
+    if (user) return false;
+    setAuthOpen(true);
+    return true;
+  };
+  const toggleFav = (id) => { if (needLogin()) return; setFavs((x) => ({ ...x, [id]: !x[id] })); };
+  const toggleFollow = (id) => { if (needLogin()) return; setFollows((x) => ({ ...x, [id]: !x[id] })); };
   const addBooking = (entry) => setBookings((x) => [entry, ...x]);
 
   const tr = t[lang];
@@ -145,8 +157,8 @@ export default function Shell({ children }) {
   }).format(usd * rates[cur]);
 
   const filtered = useMemo(
-    () => withDistance(filterSalons(f, salons), here),
-    [f, here],
+    () => withDistance(filterSalons(f, salons).filter((x) => matchQ(x, q)), here),
+    [f, here, q],
   );
 
   const nf = Object.values({ ...f, cat: f.cat ? 1 : 0, max: f.max < 60 ? 1 : 0 }).filter(Boolean).length;
@@ -227,7 +239,7 @@ export default function Shell({ children }) {
     lang, setLang, ver, cur, setCur, tr, fmt, f, setF, user, setUser,
     openBooking: setBook, openFilters: () => setFm(true), openAuth: () => setAuthOpen(true),
     tab, setTab: goTab, here, geoStatus, requestGeo,
-    favs, toggleFav, bookings, addBooking, filtered,
+    favs, toggleFav, follows, toggleFollow, needLogin, q, setQ, bookings, addBooking, filtered,
     feedMode, setFeedMode,
   };
 
@@ -256,7 +268,7 @@ export default function Shell({ children }) {
                   ))}
                 </nav>
                 <button type="button" className="mini" onClick={() => setOpen(true)}>
-                  <b>{tr.ph1}</b><i /><b>{tr.ph2}</b><i /><b>{tr.ph3}</b>
+                  <b>{q || tr.ph1}</b><i /><b>{tr.ph2}</b><i /><b>{tr.ph3}</b>
                   <span className="go"><Icon n="buscar" size={14} /></span>
                 </button>
               </div>
@@ -264,8 +276,10 @@ export default function Shell({ children }) {
             </div>
             <div className="big">
               <div className="bar" role="search">
-                {[['q1', 'ph1'], ['q2', 'ph2'], ['q3', 'ph3']].map(([a, b]) => (
-                  <label key={a}><b>{tr[a]}</b><input placeholder={tr[b]} /></label>
+                {[['q1', 'ph1'], ['q2', 'ph2'], ['q3', 'ph3']].map(([a, b], i) => (
+                  <label key={a}><b>{tr[a]}</b>{i === 0
+                    ? <input placeholder={tr[b]} value={q} onChange={(e) => setQ(e.target.value)} />
+                    : <input placeholder={tr[b]} />}</label>
                 ))}
                 <button type="button" className="go" aria-label="Buscar"><Icon n="buscar" size={20} /></button>
               </div>
@@ -360,6 +374,16 @@ export default function Shell({ children }) {
                 </Link>
               )}
               {!showFeedChrome && !showBBack && <span />}
+              {showFeedChrome && (
+                <div className="bicons">
+                  <button type="button" className="bicon" onClick={() => setSm(true)} aria-label={tr.search} title={tr.search}>
+                    <Icon n="buscar" size={20} />{q && <em />}
+                  </button>
+                  <button type="button" className="bicon" onClick={() => setFm(true)} aria-label={tr.filters} title={tr.filters}>
+                    <Icon n="filtros" size={20} />{nf > 0 && <em>{nf}</em>}
+                  </button>
+                </div>
+              )}
               {ctl}
             </div>
             <main className="ttm">{mainContent()}</main>
@@ -373,6 +397,13 @@ export default function Shell({ children }) {
           <div className="sheet">
             <button type="button" className="x" onClick={() => setFm(false)} aria-label={tr.close}><Icon n="cerrar" /></button>
             <h2>{tr.filters}</h2>
+            <div className="fr">{tr.category}
+              <div className="chips">
+                {cats.map((c) => (
+                  <button key={c} type="button" className={f.cat === c ? 'on' : ''} onClick={() => setF({ ...f, cat: f.cat === c ? null : c })}>{tr[c]}</button>
+                ))}
+              </div>
+            </div>
             <label className="fr">{tr.maxP}: <b>{fmt(f.max)}</b>
               <input type="range" min="10" max="60" value={f.max} onChange={(e) => setF({ ...f, max: +e.target.value })} />
             </label>
@@ -388,7 +419,23 @@ export default function Shell({ children }) {
           </div>
         </div>
       )}
-      {authOpen && <Auth onClose={() => setAuthOpen(false)} />}
+      {sm && (
+        <div className="gate" role="dialog" aria-modal="true" onClick={(e) => e.target === e.currentTarget && setSm(false)}>
+          <div className="sheet">
+            <button type="button" className="x" onClick={() => setSm(false)} aria-label={tr.close}><Icon n="cerrar" /></button>
+            <h2>{tr.search}</h2>
+            <form className="searchbox" onSubmit={(e) => { e.preventDefault(); setSm(false); }}>
+              <Icon n="buscar" size={20} />
+              <input autoFocus type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={tr.searchPh} aria-label={tr.search} />
+            </form>
+            <div className="two">
+              <button type="button" className="ghost" onClick={() => setQ('')}>{tr.clear}</button>
+              <button type="button" className="cta" onClick={() => setSm(false)}>{tr.show} {filtered.length} {tr.results}</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {authOpen && <Auth reason={tr.needAuth} onClose={() => setAuthOpen(false)} />}
       {book && <Booking s={book} onClose={() => setBook(null)} />}
     </Ctx.Provider>
   );
