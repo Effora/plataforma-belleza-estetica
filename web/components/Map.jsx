@@ -10,67 +10,94 @@ const pinHtml = (text, promo) => `
   </div>
 `;
 
-export default function MapView({ items, label, onPick, here }) {
+let leafletPromise = null;
+const loadLeaflet = () => {
+  if (!leafletPromise) leafletPromise = import('leaflet').then((m) => m.default);
+  return leafletPromise;
+};
+
+export default function MapView({ items, label, onPick, here, active = true }) {
   const el = useRef(null);
   const mapRef = useRef(null);
+  const layerRef = useRef(null);
+  const onPickRef = useRef(onPick);
+  const labelRef = useRef(label);
+  onPickRef.current = onPick;
+  labelRef.current = label;
 
   useEffect(() => {
+    if (!active || !el.current) return undefined;
     let dead = false;
+
     (async () => {
-      const L = (await import('leaflet')).default;
-      if (dead || !el.current) {
-        return;
+      const L = await loadLeaflet();
+      if (dead || !el.current) return;
+
+      if (!mapRef.current) {
+        const center = here || DEFAULT_HERE;
+        const map = L.map(el.current, {
+          zoomControl: false,
+          preferCanvas: true,
+          fadeAnimation: false,
+          zoomAnimation: false,
+        }).setView(center, 12);
+        mapRef.current = map;
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+          attribution: '© OSM © CARTO',
+          maxZoom: 18,
+          subdomains: 'abcd',
+          updateWhenIdle: true,
+        }).addTo(map);
+        layerRef.current = L.layerGroup().addTo(map);
+        requestAnimationFrame(() => map.invalidateSize());
       }
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-      }
-      const center = here || DEFAULT_HERE;
-      const map = L.map(el.current, { zoomControl: false }).setView(center, 13);
-      mapRef.current = map;
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap',
-      }).addTo(map);
+
+      const map = mapRef.current;
+      const group = layerRef.current;
+      group.clearLayers();
 
       if (here) {
         L.circleMarker(here, {
-          radius: 8,
+          radius: 7,
           color: '#B5532F',
           fillColor: '#B5532F',
-          fillOpacity: 0.9,
+          fillOpacity: 0.95,
           weight: 2,
-        }).addTo(map).bindTooltip('Vos', { permanent: false });
+        }).addTo(group);
       }
 
       items.forEach((s) => {
         const icon = L.divIcon({
           className: 'pin',
-          html: pinHtml(label(s), s.promo),
+          html: pinHtml(labelRef.current(s), s.promo),
           iconSize: [72, 40],
           iconAnchor: [36, 40],
         });
         L.marker(s.ll, { icon })
-          .addTo(map)
-          .on('click', () => onPick?.(s.id));
+          .addTo(group)
+          .on('click', () => onPickRef.current?.(s.id));
       });
 
       if (items.length) {
         const bounds = L.latLngBounds(items.map((s) => s.ll));
-        if (here) {
-          bounds.extend(here);
-        }
-        map.fitBounds(bounds.pad(0.2));
+        if (here) bounds.extend(here);
+        map.fitBounds(bounds.pad(0.18), { animate: false });
+      } else if (here) {
+        map.setView(here, 13, { animate: false });
       }
+      map.invalidateSize(false);
     })();
-    return () => {
-      dead = true;
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-      }
-    };
-  // label/onPick estables vía closure; remount al cambiar items/here
-  }, [items, here]);
+
+    return () => { dead = true; };
+  }, [items, here, active]);
+
+  useEffect(() => () => {
+    if (mapRef.current) {
+      mapRef.current.remove();
+      mapRef.current = null;
+      layerRef.current = null;
+    }
+  }, []);
 
   return <div ref={el} className="map" role="application" aria-label="Mapa" />;
 }

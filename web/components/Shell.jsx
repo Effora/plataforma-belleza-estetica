@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { t, rates, salons, cats, catIcon, BRAND, F0, applyF as filterSalons } from '../lib/data';
 import { DEFAULT_HERE, withDistance } from '../lib/geo';
 import Booking from './Booking';
+import Auth from './Auth';
 import { MapPanel, TurnosPanel, FavsPanel, ProfilePanel } from './Panels';
 
 const Ctx = createContext(null);
@@ -27,7 +28,9 @@ export default function Shell({ children }) {
   const [book, setBook] = useState(null);
   const [f, setF] = useState(F0);
   const [fm, setFm] = useState(false);
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(null);
+  const [authOpen, setAuthOpen] = useState(false);
+  const [feedMode, setFeedMode] = useState('foryou'); // foryou | following
   const [tab, setTab] = useState('inicio');
   const [here, setHere] = useState(null);
   const [geoStatus, setGeoStatus] = useState('idle');
@@ -48,7 +51,8 @@ export default function Shell({ children }) {
     try {
       setFavs(JSON.parse(localStorage.getItem('gl-favs') || '{}'));
       setBookings(JSON.parse(localStorage.getItem('gl-bookings') || '[]'));
-      setUser(localStorage.getItem('gl-user') === '1');
+      const saved = localStorage.getItem('gl-user');
+      setUser(saved && saved !== '0' && saved !== '1' ? JSON.parse(saved) : null);
     } catch { /* ignore */ }
     const on = () => {
       setSc(window.scrollY > 8);
@@ -68,7 +72,7 @@ export default function Shell({ children }) {
       localStorage.setItem('gl-cur', cur);
       localStorage.setItem('gl-favs', JSON.stringify(favs));
       localStorage.setItem('gl-bookings', JSON.stringify(bookings));
-      localStorage.setItem('gl-user', user ? '1' : '0');
+      localStorage.setItem('gl-user', user ? JSON.stringify(user) : '');
     } catch { /* ignore */ }
   }, [ver, lang, cur, favs, bookings, user]);
 
@@ -93,11 +97,14 @@ export default function Shell({ children }) {
         setHere(DEFAULT_HERE);
         setGeoStatus('denied');
       },
-      { enableHighAccuracy: true, timeout: 8000 },
+      { enableHighAccuracy: false, timeout: 4000, maximumAge: 60000 },
     );
   }, []);
 
-  useEffect(() => { requestGeo(); }, [requestGeo]);
+  useEffect(() => {
+    setHere(DEFAULT_HERE);
+    requestGeo();
+  }, [requestGeo]);
 
   const setVersion = (v) => {
     setVer(v);
@@ -146,6 +153,15 @@ export default function Shell({ children }) {
       <select className="cur" value={cur} onChange={(e) => setCur(e.target.value)} aria-label={tr.currency}>
         {Object.keys(rates).map((c) => <option key={c}>{c}</option>)}
       </select>
+      {user ? (
+        <button type="button" className="login-chip on" onClick={() => goTab('perfil')} title={user.email}>
+          <Icon n="perfil" size={16} />{user.name?.split(' ')[0] || tr.profile}
+        </button>
+      ) : (
+        <button type="button" className="login-chip" onClick={() => setAuthOpen(true)}>
+          <Icon n="perfil" size={16} />{tr.login}
+        </button>
+      )}
     </div>
   );
 
@@ -190,9 +206,10 @@ export default function Shell({ children }) {
 
   const ctx = {
     lang, setLang, ver, cur, setCur, tr, fmt, f, setF, user, setUser,
-    openBooking: setBook, openFilters: () => setFm(true),
+    openBooking: setBook, openFilters: () => setFm(true), openAuth: () => setAuthOpen(true),
     tab, setTab: goTab, here, geoStatus, requestGeo,
     favs, toggleFav, bookings, addBooking, filtered,
+    feedMode, setFeedMode,
   };
 
   return (
@@ -272,19 +289,36 @@ export default function Shell({ children }) {
               </button>
             ))}
           </aside>
-          <div className="btop">
-            {showFeedChrome && (
-              <div className="tk"><span>{tr.following}</span><b>{tr.forYou}</b></div>
-            )}
-            {showBBack && (
-              <Link href="/" className="back-b" onClick={() => goTab('inicio')}>
-                <Icon n="atras" size={20} />{tr.back}
-              </Link>
-            )}
-            {!showFeedChrome && !showBBack && <span />}
-            {ctl}
+          <div className="col">
+            <div className="btop">
+              {showFeedChrome && (
+                <div className="tk" role="tablist">
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={feedMode === 'following'}
+                    className={feedMode === 'following' ? 'on' : ''}
+                    onClick={() => setFeedMode('following')}
+                  >{tr.following}</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={feedMode === 'foryou'}
+                    className={feedMode === 'foryou' ? 'on' : ''}
+                    onClick={() => setFeedMode('foryou')}
+                  >{tr.forYou}</button>
+                </div>
+              )}
+              {showBBack && (
+                <Link href="/" className="back-b" onClick={() => goTab('inicio')}>
+                  <Icon n="atras" size={20} />{tr.back}
+                </Link>
+              )}
+              {!showFeedChrome && !showBBack && <span />}
+              {ctl}
+            </div>
+            <main className="ttm">{mainContent()}</main>
           </div>
-          <main className="ttm">{mainContent()}</main>
           {bottomNav(true)}
         </div>
       )}
@@ -309,6 +343,7 @@ export default function Shell({ children }) {
           </div>
         </div>
       )}
+      {authOpen && <Auth onClose={() => setAuthOpen(false)} />}
       {book && <Booking s={book} onClose={() => setBook(null)} />}
     </Ctx.Provider>
   );

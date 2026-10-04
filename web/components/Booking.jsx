@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useApp, Icon } from './Shell';
 
 export default function Booking({ s, onClose }) {
-  const { tr, fmt, lang, user, setUser, addBooking } = useApp();
+  const { tr, fmt, lang, user, openAuth, addBooking } = useApp();
   const [step, setStep] = useState(1);
   const [sv, setSv] = useState(0);
   const [day, setDay] = useState(0);
@@ -27,6 +27,10 @@ export default function Booking({ s, onClose }) {
   };
 
   const confirm = () => (user ? finish() : setStep('login'));
+  const goLogin = () => {
+    onClose();
+    openAuth();
+  };
 
   return (
     <div className="gate" role="dialog" aria-modal="true">
@@ -65,7 +69,7 @@ export default function Booking({ s, onClose }) {
             <Icon n="turnos" fill size={36} />
             <h2>{tr.gateT}</h2>
             <p>{tr.gateP}</p>
-            <button type="button" className="cta" onClick={() => { setUser(true); finish(); }}>{tr.gateB}</button>
+            <button type="button" className="cta" onClick={goLogin}>{tr.gateB}</button>
           </div>
         )}
         {step === 'done' && (

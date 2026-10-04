@@ -22,6 +22,7 @@ export function MapPanel() {
           here={here}
           label={(s) => fmt(s.price)}
           onPick={(id) => { setTab('inicio'); window.location.assign(`/salon/${id}/`); }}
+          active
         />
       </div>
       <ul className="panel__list">
@@ -102,16 +103,25 @@ export function FavsPanel() {
 }
 
 export function ProfilePanel() {
-  const { tr, user, setUser, lang, setLang, cur, setCur } = useApp();
+  const { tr, user, setUser, lang, setLang, cur, setCur, openAuth } = useApp();
   return (
     <div className="panel">
       <h1>{tr.profile}</h1>
       <div className="panel__card">
-        <p><b>{user ? tr.loggedIn : tr.guest}</b></p>
-        <p className="mut">{tr.pointsHint}</p>
-        {!user
-          ? <button type="button" className="cta" onClick={() => setUser(true)}>{tr.gateB}</button>
-          : <button type="button" className="ghost" onClick={() => setUser(false)}>{tr.logout}</button>}
+        {user ? (
+          <>
+            <p><b>{user.name}</b></p>
+            <p className="mut">{user.email} · {user.provider === 'google' ? 'Google' : 'Email'}</p>
+            <p className="mut">{tr.pointsHint}</p>
+            <button type="button" className="ghost" onClick={() => setUser(null)}>{tr.logout}</button>
+          </>
+        ) : (
+          <>
+            <p><b>{tr.guest}</b></p>
+            <p className="mut">{tr.loginSub}</p>
+            <button type="button" className="cta" onClick={openAuth}>{tr.gateB}</button>
+          </>
+        )}
       </div>
       <label className="fr">{tr.lang}
         <select value={lang} onChange={(e) => setLang(e.target.value)}>
