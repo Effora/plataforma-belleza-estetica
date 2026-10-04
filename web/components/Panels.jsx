@@ -123,16 +123,20 @@ export function ProfilePanel() {
           </>
         )}
       </div>
-      <label className="fr">{tr.lang}
-        <select value={lang} onChange={(e) => setLang(e.target.value)}>
-          {Object.keys(t).map((l) => <option key={l} value={l}>{l.toUpperCase()}</option>)}
-        </select>
-      </label>
-      <label className="fr">{tr.currency}
-        <select value={cur} onChange={(e) => setCur(e.target.value)}>
-          {Object.keys(rates).map((c) => <option key={c} value={c}>{c}</option>)}
-        </select>
-      </label>
+      <div className="prefs">
+        <label className="pref">
+          <span className="pref__label"><Icon n="idioma" size={16} />{tr.lang}</span>
+          <select className="pref__sel" value={lang} onChange={(e) => setLang(e.target.value)} aria-label={tr.lang}>
+            {Object.keys(t).map((l) => <option key={l} value={l}>{l.toUpperCase()}</option>)}
+          </select>
+        </label>
+        <label className="pref">
+          <span className="pref__label"><Icon n="puntos" size={16} />{tr.currency}</span>
+          <select className="pref__sel" value={cur} onChange={(e) => setCur(e.target.value)} aria-label={tr.currency}>
+            {Object.keys(rates).map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </label>
+      </div>
     </div>
   );
 }

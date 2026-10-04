@@ -144,15 +144,18 @@ export default function Shell({ children }) {
           <button key={v} type="button" aria-pressed={ver === v} onClick={() => setVersion(v)}>{v.toUpperCase()}</button>
         ))}
       </div>
-      <label className="sel">
-        <Icon n="idioma" size={18} />
+      <label className="pill-sel">
+        <Icon n="idioma" size={16} />
         <select value={lang} onChange={(e) => setLang(e.target.value)} aria-label={tr.lang}>
           {Object.keys(t).map((l) => <option key={l} value={l}>{l.toUpperCase()}</option>)}
         </select>
       </label>
-      <select className="cur" value={cur} onChange={(e) => setCur(e.target.value)} aria-label={tr.currency}>
-        {Object.keys(rates).map((c) => <option key={c}>{c}</option>)}
-      </select>
+      <label className="pill-sel">
+        <span className="pill-sel__cur" aria-hidden="true">$</span>
+        <select value={cur} onChange={(e) => setCur(e.target.value)} aria-label={tr.currency}>
+          {Object.keys(rates).map((c) => <option key={c} value={c}>{c}</option>)}
+        </select>
+      </label>
       {user ? (
         <button type="button" className="login-chip on" onClick={() => goTab('perfil')} title={user.email}>
           <Icon n="perfil" size={16} />{user.name?.split(' ')[0] || tr.profile}
