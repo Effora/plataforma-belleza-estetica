@@ -113,13 +113,14 @@ export function ProfilePanel() {
             <p><b>{user.name}</b></p>
             <p className="mut">{user.email} · {user.provider === 'google' ? 'Google' : 'Email'}</p>
             <p className="mut">{tr.pointsHint}</p>
+            {user.role === 'merchant' && <Link href="/comercio/" className="cta">{tr.myShop}</Link>}
             <button type="button" className="ghost" onClick={() => setUser(null)}>{tr.logout}</button>
           </>
         ) : (
           <>
             <p><b>{tr.guest}</b></p>
             <p className="mut">{tr.loginSub}</p>
-            <button type="button" className="cta" onClick={openAuth}>{tr.gateB}</button>
+            <button type="button" className="cta" onClick={() => openAuth({ choose: true })}>{tr.gateB}</button>
           </>
         )}
       </div>

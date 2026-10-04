@@ -1,18 +1,22 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useApp, Icon } from './Shell';
 
-export default function Auth({ onClose, reason }) {
+export default function Auth({ onClose, reason, choose }) {
   const { tr, setUser } = useApp();
-  const [mode, setMode] = useState('landing'); // landing | email | signup
+  const router = useRouter();
+  const [role, setRole] = useState('user'); // user | merchant
+  const [mode, setMode] = useState(choose ? 'role' : 'landing'); // role | landing | email | signup
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [pass, setPass] = useState('');
   const [err, setErr] = useState('');
 
   const finish = (user) => {
-    setUser(user);
+    setUser({ ...user, role });
     onClose();
+    if (role === 'merchant') router.push('/comercio/');
   };
 
   const withGoogle = () => {
@@ -42,9 +46,20 @@ export default function Auth({ onClose, reason }) {
         <button type="button" className="x" onClick={onClose} aria-label={tr.close}><Icon n="cerrar" /></button>
         <div className="auth-brand">
           <img src="/logo.png" alt="" width="48" height="48" />
-          <h2 id="auth-title">{mode === 'signup' ? tr.createAccount : tr.loginTitle}</h2>
-          <p className="mut">{reason || tr.loginSub}</p>
+          <h2 id="auth-title">{mode === 'role' ? tr.roleTitle : mode === 'signup' ? tr.createAccount : role === 'merchant' ? tr.shopAcc : tr.loginTitle}</h2>
+          {mode !== 'role' && <p className="mut">{reason || (role === 'merchant' ? tr.shopAccSub : tr.loginSub)}</p>}
         </div>
+
+        {mode === 'role' && (
+          <div className="roles">
+            <button type="button" className="role" onClick={() => { setRole('user'); setMode('landing'); }}>
+              <Icon n="buscar" size={30} /><b>{tr.roleUser}</b><small>{tr.roleUserP}</small>
+            </button>
+            <button type="button" className="role role--shop" onClick={() => { setRole('merchant'); setMode('landing'); }}>
+              <Icon n="comercio" size={30} /><b>{tr.roleShop}</b><small>{tr.roleShopP}</small>
+            </button>
+          </div>
+        )}
 
         {mode === 'landing' && (
           <div className="auth-actions">
@@ -55,6 +70,7 @@ export default function Auth({ onClose, reason }) {
             <button type="button" className="ghost auth-email" onClick={() => { setMode('email'); setErr(''); }}>
               {tr.continueEmail}
             </button>
+            {choose && <button type="button" className="ghost" onClick={() => setMode('role')}>{tr.back}</button>}
             <p className="auth-switch">
               {tr.noAccount}{' '}
               <button type="button" onClick={() => { setMode('signup'); setErr(''); }}>{tr.createAccount}</button>

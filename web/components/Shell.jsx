@@ -30,6 +30,7 @@ export default function Shell({ children }) {
   const [fm, setFm] = useState(false);
   const [user, setUser] = useState(null);
   const [authOpen, setAuthOpen] = useState(false);
+  const [authChoose, setAuthChoose] = useState(false);
   const [sm, setSm] = useState(false);
   const [q, setQ] = useState('');
   const [follows, setFollows] = useState({});
@@ -45,6 +46,8 @@ export default function Shell({ children }) {
   const router = useRouter();
   const home = path === '/';
   const onSalon = path.startsWith('/salon');
+  const onShop = path.startsWith('/comercio');
+  const onSub = onSalon || onShop;
 
   useEffect(() => {
     const nl = navigator.language || 'es';
@@ -137,13 +140,14 @@ export default function Shell({ children }) {
 
   const goTab = (id) => {
     setTab(id);
-    if (onSalon) router.push('/');
+    if (onSub) router.push('/');
     window.scrollTo(0, 0);
   };
 
   // Acciones que requieren cuenta: me gusta, seguir, comentar, reservar.
   const needLogin = () => {
     if (user) return false;
+    setAuthChoose(false);
     setAuthOpen(true);
     return true;
   };
@@ -163,7 +167,7 @@ export default function Shell({ children }) {
 
   const nf = Object.values({ ...f, cat: f.cat ? 1 : 0, max: f.max < 60 ? 1 : 0 }).filter(Boolean).length;
   const showFeedChrome = ver === 'b' && home && tab === 'inicio';
-  const showBBack = ver === 'b' && (onSalon || tab !== 'inicio');
+  const showBBack = ver === 'b' && (onSub || tab !== 'inicio');
 
   const ctl = (
     <div className="ctl">
@@ -185,11 +189,11 @@ export default function Shell({ children }) {
         </select>
       </label>
       {user ? (
-        <button type="button" className="login-chip on" onClick={() => goTab('perfil')} title={user.email}>
+        <button type="button" className="login-chip on" onClick={() => (user.role === 'merchant' ? router.push('/comercio/') : goTab('perfil'))} title={user.email}>
           <Icon n="perfil" size={16} />{user.name?.split(' ')[0] || tr.profile}
         </button>
       ) : (
-        <button type="button" className="login-chip" onClick={() => setAuthOpen(true)}>
+        <button type="button" className="login-chip" onClick={() => { setAuthChoose(true); setAuthOpen(true); }}>
           <Icon n="perfil" size={16} />{tr.login}
         </button>
       )}
@@ -216,10 +220,10 @@ export default function Shell({ children }) {
         <button
           key={n}
           type="button"
-          className={tab === n && !onSalon ? 'on' : ''}
+          className={tab === n && !onSub ? 'on' : ''}
           onClick={() => goTab(n)}
         >
-          <span className="ic"><Icon n={n} fill={tab === n && !onSalon} /></span>
+          <span className="ic"><Icon n={n} fill={tab === n && !onSub} /></span>
           <span className="bottom__lbl">{l}</span>
         </button>
       ))}
@@ -227,7 +231,7 @@ export default function Shell({ children }) {
   );
 
   const mainContent = () => {
-    if (onSalon) return children;
+    if (onSub) return children;
     if (tab === 'mapa') return <MapPanel />;
     if (tab === 'turnos') return <TurnosPanel />;
     if (tab === 'favoritos') return <FavsPanel />;
@@ -237,7 +241,7 @@ export default function Shell({ children }) {
 
   const ctx = {
     lang, setLang, ver, cur, setCur, tr, fmt, f, setF, user, setUser,
-    openBooking: setBook, openFilters: () => setFm(true), openAuth: () => setAuthOpen(true),
+    openBooking: setBook, openFilters: () => setFm(true), openAuth: (o) => { setAuthChoose(!!(o && o.choose)); setAuthOpen(true); },
     tab, setTab: goTab, here, geoStatus, requestGeo,
     favs, toggleFav, follows, toggleFollow, needLogin, q, setQ, bookings, addBooking, filtered,
     feedMode, setFeedMode,
@@ -247,7 +251,7 @@ export default function Shell({ children }) {
     <Ctx.Provider value={ctx}>
       {ver === 'a' ? (
         <>
-          <header ref={topRef} className={`top ${sc && !open ? 'sc' : ''}`}>
+          <header ref={topRef} className={`top ${sc && !open ? 'sc' : ''} ${onShop ? 'm' : ''}`}>
             <div className="r1">
               <Link href="/" className="brand" onClick={() => goTab('inicio')}>
                 <img src="/logo.png" alt="" width="34" height="34" />
@@ -321,12 +325,12 @@ export default function Shell({ children }) {
               <button
                 key={n}
                 type="button"
-                className={tab === n && !onSalon ? 'on' : ''}
+                className={tab === n && !onSub ? 'on' : ''}
                 onClick={() => goTab(n)}
                 aria-label={l}
                 title={l}
               >
-                <span className="ic"><Icon n={n} fill={tab === n && !onSalon} size={26} /></span>
+                <span className="ic"><Icon n={n} fill={tab === n && !onSub} size={26} /></span>
               </button>
             ))}
           </aside>
@@ -435,7 +439,7 @@ export default function Shell({ children }) {
           </div>
         </div>
       )}
-      {authOpen && <Auth reason={tr.needAuth} onClose={() => setAuthOpen(false)} />}
+      {authOpen && <Auth reason={authChoose ? null : tr.needAuth} choose={authChoose} onClose={() => setAuthOpen(false)} />}
       {book && <Booking s={book} onClose={() => setBook(null)} />}
     </Ctx.Provider>
   );
