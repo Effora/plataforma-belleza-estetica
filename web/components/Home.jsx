@@ -106,6 +106,7 @@ export default function Home() {
                   </button>
                   <button type="button" aria-label={tr.share} onClick={() => shareReel(r)}>
                     <Icon n="compartir" size={30} />
+                    <small>{tr.share}</small>
                   </button>
                 </div>
                 <div className="info">

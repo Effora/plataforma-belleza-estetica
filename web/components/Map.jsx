@@ -91,6 +91,17 @@ export default function MapView({ items, label, onPick, here, active = true }) {
     return () => { dead = true; };
   }, [items, here, active]);
 
+  useEffect(() => {
+    if (!el.current || typeof ResizeObserver === 'undefined') return undefined;
+    const ro = new ResizeObserver(() => {
+      if (mapRef.current && el.current?.offsetHeight > 0) {
+        mapRef.current.invalidateSize(false);
+      }
+    });
+    ro.observe(el.current);
+    return () => ro.disconnect();
+  }, []);
+
   useEffect(() => () => {
     if (mapRef.current) {
       mapRef.current.remove();
