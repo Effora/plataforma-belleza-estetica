@@ -2,16 +2,14 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { reels, salons } from '../lib/data';
-import { useApp, Icon, applyF } from './Shell';
+import { useApp, Icon } from './Shell';
 import Carousel from './Carousel';
 import MapView from './Map';
 
 function ReelMedia({ imgs, name }) {
   const [i, setI] = useState(0);
   useEffect(() => {
-    if (imgs.length < 2) {
-      return undefined;
-    }
+    if (imgs.length < 2) return undefined;
     const id = setInterval(() => setI((n) => (n + 1) % imgs.length), 3200);
     return () => clearInterval(id);
   }, [imgs.length]);
@@ -34,11 +32,12 @@ function ReelMedia({ imgs, name }) {
 }
 
 export default function Home() {
-  const { ver, lang, tr, fmt, f, openBooking } = useApp();
+  const {
+    ver, lang, tr, fmt, openBooking, filtered, here, favs, toggleFav, requestGeo, geoStatus,
+  } = useApp();
   const [map, setMap] = useState(false);
   const [liked, setLiked] = useState({});
   const [pick, setPick] = useState(null);
-  const list = applyF(f);
   const lk = (id) => setLiked((x) => ({ ...x, [id]: !x[id] }));
 
   if (ver === 'b') {
@@ -57,13 +56,8 @@ export default function Home() {
                   <Icon n="favoritos" fill={isLiked} size={30} />
                   <small>{isLiked ? r.likes + 1 : r.likes}</small>
                 </button>
-                <button type="button" aria-label="chat">
-                  <Icon n="mensaje" size={30} />
-                  <small>{r.chats}</small>
-                </button>
-                <button type="button" aria-label="share">
-                  <Icon n="compartir" size={30} />
-                </button>
+                <button type="button" aria-label="chat"><Icon n="mensaje" size={30} /><small>{r.chats}</small></button>
+                <button type="button" aria-label="share"><Icon n="compartir" size={30} /></button>
               </div>
               <div className="info">
                 <Link href={`/salon/${r.id}/`}><b>@{r.handle}</b></Link>
@@ -84,27 +78,41 @@ export default function Home() {
   return (
     <div className={`split ${map ? 'showmap' : ''}`}>
       <div className="list">
+        <div className="geo-bar">
+          <button type="button" className="ghost geo" onClick={requestGeo}>
+            <Icon n="mapa" size={16} />
+            {geoStatus === 'ok' ? tr.nearYou : tr.useLocation}
+          </button>
+        </div>
         <div className="grid">
-          {list.map((s) => (
+          {filtered.map((s) => (
             <article key={s.id} className={`card ${pick === s.id ? 'hl' : ''}`}>
               <div className="ph">
                 <Carousel imgs={s.imgs} alt={s.name} />
                 {s.promo && <span className="tag">{s.promo}</span>}
-                <button type="button" className="heart" aria-pressed={!!liked[s.id]} aria-label={tr.favs} onClick={() => lk(s.id)}>
-                  <Icon n="favoritos" fill={!!liked[s.id]} size={20} />
+                <button
+                  type="button"
+                  className="heart"
+                  aria-pressed={!!favs[s.id]}
+                  aria-label={tr.favs}
+                  onClick={() => toggleFav(s.id)}
+                >
+                  <Icon n="favoritos" fill={!!favs[s.id]} size={20} />
                 </button>
               </div>
               <Link href={`/salon/${s.id}/`}>
                 <div className="row"><b>{s.name}</b><span>★ {s.rating}</span></div>
-                <p className="mut">{s.zone} · {s.km} km</p>
+                <p className="mut">{s.zone} · {s.dist ?? s.km} km</p>
                 <p>{tr.from} <b>{fmt(s.price)}</b></p>
               </Link>
             </article>
           ))}
         </div>
       </div>
-      <div className="mapcol"><MapView items={list} label={(s) => fmt(s.price)} onPick={setPick} /></div>
-      <button type="button" className="fab" onClick={() => setMap(!map)}>
+      <div className="mapcol">
+        <MapView items={filtered} here={here} label={(s) => fmt(s.price)} onPick={setPick} />
+      </div>
+      <button type="button" className="fab" onClick={() => setMap((v) => !v)}>
         <Icon n="mapa" size={18} />{map ? tr.showList : tr.showMap}
       </button>
     </div>

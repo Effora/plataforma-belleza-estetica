@@ -1,72 +1,314 @@
 'use client';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { t, rates, salons, cats, catIcon } from '../lib/data';
+import { usePathname, useRouter } from 'next/navigation';
+import { t, rates, salons, cats, catIcon, BRAND, F0, applyF as filterSalons } from '../lib/data';
+import { DEFAULT_HERE, withDistance } from '../lib/geo';
 import Booking from './Booking';
+import { MapPanel, TurnosPanel, FavsPanel, ProfilePanel } from './Panels';
+
 const Ctx = createContext(null);
 export const useApp = () => useContext(Ctx);
+
 export const Icon = ({ n, fill, size = 24 }) => (
   <svg className="ico" width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
     <use href={`/icons.svg#gl-${n}${fill ? '-fill' : ''}`} />
   </svg>
 );
-const F0 = { cat: null, max: 60, promo: false, now: false, rate: false };
-export const applyF = (f) => salons.filter((s) => (!f.cat || s.cat === f.cat) && s.price <= f.max && (!f.promo || s.promo) && (!f.now || s.now) && (!f.rate || s.rating >= 4.5));
+
+export const applyF = (f) => filterSalons(f);
+
 export default function Shell({ children }) {
-  const [lang, setLang] = useState('es'); const [ver, setVer] = useState('a'); const [cur, setCur] = useState('USD');
-  const [sc, setSc] = useState(false); const [open, setOpen] = useState(false); const [book, setBook] = useState(null);
-  const [f, setF] = useState(F0); const [fm, setFm] = useState(false); const [user, setUser] = useState(false);
+  const [lang, setLang] = useState('es');
+  const [ver, setVer] = useState('a');
+  const [cur, setCur] = useState('USD');
+  const [sc, setSc] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [book, setBook] = useState(null);
+  const [f, setF] = useState(F0);
+  const [fm, setFm] = useState(false);
+  const [user, setUser] = useState(false);
+  const [tab, setTab] = useState('inicio');
+  const [here, setHere] = useState(null);
+  const [geoStatus, setGeoStatus] = useState('idle');
+  const [favs, setFavs] = useState({});
+  const [bookings, setBookings] = useState([]);
   const path = usePathname();
+  const router = useRouter();
+  const home = path === '/';
+  const onSalon = path.startsWith('/salon');
+
   useEffect(() => {
-    const nl = navigator.language || 'es'; const l = localStorage.getItem('gl-lang') || nl.slice(0, 2); if (t[l]) setLang(l);
+    const nl = navigator.language || 'es';
+    const l = localStorage.getItem('gl-lang') || nl.slice(0, 2);
+    if (t[l]) setLang(l);
     setVer(localStorage.getItem('gl-ver') || 'a');
-    const r = nl.split('-')[1]; setCur(localStorage.getItem('gl-cur') || { CO: 'COP', AR: 'ARS', MX: 'MXN', BR: 'BRL' }[r] || 'USD');
-    const on = () => { setSc(window.scrollY > 8); if (window.scrollY <= 8) setOpen(false); };
-    on(); window.addEventListener('scroll', on, { passive: true }); return () => window.removeEventListener('scroll', on);
+    const r = nl.split('-')[1];
+    setCur(localStorage.getItem('gl-cur') || { CO: 'COP', AR: 'ARS', MX: 'MXN', BR: 'BRL' }[r] || 'USD');
+    try {
+      setFavs(JSON.parse(localStorage.getItem('gl-favs') || '{}'));
+      setBookings(JSON.parse(localStorage.getItem('gl-bookings') || '[]'));
+      setUser(localStorage.getItem('gl-user') === '1');
+    } catch { /* ignore */ }
+    const on = () => {
+      setSc(window.scrollY > 8);
+      if (window.scrollY <= 8) setOpen(false);
+    };
+    on();
+    window.addEventListener('scroll', on, { passive: true });
+    return () => window.removeEventListener('scroll', on);
   }, []);
-  useEffect(() => { document.documentElement.dataset.v = ver; document.documentElement.lang = lang; try { localStorage.setItem('gl-ver', ver); localStorage.setItem('gl-lang', lang); localStorage.setItem('gl-cur', cur); } catch {} }, [ver, lang, cur]);
+
+  useEffect(() => {
+    document.documentElement.dataset.v = ver;
+    document.documentElement.lang = lang;
+    try {
+      localStorage.setItem('gl-ver', ver);
+      localStorage.setItem('gl-lang', lang);
+      localStorage.setItem('gl-cur', cur);
+      localStorage.setItem('gl-favs', JSON.stringify(favs));
+      localStorage.setItem('gl-bookings', JSON.stringify(bookings));
+      localStorage.setItem('gl-user', user ? '1' : '0');
+    } catch { /* ignore */ }
+  }, [ver, lang, cur, favs, bookings, user]);
+
+  useEffect(() => {
+    const feedOn = ver === 'b' && home && tab === 'inicio';
+    document.documentElement.dataset.feed = feedOn ? '1' : '';
+  }, [ver, home, tab]);
+
+  const requestGeo = useCallback(() => {
+    if (!navigator.geolocation) {
+      setHere(DEFAULT_HERE);
+      setGeoStatus('denied');
+      return;
+    }
+    setGeoStatus('loading');
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setHere([pos.coords.latitude, pos.coords.longitude]);
+        setGeoStatus('ok');
+      },
+      () => {
+        setHere(DEFAULT_HERE);
+        setGeoStatus('denied');
+      },
+      { enableHighAccuracy: true, timeout: 8000 },
+    );
+  }, []);
+
+  useEffect(() => { requestGeo(); }, [requestGeo]);
+
   const setVersion = (v) => {
     setVer(v);
-    if (v === 'b') {
-      setF(F0);
-      setOpen(false);
-      window.scrollTo(0, 0);
-    }
+    setF(F0);
+    setOpen(false);
+    setTab('inicio');
+    window.scrollTo(0, 0);
   };
+
+  const goTab = (id) => {
+    setTab(id);
+    if (onSalon) router.push('/');
+    window.scrollTo(0, 0);
+  };
+
+  const toggleFav = (id) => setFavs((x) => ({ ...x, [id]: !x[id] }));
+  const addBooking = (entry) => setBookings((x) => [entry, ...x]);
+
   const tr = t[lang];
-  const fmt = (usd) => new Intl.NumberFormat(lang, { style: 'currency', currency: cur, maximumFractionDigits: 0 }).format(usd * rates[cur]);
+  const fmt = (usd) => new Intl.NumberFormat(lang, {
+    style: 'currency', currency: cur, maximumFractionDigits: 0,
+  }).format(usd * rates[cur]);
+
+  const filtered = useMemo(
+    () => withDistance(filterSalons(f, salons), here),
+    [f, here],
+  );
+
   const nf = Object.values({ ...f, cat: f.cat ? 1 : 0, max: f.max < 60 ? 1 : 0 }).filter(Boolean).length;
-  const home = path === '/';
-  const ctl = (<div className="ctl">
-    <div className="seg" role="group" aria-label="Version">{['a', 'b'].map((v) => <button key={v} type="button" aria-pressed={ver === v} onClick={() => setVersion(v)}>{v.toUpperCase()}</button>)}</div>
-    <label className="sel"><Icon n="idioma" size={18} /><select value={lang} onChange={(e) => setLang(e.target.value)} aria-label="Idioma">{Object.keys(t).map((l) => <option key={l} value={l}>{l.toUpperCase()}</option>)}</select></label>
-    <select className="cur" value={cur} onChange={(e) => setCur(e.target.value)} aria-label="Moneda">{Object.keys(rates).map((c) => <option key={c}>{c}</option>)}</select></div>);
-  const nav = [['inicio', tr.home], ['mapa', tr.map], ['turnos', tr.appts], ['favoritos', tr.favs], ['perfil', tr.profile]];
-  const tabs = [['inicio', tr.all], ['promos', tr.promos], ['ahora', tr.now]];
+  const showFeedChrome = ver === 'b' && home && tab === 'inicio';
+  const showBBack = ver === 'b' && (onSalon || tab !== 'inicio');
+
+  const ctl = (
+    <div className="ctl">
+      <div className="seg" role="group" aria-label="Version">
+        {['a', 'b'].map((v) => (
+          <button key={v} type="button" aria-pressed={ver === v} onClick={() => setVersion(v)}>{v.toUpperCase()}</button>
+        ))}
+      </div>
+      <label className="sel">
+        <Icon n="idioma" size={18} />
+        <select value={lang} onChange={(e) => setLang(e.target.value)} aria-label={tr.lang}>
+          {Object.keys(t).map((l) => <option key={l} value={l}>{l.toUpperCase()}</option>)}
+        </select>
+      </label>
+      <select className="cur" value={cur} onChange={(e) => setCur(e.target.value)} aria-label={tr.currency}>
+        {Object.keys(rates).map((c) => <option key={c}>{c}</option>)}
+      </select>
+    </div>
+  );
+
+  const navItems = [
+    ['inicio', tr.home],
+    ['mapa', tr.map],
+    ['turnos', tr.appts],
+    ['favoritos', tr.favs],
+    ['perfil', tr.profile],
+  ];
+
+  const tabsQuick = [
+    ['all', tr.all, () => setF(F0)],
+    ['promos', tr.promos, () => setF({ ...F0, promo: true })],
+    ['ahora', tr.now, () => setF({ ...F0, now: true })],
+  ];
+
+  const bottomNav = (dark) => (
+    <nav className={`bottom ${dark ? 'dark' : ''}`} aria-label="Principal">
+      {navItems.map(([n, l]) => (
+        <button
+          key={n}
+          type="button"
+          className={tab === n && !onSalon ? 'on' : ''}
+          onClick={() => goTab(n)}
+        >
+          <span className="ic"><Icon n={n} fill={tab === n && !onSalon} /></span>
+          <span>{l}</span>
+        </button>
+      ))}
+    </nav>
+  );
+
+  const mainContent = () => {
+    if (onSalon) return children;
+    if (tab === 'mapa') return <MapPanel />;
+    if (tab === 'turnos') return <TurnosPanel />;
+    if (tab === 'favoritos') return <FavsPanel />;
+    if (tab === 'perfil') return <ProfilePanel />;
+    return children;
+  };
+
+  const ctx = {
+    lang, setLang, ver, cur, setCur, tr, fmt, f, setF, user, setUser,
+    openBooking: setBook, openFilters: () => setFm(true),
+    tab, setTab: goTab, here, geoStatus, requestGeo,
+    favs, toggleFav, bookings, addBooking, filtered,
+  };
+
   return (
-    <Ctx.Provider value={{ lang, ver, tr, fmt, f, setF, user, setUser, openBooking: setBook, openFilters: () => setFm(true) }}>
-      {ver === 'a' ? (<>
-        <header className={`top ${sc && !open ? 'sc' : ''}`}>
-          <div className="r1"><Link href="/" className="brand"><img src="/logo.png" alt="Glowly" width="34" height="34" /><b>Glowly</b></Link>
-            <div className="mid"><nav className="tabs">{tabs.map(([n, l], i) => <button key={n} className={i === 0 ? 'on' : ''}><Icon n={n} fill={i === 0} size={34} /><span>{l}</span></button>)}</nav>
-              <button className="mini" onClick={() => setOpen(true)}><b>{tr.ph1}</b><i /><b>{tr.ph2}</b><i /><b>{tr.ph3}</b><span className="go"><Icon n="buscar" size={14} /></span></button></div>{ctl}</div>
-          <div className="big"><div className="bar" role="search">{[['q1', 'ph1'], ['q2', 'ph2'], ['q3', 'ph3']].map(([a, b]) => <label key={a}><b>{tr[a]}</b><input placeholder={tr[b]} /></label>)}<button className="go" aria-label="Buscar"><Icon n="buscar" size={20} /></button></div></div>
-          {home && (<div className="cats"><div className="cs" role="tablist">{cats.map((c) => <button key={c} type="button" role="tab" aria-selected={f.cat === c} className={f.cat === c ? 'on' : ''} onClick={() => setF({ ...f, cat: f.cat === c ? null : c })}><span className="ic"><Icon n={catIcon[c]} fill={f.cat === c} /></span><span>{tr[c]}</span></button>)}</div>
-            <button type="button" className="fbtn" onClick={() => setFm(true)}><Icon n="filtros" size={18} />{tr.filters}{nf > 0 && <em>{nf}</em>}</button></div>)}
-        </header>
-        <main>{children}</main>
-        <nav className="bottom" aria-label="Principal">{nav.map(([n, l], i) => <button key={n} type="button" className={i === 0 ? 'on' : ''}><span className="ic"><Icon n={n} fill={i === 0} /></span><span>{l}</span></button>)}</nav>
-      </>) : (<div className="tt">
-        <aside className="side"><Link href="/" className="brand"><img src="/logo.png" alt="Glowly" width="34" height="34" /><b>Glowly</b></Link>{nav.map(([n, l], i) => <button key={n} type="button" className={i === 0 ? 'on' : ''}><span className="ic"><Icon n={n} fill={i === 0} /></span><span>{l}</span></button>)}</aside>
-        <div className="btop"><div className="tk"><span>{tr.following}</span><b>{tr.forYou}</b></div>{ctl}</div>
-        <main className="ttm">{children}</main>
-        <nav className="bottom dark" aria-label="Principal">{nav.map(([n, l], i) => <button key={n} type="button" className={i === 0 ? 'on' : ''}><span className="ic"><Icon n={n} fill={i === 0} /></span><span>{l}</span></button>)}</nav>
-      </div>)}
-      {fm && (<div className="gate" role="dialog" aria-modal="true"><div className="sheet"><button className="x" onClick={() => setFm(false)} aria-label={tr.close}><Icon n="cerrar" /></button><h2>{tr.filters}</h2>
-        <label className="fr">{tr.maxP}: <b>{fmt(f.max)}</b><input type="range" min="10" max="60" value={f.max} onChange={(e) => setF({ ...f, max: +e.target.value })} /></label>
-        {[['promo', tr.onlyPromo], ['now', tr.avail], ['rate', tr.r45]].map(([k, l]) => <label key={k} className="fr chk"><input type="checkbox" checked={f[k]} onChange={(e) => setF({ ...f, [k]: e.target.checked })} />{l}</label>)}
-        <div className="two"><button className="ghost" onClick={() => setF(F0)}>{tr.clear}</button><button className="cta" onClick={() => setFm(false)}>{tr.show} {applyF(f).length} {tr.results}</button></div></div></div>)}
+    <Ctx.Provider value={ctx}>
+      {ver === 'a' ? (
+        <>
+          <header className={`top ${sc && !open ? 'sc' : ''}`}>
+            <div className="r1">
+              <Link href="/" className="brand" onClick={() => goTab('inicio')}>
+                <img src="/logo.png" alt="" width="34" height="34" />
+                <b>{BRAND}</b>
+              </Link>
+              <div className="mid">
+                <nav className="tabs">
+                  {tabsQuick.map(([k, l, fn], i) => (
+                    <button
+                      key={k}
+                      type="button"
+                      className={(k === 'all' && !f.promo && !f.now) || (k === 'promos' && f.promo) || (k === 'ahora' && f.now) ? 'on' : ''}
+                      onClick={fn}
+                    >
+                      <Icon n={i === 0 ? 'inicio' : i === 1 ? 'promos' : 'ahora'} fill size={34} />
+                      <span>{l}</span>
+                    </button>
+                  ))}
+                </nav>
+                <button type="button" className="mini" onClick={() => setOpen(true)}>
+                  <b>{tr.ph1}</b><i /><b>{tr.ph2}</b><i /><b>{tr.ph3}</b>
+                  <span className="go"><Icon n="buscar" size={14} /></span>
+                </button>
+              </div>
+              {ctl}
+            </div>
+            <div className="big">
+              <div className="bar" role="search">
+                {[['q1', 'ph1'], ['q2', 'ph2'], ['q3', 'ph3']].map(([a, b]) => (
+                  <label key={a}><b>{tr[a]}</b><input placeholder={tr[b]} /></label>
+                ))}
+                <button type="button" className="go" aria-label="Buscar"><Icon n="buscar" size={20} /></button>
+              </div>
+            </div>
+            {home && tab === 'inicio' && (
+              <div className="cats">
+                <div className="cs" role="tablist">
+                  {cats.map((c) => (
+                    <button
+                      key={c}
+                      type="button"
+                      role="tab"
+                      aria-selected={f.cat === c}
+                      className={f.cat === c ? 'on' : ''}
+                      onClick={() => setF({ ...f, cat: f.cat === c ? null : c })}
+                    >
+                      <span className="ic"><Icon n={catIcon[c]} fill={f.cat === c} /></span>
+                      <span>{tr[c]}</span>
+                    </button>
+                  ))}
+                </div>
+                <button type="button" className="fbtn" onClick={() => setFm(true)}>
+                  <Icon n="filtros" size={18} />{tr.filters}{nf > 0 && <em>{nf}</em>}
+                </button>
+              </div>
+            )}
+          </header>
+          <main>{mainContent()}</main>
+          {bottomNav(false)}
+        </>
+      ) : (
+        <div className="tt">
+          <aside className="side">
+            <Link href="/" className="brand" onClick={() => goTab('inicio')}>
+              <img src="/logo.png" alt="" width="34" height="34" /><b>{BRAND}</b>
+            </Link>
+            {navItems.map(([n, l]) => (
+              <button key={n} type="button" className={tab === n && !onSalon ? 'on' : ''} onClick={() => goTab(n)}>
+                <span className="ic"><Icon n={n} fill={tab === n && !onSalon} /></span><span>{l}</span>
+              </button>
+            ))}
+          </aside>
+          <div className="btop">
+            {showFeedChrome && (
+              <div className="tk"><span>{tr.following}</span><b>{tr.forYou}</b></div>
+            )}
+            {showBBack && (
+              <Link href="/" className="back-b" onClick={() => goTab('inicio')}>
+                <Icon n="atras" size={20} />{tr.back}
+              </Link>
+            )}
+            {!showFeedChrome && !showBBack && <span />}
+            {ctl}
+          </div>
+          <main className="ttm">{mainContent()}</main>
+          {bottomNav(true)}
+        </div>
+      )}
+
+      {fm && (
+        <div className="gate" role="dialog" aria-modal="true">
+          <div className="sheet">
+            <button type="button" className="x" onClick={() => setFm(false)} aria-label={tr.close}><Icon n="cerrar" /></button>
+            <h2>{tr.filters}</h2>
+            <label className="fr">{tr.maxP}: <b>{fmt(f.max)}</b>
+              <input type="range" min="10" max="60" value={f.max} onChange={(e) => setF({ ...f, max: +e.target.value })} />
+            </label>
+            {[['promo', tr.onlyPromo], ['now', tr.avail], ['rate', tr.r45]].map(([k, l]) => (
+              <label key={k} className="fr chk">
+                <input type="checkbox" checked={f[k]} onChange={(e) => setF({ ...f, [k]: e.target.checked })} />{l}
+              </label>
+            ))}
+            <div className="two">
+              <button type="button" className="ghost" onClick={() => setF(F0)}>{tr.clear}</button>
+              <button type="button" className="cta" onClick={() => setFm(false)}>{tr.show} {filtered.length} {tr.results}</button>
+            </div>
+          </div>
+        </div>
+      )}
       {book && <Booking s={book} onClose={() => setBook(null)} />}
     </Ctx.Provider>
   );
