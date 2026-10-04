@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { cats } from '../lib/data';
 import { PLANS, DAYS, PAYS, tm } from '../lib/merchantT';
@@ -27,7 +28,7 @@ export default function Merchant() {
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem('gl-merchant') || 'null');
-      if (saved) setM({ ...M0, ...saved });
+      if (saved) { setM({ ...M0, ...saved }); if (saved.published) setStep(7); }
     } catch { /* ignore */ }
     setReady(true);
   }, []);
@@ -96,6 +97,7 @@ export default function Merchant() {
         </div>
         {Preview}
         <p className="mut">{T.photosN}: {photos.length} · {T.videosN}: {videos.length} · {T.servicesN}: {m.services.filter((s) => s.name).length}</p>
+        <Link href="/comercio/panel/" className="cta mp__open">{T.openPanel}</Link>
         <button type="button" className="ghost" onClick={() => go(0)}>{T.edit}</button>
         <small>{T.onlyDemo}</small>
       </div>

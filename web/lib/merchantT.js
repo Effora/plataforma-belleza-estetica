@@ -7,7 +7,7 @@ export const PAYS = ['card', 'pse', 'nequi'];
 
 export const tm = {
   es: {
-    title: 'Registrá tu comercio', sub: 'Aparecé en el mapa de Glowlys y recibí reservas pagadas online. Sin comisiones por reserva.',
+    title: 'Registrá tu comercio', openPanel: 'Abrir panel del comercio', sub: 'Aparecé en el mapa de Glowlys y recibí reservas pagadas online. Sin comisiones por reserva.',
     steps: ['Datos', 'Horarios', 'Fotos y videos', 'Servicios', 'Cobros', 'Plan', 'Publicar'],
     step: 'Paso', of: 'de', next: 'Siguiente', back: 'Atrás', publish: 'Publicar mi comercio', edit: 'Editar',
     name: 'Nombre del comercio', cats: 'Categorías', desc: 'Descripción', descPh: 'Contá qué te hace distinto: estilo, equipo, experiencia…',
@@ -35,7 +35,7 @@ export const tm = {
     needAccount: 'Creá tu cuenta de comercio para registrar tu negocio.', createAcc: 'Crear cuenta de comercio',
   },
   en: {
-    title: 'Register your business', sub: 'Show up on the Glowlys map and get bookings paid online. No per-booking commission.',
+    title: 'Register your business', openPanel: 'Open business dashboard', sub: 'Show up on the Glowlys map and get bookings paid online. No per-booking commission.',
     steps: ['Details', 'Hours', 'Photos & videos', 'Services', 'Payouts', 'Plan', 'Publish'],
     step: 'Step', of: 'of', next: 'Next', back: 'Back', publish: 'Publish my business', edit: 'Edit',
     name: 'Business name', cats: 'Categories', desc: 'Description', descPh: 'What makes you different: style, team, experience…',

@@ -189,7 +189,7 @@ export default function Shell({ children }) {
         </select>
       </label>
       {user ? (
-        <button type="button" className="login-chip on" onClick={() => (user.role === 'merchant' ? router.push('/comercio/') : goTab('perfil'))} title={user.email}>
+        <button type="button" className="login-chip on" onClick={() => (user.role === 'merchant' ? router.push(JSON.parse(localStorage.getItem('gl-merchant') || '{}').published ? '/comercio/panel/' : '/comercio/') : goTab('perfil'))} title={user.email}>
           <Icon n="perfil" size={16} />{user.name?.split(' ')[0] || tr.profile}
         </button>
       ) : (
@@ -319,7 +319,8 @@ export default function Shell({ children }) {
         <div className="tt">
           <aside className="side" aria-label="Navegación">
             <Link href="/" className="brand brand--icon" onClick={() => goTab('inicio')} aria-label={BRAND}>
-              <img src="/logo.png" alt="" width="32" height="32" />
+              <img src="/logo.png" alt="" width="60" height="60" />
+              <b>{BRAND}</b>
             </Link>
             {navItems.map(([n, l]) => (
               <button
@@ -354,6 +355,10 @@ export default function Shell({ children }) {
           )}
           <div className="col">
             <div className="btop" ref={btopRef}>
+              <Link href="/" className="brand brand--b" onClick={() => goTab('inicio')} aria-label={BRAND}>
+                <img src="/logo.png" alt="" width="40" height="40" />
+                <b>{BRAND}</b>
+              </Link>
               {showFeedChrome && (
                 <div className="tk" role="tablist">
                   <button
