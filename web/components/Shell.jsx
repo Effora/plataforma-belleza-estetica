@@ -182,8 +182,8 @@ export default function Shell({ children }) {
     ['ahora', tr.now, () => setF({ ...F0, now: true })],
   ];
 
-  const bottomNav = (dark) => (
-    <nav className={`bottom ${dark ? 'dark' : ''}`} aria-label="Principal">
+  const bottomNav = () => (
+    <nav className="bottom" aria-label="Principal">
       {navItems.map(([n, l]) => (
         <button
           key={n}
@@ -192,7 +192,7 @@ export default function Shell({ children }) {
           onClick={() => goTab(n)}
         >
           <span className="ic"><Icon n={n} fill={tab === n && !onSalon} /></span>
-          <span>{l}</span>
+          <span className="bottom__lbl">{l}</span>
         </button>
       ))}
     </nav>
@@ -271,27 +271,53 @@ export default function Shell({ children }) {
                     </button>
                   ))}
                 </div>
-                <button type="button" className="fbtn" onClick={() => setFm(true)}>
-                  <Icon n="filtros" size={18} />{tr.filters}{nf > 0 && <em>{nf}</em>}
+                <button type="button" className="fbtn" onClick={() => setFm(true)} aria-label={tr.filters} title={tr.filters}>
+                  <Icon n="filtros" size={20} />
+                  {nf > 0 && <em>{nf}</em>}
                 </button>
               </div>
             )}
           </header>
           <main>{mainContent()}</main>
-          {bottomNav(false)}
+          {bottomNav()}
         </>
       ) : (
         <div className="tt">
-          <aside className="side">
-            <Link href="/" className="brand" onClick={() => goTab('inicio')}>
-              <img src="/logo.png" alt="" width="34" height="34" /><b>{BRAND}</b>
+          <aside className="side" aria-label="Navegación">
+            <Link href="/" className="brand brand--icon" onClick={() => goTab('inicio')} aria-label={BRAND}>
+              <img src="/logo.png" alt="" width="32" height="32" />
             </Link>
             {navItems.map(([n, l]) => (
-              <button key={n} type="button" className={tab === n && !onSalon ? 'on' : ''} onClick={() => goTab(n)}>
-                <span className="ic"><Icon n={n} fill={tab === n && !onSalon} /></span><span>{l}</span>
+              <button
+                key={n}
+                type="button"
+                className={tab === n && !onSalon ? 'on' : ''}
+                onClick={() => goTab(n)}
+                aria-label={l}
+                title={l}
+              >
+                <span className="ic"><Icon n={n} fill={tab === n && !onSalon} size={26} /></span>
               </button>
             ))}
           </aside>
+          {showFeedChrome && (
+            <aside className="rail-list" aria-label={tr.results}>
+              <h2>{tr.nearYou}</h2>
+              <ul>
+                {filtered.map((s) => (
+                  <li key={s.id}>
+                    <Link href={`/salon/${s.id}/`} onClick={() => goTab('inicio')}>
+                      <img src={`/media/${s.imgs[0]}`} alt="" width="44" height="44" />
+                      <span>
+                        <b>{s.name}</b>
+                        <small>★ {s.rating} · {s.zone} · {fmt(s.price)}</small>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )}
           <div className="col">
             <div className="btop">
               {showFeedChrome && (
@@ -322,7 +348,7 @@ export default function Shell({ children }) {
             </div>
             <main className="ttm">{mainContent()}</main>
           </div>
-          {bottomNav(true)}
+          {bottomNav()}
         </div>
       )}
 

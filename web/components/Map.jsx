@@ -3,10 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { DEFAULT_HERE } from '../lib/geo';
 
+/** Proveedores sin API key (nunca Carto). */
 const TILES = [
   {
-    url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    opts: { attribution: '© OSM © CARTO', maxZoom: 18, subdomains: 'abcd', updateWhenIdle: true },
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+    opts: { attribution: '© Esri', maxZoom: 19, updateWhenIdle: true },
   },
   {
     url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',

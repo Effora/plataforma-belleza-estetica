@@ -14,7 +14,7 @@ function ReelMedia({ imgs, name }) {
     return () => clearInterval(id);
   }, [imgs.length]);
   return (
-    <>
+    <div className="reel-media">
       {imgs.map((src, idx) => (
         <img
           key={src}
@@ -27,7 +27,7 @@ function ReelMedia({ imgs, name }) {
       <div className="reel-dots" aria-hidden="true">
         {imgs.map((src, idx) => <i key={src} className={idx === i ? 'on' : ''} />)}
       </div>
-    </>
+    </div>
   );
 }
 
