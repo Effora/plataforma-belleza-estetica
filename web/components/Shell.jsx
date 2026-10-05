@@ -89,8 +89,8 @@ export default function Shell({ children }) {
   // Mide el alto real del header para que el mapa ocupe todo el resto de la pantalla.
   useEffect(() => {
     const root = document.documentElement;
-    const pairs = [[topRef.current, '--hdr'], [btopRef.current, '--btop-h']].filter(([el]) => el);
-    ['--hdr', '--btop-h'].forEach((v) => root.style.removeProperty(v));
+    const pairs = [[topRef.current, '--hdr'], [topRef.current?.querySelector('.r1'), '--r1h'], [btopRef.current, '--btop-h']].filter(([el]) => el);
+    ['--hdr', '--r1h', '--btop-h'].forEach((v) => root.style.removeProperty(v));
     if (!pairs.length) return undefined;
     const set = () => pairs.forEach(([el, v]) => root.style.setProperty(v, `${Math.round(el.getBoundingClientRect().height)}px`));
     set();
@@ -251,7 +251,7 @@ export default function Shell({ children }) {
     <Ctx.Provider value={ctx}>
       {ver === 'a' ? (
         <>
-          <header ref={topRef} className={`top ${sc && !open ? 'sc' : ''} ${onShop ? 'm' : ''}`}>
+          <header ref={topRef} className={`top ${home && tab === 'inicio' ? 'hcol' : ''} ${onShop ? 'm' : ''}`}>
             <div className="r1">
               <Link href="/" className="brand" onClick={() => goTab('inicio')}>
                 <img src="/logo.png" alt="" width="34" height="34" />

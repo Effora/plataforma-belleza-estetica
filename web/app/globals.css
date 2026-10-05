@@ -145,7 +145,7 @@ a[href*="netlify.com"][style*="position"],a[href*="netlify.com"][style*="fixed"]
   .split{display:grid;grid-template-columns:minmax(0,1fr) 56%;align-items:start}
   .list{padding:20px 40px}
   .grid{grid-template-columns:repeat(2,1fr)}
-  .mapcol,.showmap .mapcol{display:block;position:sticky;top:var(--hdr,178px);height:calc(100dvh - var(--hdr,178px))}
+  .mapcol,.showmap .mapcol{display:block;position:sticky;top:calc(var(--hdr,178px) - var(--r1h,0px));height:calc(100dvh - var(--hdr,178px) + var(--r1h,0px))}
   .showmap .list{display:block}
   .fab{display:none}
   .detail{grid-template-columns:1.5fr 1fr;gap:56px;padding:24px 40px}
@@ -394,3 +394,11 @@ textarea.mi{resize:vertical}
 .mp .cta:disabled,.mp .ghost:disabled{opacity:.5}
 .mp input[type=range]{width:100%;accent-color:var(--terra)}
 .mp__open{display:flex;justify-content:center;width:auto;margin:14px auto 6px;padding:12px 22px}
+
+
+/* Header A: la fila superior (logo, pestañas, idioma) se va con el scroll y la búsqueda + categorías quedan fijas.
+   La altura del header nunca cambia, así que no hay saltos ni parpadeo al deslizar. */
+.top.hcol{top:calc(var(--r1h,0px) * -1)}
+body:has(.showmap) .top.hcol{top:0}
+html,body{overflow-anchor:none}
+body:has(.showmap) .top:not(.sc) .mid{display:flex}
