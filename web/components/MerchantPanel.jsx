@@ -203,7 +203,6 @@ export default function MerchantPanel() {
         <>
           <h2>{T.pTitle}</h2>
           <p className="mut">{T.pHint}</p>
-          {!pro && <p className="auth-err">{T.pLock}</p>}
           <div className="mform">
             <label className="fr">{T.pSvc}
               <select className="mi" value={pf.svc} onChange={(e) => setPf({ ...pf, svc: Number(e.target.value) })}>
@@ -218,7 +217,7 @@ export default function MerchantPanel() {
                 </select>
               </label>
             </div>
-            <button type="button" className="cta" disabled={!pro} onClick={addPromo}>{T.pCreate}</button>
+            <button type="button" className="cta" onClick={addPromo}>{T.pCreate}</button>
           </div>
           <h2>{T.pActive}</h2>
           {promos.length === 0 ? <p className="mut">{T.pNone}</p> : (
