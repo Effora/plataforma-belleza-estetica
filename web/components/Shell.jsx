@@ -6,6 +6,7 @@ import { t, rates, salons, cats, catIcon, BRAND, F0, applyF as filterSalons, mat
 import { DEFAULT_HERE, withDistance } from '../lib/geo';
 import Booking from './Booking';
 import Auth from './Auth';
+import Suggest from './Suggest';
 import { MapPanel, TurnosPanel, FavsPanel, ProfilePanel } from './Panels';
 
 const Ctx = createContext(null);
@@ -21,8 +22,10 @@ export const applyF = (f) => filterSalons(f);
 
 export default function Shell({ children }) {
   const [lang, setLang] = useState('es');
-  const [ver, setVer] = useState('a');
-  const [cur, setCur] = useState('USD');
+  const [verPref, setVer] = useState('a');
+  const [desk, setDesk] = useState(false);
+  const [sfocus, setSfocus] = useState(false);
+  const [cur, setCur] = useState('COP');
   const [sc, setSc] = useState(false);
   const [open, setOpen] = useState(false);
   const [book, setBook] = useState(null);
@@ -50,12 +53,15 @@ export default function Shell({ children }) {
   const onSub = onSalon || onShop;
 
   useEffect(() => {
-    const nl = navigator.language || 'es';
-    const l = localStorage.getItem('gl-lang') || nl.slice(0, 2);
+    // Por defecto: español y COP (se cambian desde la configuración del usuario)
+    const l = localStorage.getItem('gl-lang2') || 'es';
     if (t[l]) setLang(l);
     setVer(localStorage.getItem('gl-ver') || 'a');
-    const r = nl.split('-')[1];
-    setCur(localStorage.getItem('gl-cur') || { CO: 'COP', AR: 'ARS', MX: 'MXN', BR: 'BRL' }[r] || 'USD');
+    setCur(localStorage.getItem('gl-cur2') || 'COP');
+    const mq = window.matchMedia('(min-width:900px)');
+    const onMq = () => setDesk(mq.matches);
+    onMq();
+    mq.addEventListener('change', onMq);
     try {
       setFavs(JSON.parse(localStorage.getItem('gl-favs') || '{}'));
       setFollows(JSON.parse(localStorage.getItem('gl-follows') || '{}'));
@@ -76,15 +82,18 @@ export default function Shell({ children }) {
     document.documentElement.dataset.v = ver;
     document.documentElement.lang = lang;
     try {
-      localStorage.setItem('gl-ver', ver);
-      localStorage.setItem('gl-lang', lang);
-      localStorage.setItem('gl-cur', cur);
+      localStorage.setItem('gl-ver', verPref);
+      localStorage.setItem('gl-lang2', lang);
+      localStorage.setItem('gl-cur2', cur);
       localStorage.setItem('gl-favs', JSON.stringify(favs));
       localStorage.setItem('gl-follows', JSON.stringify(follows));
       localStorage.setItem('gl-bookings', JSON.stringify(bookings));
       localStorage.setItem('gl-user', user ? JSON.stringify(user) : '');
     } catch { /* ignore */ }
-  }, [ver, lang, cur, favs, follows, bookings, user]);
+  }, [verPref, lang, cur, favs, follows, bookings, user]);
+
+  // Escritorio: solo el modelo A. En móvil se elige entre A (clásica) y B (video).
+  const ver = desk ? 'a' : verPref;
 
   // Mide el alto real del header para que el mapa ocupe todo el resto de la pantalla.
   useEffect(() => {
@@ -171,23 +180,12 @@ export default function Shell({ children }) {
 
   const ctl = (
     <div className="ctl">
-      <div className="seg" role="group" aria-label="Version">
-        {['a', 'b'].map((v) => (
-          <button key={v} type="button" aria-pressed={ver === v} onClick={() => setVersion(v)}>{v.toUpperCase()}</button>
+      <div className="seg vsw" role="group" aria-label="Version">
+        {[['a', 'escritorio', tr.classicView], ['b', 'video', tr.videoView]].map(([v, ic, lb]) => (
+          <button key={v} type="button" aria-pressed={ver === v} aria-label={lb} title={lb} onClick={() => setVersion(v)}><Icon n={ic} size={18} /></button>
         ))}
       </div>
-      <label className="pill-sel">
-        <Icon n="idioma" size={16} />
-        <select value={lang} onChange={(e) => setLang(e.target.value)} aria-label={tr.lang}>
-          {Object.keys(t).map((l) => <option key={l} value={l}>{l.toUpperCase()}</option>)}
-        </select>
-      </label>
-      <label className="pill-sel">
-        <span className="pill-sel__cur" aria-hidden="true">$</span>
-        <select value={cur} onChange={(e) => setCur(e.target.value)} aria-label={tr.currency}>
-          {Object.keys(rates).map((c) => <option key={c} value={c}>{c}</option>)}
-        </select>
-      </label>
+      <button type="button" className="cfg" onClick={() => goTab('perfil')} aria-label={tr.settings} title={tr.settings}><Icon n="config" size={18} /></button>
       {user ? (
         <button type="button" className="login-chip on" onClick={() => (user.role === 'merchant' ? router.push(JSON.parse(localStorage.getItem('gl-merchant') || '{}').published ? '/comercio/panel/' : '/comercio/') : goTab('perfil'))} title={user.email}>
           <Icon n="perfil" size={16} />{user.name?.split(' ')[0] || tr.profile}
@@ -282,10 +280,11 @@ export default function Shell({ children }) {
               <div className="bar" role="search">
                 {[['q1', 'ph1'], ['q2', 'ph2'], ['q3', 'ph3']].map(([a, b], i) => (
                   <label key={a}><b>{tr[a]}</b>{i === 0
-                    ? <input placeholder={tr[b]} value={q} onChange={(e) => setQ(e.target.value)} />
+                    ? <input placeholder={tr[b]} value={q} onChange={(e) => setQ(e.target.value)} onFocus={() => setSfocus(true)} onBlur={() => setSfocus(false)} autoComplete="off" />
                     : <input placeholder={tr[b]} />}</label>
                 ))}
                 <button type="button" className="go" aria-label="Buscar"><Icon n="buscar" size={20} /></button>
+                {sfocus && <Suggest />}
               </div>
             </div>
             {home && tab === 'inicio' && (
@@ -435,8 +434,9 @@ export default function Shell({ children }) {
             <h2>{tr.search}</h2>
             <form className="searchbox" onSubmit={(e) => { e.preventDefault(); setSm(false); }}>
               <Icon n="buscar" size={20} />
-              <input autoFocus type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={tr.searchPh} aria-label={tr.search} />
+              <input autoFocus type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={tr.searchPh} aria-label={tr.search} autoComplete="off" />
             </form>
+            <Suggest inline onPick={() => setSm(false)} />
             <div className="two">
               <button type="button" className="ghost" onClick={() => setQ('')}>{tr.clear}</button>
               <button type="button" className="cta" onClick={() => setSm(false)}>{tr.show} {filtered.length} {tr.results}</button>
