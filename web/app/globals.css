@@ -529,3 +529,37 @@ main.hpad{padding-top:var(--B)}
 }
 .mrow{display:flex;justify-content:space-between;align-items:baseline;gap:6px}.mrow span{flex:0 0 auto;font-size:13px}
 @media(min-width:900px){.detail{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px}}
+
+/* Filas: encabezado compacto; flechas chicas tipo Airbnb solo si hay más para ver */
+.hrow{margin:0 0 22px}
+.hrow__h{margin:0 0 8px;min-height:28px}
+.hrow__go{width:24px;height:24px;flex-basis:24px}
+.hrow__nav{gap:6px}
+.hrow__nav button{width:28px;height:28px;border:0;background:var(--card,#fff);box-shadow:0 1px 3px #3b2a2226,0 0 0 1px #3b2a2214;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.hrow__nav button:hover:not(:disabled){transform:scale(1.06);box-shadow:0 2px 8px #3b2a2233}
+.hrow__nav button:disabled{opacity:.35;cursor:default;box-shadow:none;background:var(--sand,#F3E7D8)}
+@media(min-width:900px){.hrow__t h2{font-size:20px}}
+
+/* Turnos y Favoritos: tarjetitas tipo comentario de Instagram */
+.igl{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.igc{display:flex;align-items:center;gap:12px;padding:12px 10px 12px 12px;background:var(--card,#fff);border:1px solid var(--line);border-radius:18px;box-shadow:0 2px 10px #3b2a220d}
+.igc__av{flex:0 0 58px;width:58px;height:58px;border-radius:50%;padding:2.5px;background:linear-gradient(135deg,#E8A06A,#B5532F 55%,#8F3F22);display:grid;place-items:center;color:#fff}
+.igc__av img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid var(--card,#fff);box-sizing:border-box;display:block}
+.igc__b{flex:1 1 auto;min-width:0;color:inherit;text-decoration:none}
+.igc__b p{margin:0;line-height:1.35}
+.igc__t{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.igc__t span{color:var(--mut);font-size:14px}
+.igc__l{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.igc__m{display:flex;align-items:center;gap:4px;margin-top:2px!important;font-size:13px;color:var(--mut);white-space:nowrap;overflow:hidden}
+.igc__m b{color:var(--ink)}
+.igc__h{flex:0 0 auto;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;color:var(--mut)}
+.igc__h[aria-pressed=true]{color:var(--terra)}
+/* Más ancho en celular: ocupa casi toda la pantalla, como en escritorio */
+@media(max-width:899px){
+  .panel:has(.igl){padding-left:10px;padding-right:10px}
+  .panel:has(.igl) h1{padding-left:6px}
+}
+@media(min-width:900px){.igl{gap:12px}.igc{padding:14px 12px 14px 14px}.igc__av{flex-basis:64px;width:64px;height:64px}}
+.igc__av{display:block;box-sizing:border-box;overflow:hidden}
+.igc__av img{width:100%!important;height:auto!important;aspect-ratio:1/1;max-width:none}
+.igc__av>.ico{margin:13px auto;display:block}

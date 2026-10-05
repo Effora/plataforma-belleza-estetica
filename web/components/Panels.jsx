@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { salons, t, rates } from '../lib/data';
 import { useApp, Icon } from './Shell';
 import MapView from './Map';
+import { withDistance } from '../lib/geo';
 
 export function MapPanel() {
   const { tr, fmt, here, geoStatus, requestGeo, setTab, filtered } = useApp();
@@ -16,6 +17,7 @@ export function MapPanel() {
         </button>
       </div>
       {geoStatus === 'denied' && <p className="mut pad">{tr.geoDenied}</p>}
+      {geoStatus === 'far' && <p className="mut pad">{tr.geoFar}</p>}
       <div className="panel__map">
         <MapView
           items={filtered}
@@ -42,8 +44,32 @@ export function MapPanel() {
   );
 }
 
+/** Tarjetita tipo comentario de Instagram: foto redonda del comercio, nombre, ubicación, valor y corazón. */
+function IgCard({ s, title, line, meta, onClick }) {
+  const { tr, favs, toggleFav } = useApp();
+  const liked = !!(s && favs[s.id]);
+  const href = s ? `/salon/${s.id}/` : '/';
+  return (
+    <li className="igc">
+      <Link href={href} className="igc__av" onClick={onClick} aria-label={title}>
+        {s ? <img src={`/media/${s.imgs[0]}`} alt="" /> : <Icon n="turnos" size={22} />}
+      </Link>
+      <Link href={href} className="igc__b" onClick={onClick}>
+        <p className="igc__t"><b>{title}</b>{s && <span> · {s.zone}</span>}</p>
+        {line && <p className="igc__l">{line}</p>}
+        <p className="igc__m">{meta}</p>
+      </Link>
+      {s && (
+        <button type="button" className="igc__h" aria-pressed={liked} aria-label={tr.favs} onClick={() => toggleFav(s.id)}>
+          <Icon n="favoritos" fill={liked} size={20} />
+        </button>
+      )}
+    </li>
+  );
+}
+
 export function TurnosPanel() {
-  const { tr, fmt, bookings, openBooking } = useApp();
+  const { tr, fmt, bookings, openBooking, setTab } = useApp();
   if (!bookings.length) {
     return (
       <div className="panel empty">
@@ -57,22 +83,28 @@ export function TurnosPanel() {
   return (
     <div className="panel">
       <h1>{tr.appts}</h1>
-      <ul className="panel__cards">
-        {bookings.map((b) => (
-          <li key={b.id} className="panel__card">
-            <b>{b.salon}</b>
-            <p>{b.service}</p>
-            <p className="mut">{b.when} · {fmt(b.price)}</p>
-          </li>
-        ))}
+      <ul className="igl">
+        {bookings.map((b) => {
+          const s = salons.find((x) => x.id === b.sid) || salons.find((x) => x.name === b.salon);
+          return (
+            <IgCard
+              key={b.id}
+              s={s}
+              title={b.salon}
+              line={b.service}
+              meta={<><Icon n="turnos" size={14} />{b.when} · <b>{fmt(b.price)}</b></>}
+              onClick={() => setTab('inicio')}
+            />
+          );
+        })}
       </ul>
     </div>
   );
 }
 
 export function FavsPanel() {
-  const { tr, fmt, favs, toggleFav, setTab } = useApp();
-  const list = salons.filter((s) => favs[s.id]);
+  const { tr, fmt, favs, setTab, here } = useApp();
+  const list = withDistance(salons.filter((s) => favs[s.id]), here);
   if (!list.length) {
     return (
       <div className="panel empty">
@@ -85,17 +117,16 @@ export function FavsPanel() {
   return (
     <div className="panel">
       <h1>{tr.favs}</h1>
-      <ul className="panel__cards">
+      <ul className="igl">
         {list.map((s) => (
-          <li key={s.id} className="panel__card rowish">
-            <Link href={`/salon/${s.id}/`} onClick={() => setTab('inicio')}>
-              <b>{s.name}</b>
-              <p className="mut">{s.zone} · {fmt(s.price)}</p>
-            </Link>
-            <button type="button" className="fav-btn" aria-label={tr.favs} onClick={() => toggleFav(s.id)}>
-              <Icon n="favoritos" fill size={22} />
-            </button>
-          </li>
+          <IgCard
+            key={s.id}
+            s={s}
+            title={s.name}
+            line={`★ ${s.rating} (${s.reviews} ${tr.reviews})${s.promo ? ` · ${s.promo}` : ''}`}
+            meta={<>{s.dist ?? s.km} km · {tr.from} <b>{fmt(s.price)}</b></>}
+            onClick={() => setTab('inicio')}
+          />
         ))}
       </ul>
     </div>

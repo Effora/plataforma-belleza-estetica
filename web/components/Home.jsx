@@ -58,19 +58,34 @@ function Row({ title, items, onAll }) {
   const go = (d) => r.current?.scrollBy({ left: d * r.current.clientWidth * 0.9, behavior: 'smooth' });
   // Al reordenarse (p. ej. por distancia) el scroll-snap salta a la tarjeta que estaba enganchada; volvemos al inicio.
   const ids = items.map((x) => x.id).join();
-  useEffect(() => { if (r.current) r.current.scrollLeft = 0; }, [ids]);
+  const [edge, setEdge] = useState({ l: false, r: false });
+  const sync = () => {
+    const e = r.current;
+    if (!e) return;
+    setEdge({ l: e.scrollLeft > 4, r: e.scrollLeft + e.clientWidth < e.scrollWidth - 4 });
+  };
+  useEffect(() => {
+    if (r.current) r.current.scrollLeft = 0;
+    sync();
+    if (typeof ResizeObserver === 'undefined' || !r.current) return undefined;
+    const ro = new ResizeObserver(sync);
+    ro.observe(r.current);
+    return () => ro.disconnect();
+  }, [ids]);
   return (
     <section className="hrow">
       <div className="hrow__h">
         <button type="button" className="hrow__t" onClick={onAll}>
           <h2>{title}</h2><span className="hrow__go"><Icon n="atras" size={16} /></span>
         </button>
-        <div className="hrow__nav">
-          <button type="button" aria-label="‹" onClick={() => go(-1)}><Icon n="atras" size={16} /></button>
-          <button type="button" aria-label="›" onClick={() => go(1)}><Icon n="atras" size={16} /></button>
-        </div>
+        {(edge.l || edge.r) && (
+          <div className="hrow__nav">
+            <button type="button" aria-label="‹" disabled={!edge.l} onClick={() => go(-1)}><Icon n="atras" size={14} /></button>
+            <button type="button" aria-label="›" disabled={!edge.r} onClick={() => go(1)}><Icon n="atras" size={14} /></button>
+          </div>
+        )}
       </div>
-      <div className="hrow__trk" ref={r}>
+      <div className="hrow__trk" ref={r} onScroll={sync}>
         {items.map((s) => <MiniCard key={s.id} s={s} />)}
       </div>
     </section>

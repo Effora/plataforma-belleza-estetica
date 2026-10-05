@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { t, rates, salons, cats, catIcon, BRAND, F0, applyF as filterSalons, matchQ } from '../lib/data';
-import { DEFAULT_HERE, withDistance } from '../lib/geo';
+import { DEFAULT_HERE, withDistance, distanceKm } from '../lib/geo';
 import Booking from './Booking';
 import Auth from './Auth';
 import Suggest from './Suggest';
@@ -144,7 +144,14 @@ export default function Shell({ children }) {
     setGeoStatus('loading');
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        setHere([pos.coords.latitude, pos.coords.longitude]);
+        const p = [pos.coords.latitude, pos.coords.longitude];
+        // Los comercios de ejemplo están en Bogotá: si estás lejos, seguimos mostrando Bogotá (evita "5000 km").
+        if (distanceKm(p[0], p[1], DEFAULT_HERE[0], DEFAULT_HERE[1]) > 80) {
+          setHere(DEFAULT_HERE);
+          setGeoStatus('far');
+          return;
+        }
+        setHere(p);
         setGeoStatus('ok');
       },
       () => {

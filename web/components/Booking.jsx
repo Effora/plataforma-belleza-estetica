@@ -18,6 +18,7 @@ export default function Booking({ s, onClose }) {
   const finish = () => {
     addBooking({
       id: `${s.id}-${Date.now()}`,
+      sid: s.id,
       salon: s.name,
       service: svc[0],
       when: `${days[day]} ${time}`,
