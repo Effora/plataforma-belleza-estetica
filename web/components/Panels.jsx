@@ -103,9 +103,10 @@ export function FavsPanel() {
 }
 
 export function ProfilePanel() {
-  const { tr, user, setUser, lang, setLang, cur, setCur, openAuth } = useApp();
+  const { tr, user, setUser, lang, setLang, cur, setCur, openAuth, setTab } = useApp();
   return (
     <div className="panel">
+      <button type="button" className="ghost backd" onClick={() => setTab('inicio')}><Icon n="atras" size={18} />{tr.home}</button>
       <h1>{tr.profile}</h1>
       <div className="panel__card">
         {user ? (

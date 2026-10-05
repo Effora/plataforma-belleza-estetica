@@ -417,3 +417,56 @@ body:has(.showmap) .top:not(.sc) .mid{display:flex}
 .sugg__tx{display:grid;gap:1px;min-width:0}.sugg__tx b{font-size:15px}.sugg__tx small{color:var(--mut);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sugg--inline{position:static;width:100%;max-height:40dvh;box-shadow:none;margin-top:10px}
 @media(max-width:899px){.sugg{left:8px;right:8px;width:auto}}
+
+/* ============================================================
+   Header tipo Airbnb (modelo A): íconos grandes que se achican y
+   pasan a una píldora compacta al deslizar. Todo guiado por --p
+   (0 = arriba, 1 = deslizado) con transform/opacity: la altura del
+   layout nunca cambia, así que no hay saltos ni parpadeo.
+   ============================================================ */
+:root{--B:76px}
+@media(max-width:899px){:root{--B:84px}}
+.top.hcol{top:0;border-bottom:0}
+.top.hcol .r1{position:relative;z-index:3;background:var(--bg)}
+.top.hcol .big{position:absolute;left:0;right:0;top:var(--r1h,88px);height:var(--B);box-sizing:border-box;padding:6px 16px 0;background:var(--bg);z-index:1;transform:translateY(calc(var(--p,0) * var(--B) * -1));opacity:max(0,calc(1 - var(--p,0) * 1.6));will-change:transform,opacity}
+.top.hcol.hc .big{visibility:hidden;pointer-events:none}
+.top.hcol .cats{position:relative;z-index:2;transform:translateY(calc((1 - var(--p,0)) * var(--B)));border-bottom:1px solid var(--line);will-change:transform}
+main.hpad{padding-top:var(--B)}
+.top .brand b{display:inline!important}
+.backd{display:none}
+@media(min-width:900px){
+  .backd{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;padding:8px 14px;border:1.5px solid var(--line);border-radius:999px;font-weight:700}
+  .top.hcol .mid{position:relative;justify-content:center}
+  .top.hcol .tabs{display:flex;transform:scale(calc(1 - var(--p,0) * .3));opacity:max(0,calc(1 - var(--p,0) * 2.2));will-change:transform,opacity}
+  .top.hcol.hc .tabs{visibility:hidden;pointer-events:none}
+  .top.hcol .mini{display:flex;position:absolute;left:50%;top:50%;width:min(440px,100%);transform:translate(-50%,-50%) scale(calc(.85 + var(--p,0) * .15));opacity:max(0,calc(var(--p,0) * 2.2 - 1.2));pointer-events:none;min-height:44px;padding:6px 8px 6px 16px;font-size:13px}
+  .top.hcol .mini b{flex:1 1 0;max-width:none;text-align:center;min-width:0}
+  .top.hcol.hc .mini{pointer-events:auto}
+
+  /* Mapa oculto al inicio: primero los comercios; el mapa se abre con "Mostrar mapa" */
+  .split:not(.showmap){display:block}
+  .split:not(.showmap) .mapcol{display:none}
+  .split:not(.showmap) .grid{grid-template-columns:repeat(3,1fr)}
+  .fab{display:flex;bottom:28px}
+  .split.showmap{display:grid;grid-template-columns:minmax(0,46%) minmax(0,1fr);align-items:start}
+  .showmap .grid{grid-template-columns:repeat(2,1fr)}
+  .showmap .mapcol{display:block;position:sticky;top:var(--hdr,150px);height:calc(100dvh - var(--hdr,150px))}
+}
+@media(min-width:1200px){.split:not(.showmap) .grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1700px){.split:not(.showmap) .grid{grid-template-columns:repeat(5,1fr)}}
+
+/* Móvil: logo completo con los íconos al lado, en una sola fila */
+@media(max-width:899px){
+  html .top:not(.sc) .r1{flex-wrap:nowrap;justify-content:space-between;align-items:center;row-gap:0;padding:8px 12px;gap:8px}
+  html .top:not(.sc) .brand{flex:0 1 auto;justify-content:flex-start}
+  html .top:not(.sc) .ctl{flex:0 0 auto;margin:0;justify-content:flex-end;flex-wrap:nowrap}
+  .top .brand{font-size:22px;gap:6px}
+  .top .brand img{width:52px;height:52px;margin:-6px -2px -6px -8px}
+  .seg.vsw button{width:40px}
+  body:has(.showmap) .top .brand b{display:inline!important}
+  body:has(.showmap) .top .big{display:block!important}
+  body:has(.showmap) .top:not(.sc) .mid{display:none}
+  body:has(.showmap) .top.hcol .big{position:static;transform:none;opacity:1;visibility:visible;pointer-events:auto;height:auto;padding:0 16px 10px}
+  body:has(.showmap) main.hpad{padding-top:0}
+}
+@media(max-width:899px){body:has(.showmap) .top .ctl{display:flex!important}}

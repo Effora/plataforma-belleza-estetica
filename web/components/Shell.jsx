@@ -95,6 +95,27 @@ export default function Shell({ children }) {
   // Escritorio: solo el modelo A. En móvil se elige entre A (clásica) y B (video).
   const ver = desk ? 'a' : verPref;
 
+  // Header tipo Airbnb: --p (0..1) sigue al scroll, sin cambiar nunca la altura del layout.
+  const hcol = ver === 'a' && home && tab === 'inicio';
+  useEffect(() => {
+    const root = document.documentElement;
+    const hd = topRef.current;
+    if (!hcol || !hd) { root.style.removeProperty('--p'); return undefined; }
+    let raf = 0;
+    const run = () => {
+      raf = 0;
+      const B = parseFloat(getComputedStyle(root).getPropertyValue('--B')) || 76;
+      const p = Math.min(1, Math.max(0, window.scrollY / B));
+      root.style.setProperty('--p', p.toFixed(3));
+      hd.classList.toggle('hc', p > 0.55);
+    };
+    const on = () => { if (!raf) raf = requestAnimationFrame(run); };
+    run();
+    window.addEventListener('scroll', on, { passive: true });
+    window.addEventListener('resize', on);
+    return () => { window.removeEventListener('scroll', on); window.removeEventListener('resize', on); if (raf) cancelAnimationFrame(raf); root.style.removeProperty('--p'); };
+  }, [hcol]);
+
   // Mide el alto real del header para que el mapa ocupe todo el resto de la pantalla.
   useEffect(() => {
     const root = document.documentElement;
@@ -207,9 +228,9 @@ export default function Shell({ children }) {
   ];
 
   const tabsQuick = [
-    ['all', tr.all, () => setF(F0)],
-    ['promos', tr.promos, () => setF({ ...F0, promo: true })],
-    ['ahora', tr.now, () => setF({ ...F0, now: true })],
+    ['all', tr.all, () => { setTab('inicio'); setF(F0); }],
+    ['promos', tr.promos, () => { setTab('inicio'); setF({ ...F0, promo: true }); }],
+    ['ahora', tr.now, () => { setTab('inicio'); setF({ ...F0, now: true }); }],
   ];
 
   const bottomNav = () => (
@@ -249,7 +270,7 @@ export default function Shell({ children }) {
     <Ctx.Provider value={ctx}>
       {ver === 'a' ? (
         <>
-          <header ref={topRef} className={`top ${home && tab === 'inicio' ? 'hcol' : ''} ${onShop ? 'm' : ''}`}>
+          <header ref={topRef} className={`top ${hcol ? 'hcol' : ''} ${onShop ? 'm' : ''}`}>
             <div className="r1">
               <Link href="/" className="brand" onClick={() => goTab('inicio')}>
                 <img src="/logo.png" alt="" width="34" height="34" />
@@ -269,7 +290,7 @@ export default function Shell({ children }) {
                     </button>
                   ))}
                 </nav>
-                <button type="button" className="mini" onClick={() => setOpen(true)}>
+                <button type="button" className="mini" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(() => document.querySelector('.big input')?.focus(), 350); }}>
                   <b>{q || tr.ph1}</b><i /><b>{tr.ph2}</b><i /><b>{tr.ph3}</b>
                   <span className="go"><Icon n="buscar" size={14} /></span>
                 </button>
@@ -311,7 +332,7 @@ export default function Shell({ children }) {
               </div>
             )}
           </header>
-          <main>{mainContent()}</main>
+          <main className={hcol ? 'hpad' : undefined}>{mainContent()}</main>
           {bottomNav()}
         </>
       ) : (
