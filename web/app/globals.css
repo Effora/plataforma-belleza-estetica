@@ -563,3 +563,10 @@ main.hpad{padding-top:var(--B)}
 .igc__av{display:block;box-sizing:border-box;overflow:hidden}
 .igc__av img{width:100%!important;height:auto!important;aspect-ratio:1/1;max-width:none}
 .igc__av>.ico{margin:13px auto;display:block}
+
+/* Validación HTML: títulos de fila como h2 > button, nombres de comercio como h3 */
+.hrow__h2{margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em;min-width:0}
+.hrow__t{font:inherit;letter-spacing:inherit}
+@media(min-width:900px){.hrow__h2{font-size:20px}}
+.mcard h3.mn{margin:0;font-size:14px;font-weight:700}
+.card h3.cn{margin:0;font-size:14px;font-weight:700;line-height:1.3;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

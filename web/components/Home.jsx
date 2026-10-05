@@ -41,7 +41,7 @@ function MiniCard({ s }) {
           <img src={`/media/${s.imgs[0]}`} alt={s.name} loading="lazy" />
           {s.promo && <span className="tag">{s.promo}</span>}
         </div>
-        <div className="mrow"><b className="mn">{s.name}</b><span>★ {s.rating}</span></div>
+        <div className="mrow"><h3 className="mn">{s.name}</h3><span>★ {s.rating}</span></div>
         <p className="mut">{s.zone} · {s.dist ?? s.km} km</p>
         <p>{tr.from} <b>{fmt(s.price)}</b></p>
       </Link>
@@ -75,9 +75,11 @@ function Row({ title, items, onAll }) {
   return (
     <section className="hrow">
       <div className="hrow__h">
-        <button type="button" className="hrow__t" onClick={onAll}>
-          <h2>{title}</h2><span className="hrow__go"><Icon n="atras" size={16} /></span>
-        </button>
+        <h2 className="hrow__h2">
+          <button type="button" className="hrow__t" onClick={onAll}>
+            {title}<span className="hrow__go"><Icon n="atras" size={16} /></span>
+          </button>
+        </h2>
         {(edge.l || edge.r) && (
           <div className="hrow__nav">
             <button type="button" aria-label="‹" disabled={!edge.l} onClick={() => go(-1)}><Icon n="atras" size={14} /></button>
@@ -248,7 +250,7 @@ export default function Home() {
                 </button>
               </div>
               <Link href={`/salon/${s.id}/`}>
-                <div className="row"><b>{s.name}</b><span>★ {s.rating}</span></div>
+                <div className="row"><h3 className="cn">{s.name}</h3><span>★ {s.rating}</span></div>
                 <p className="mut">{s.zone} · {s.dist ?? s.km} km</p>
                 <p>{tr.from} <b>{fmt(s.price)}</b></p>
               </Link>
