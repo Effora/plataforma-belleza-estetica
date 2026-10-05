@@ -15,8 +15,8 @@ const TILES = [
   },
 ];
 
-const pinHtml = (text, promo) => `
-  <div class="gpin ${promo ? 'gpin--promo' : ''}">
+const pinHtml = (text, promo, on) => `
+  <div class="gpin ${promo ? 'gpin--promo' : ''} ${on ? 'gpin--on' : ''}">
     ${promo ? `<em>${promo}</em>` : ''}
     <b>${text}</b>
   </div>
@@ -30,7 +30,7 @@ const loadLeaflet = () => {
   return leafletPromise;
 };
 
-export default function MapView({ items, label, onPick, here, active = true }) {
+export default function MapView({ items, label, onPick, here, active = true, focus = null }) {
   const el = useRef(null);
   const mapRef = useRef(null);
   const layerRef = useRef(null);
@@ -107,16 +107,22 @@ export default function MapView({ items, label, onPick, here, active = true }) {
       items.forEach((s) => {
         const icon = L.divIcon({
           className: 'pin',
-          html: pinHtml(labelRef.current(s), s.promo),
+          html: pinHtml(labelRef.current(s), s.promo, s.id === focus),
           iconSize: [72, 40],
           iconAnchor: [36, 40],
         });
-        L.marker(s.ll, { icon })
+        L.marker(s.ll, { icon, zIndexOffset: s.id === focus ? 1000 : 0 })
           .addTo(group)
           .on('click', () => onPickRef.current?.(s.id));
       });
 
-      if (items.length) {
+      const sel = focus && items.find((s) => s.id === focus);
+      if (sel) {
+        // Comercio abierto: centrado a escala de barrio; el resto de los pines queda alrededor.
+        boundsRef.current = { center: sel.ll };
+        needsFit.current = !el.current.offsetHeight;
+        map.setView(sel.ll, 14, { animate: false });
+      } else if (items.length) {
         const bounds = L.latLngBounds(items.map((s) => s.ll));
         if (here) bounds.extend(here);
         boundsRef.current = bounds;
@@ -131,7 +137,7 @@ export default function MapView({ items, label, onPick, here, active = true }) {
     });
 
     return () => { dead = true; };
-  }, [items, here, active]);
+  }, [items, here, active, focus]);
 
   useEffect(() => {
     if (!el.current || typeof ResizeObserver === 'undefined') return undefined;
@@ -140,7 +146,8 @@ export default function MapView({ items, label, onPick, here, active = true }) {
         mapRef.current.invalidateSize(false);
         if (needsFit.current && boundsRef.current) {
           needsFit.current = false;
-          mapRef.current.fitBounds(boundsRef.current.pad(0.18), { animate: false });
+          if (boundsRef.current.center) mapRef.current.setView(boundsRef.current.center, 14, { animate: false });
+          else mapRef.current.fitBounds(boundsRef.current.pad(0.18), { animate: false });
         }
       }
     });

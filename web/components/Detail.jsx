@@ -1,10 +1,14 @@
 'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { salons } from '../lib/data';
 import { useApp, Icon } from './Shell';
 import Carousel from './Carousel';
+import MapView from './Map';
 
 export default function Detail({ s }) {
-  const { tr, fmt, openBooking, ver, favs, toggleFav, follows, toggleFollow, setTab } = useApp();
+  const { tr, fmt, openBooking, ver, favs, toggleFav, follows, toggleFollow, setTab, here } = useApp();
+  const router = useRouter();
   if (!s) return null;
   return (
     <div className={`detail ${ver === 'b' ? 'detail--b' : ''}`}>
@@ -43,10 +47,17 @@ export default function Detail({ s }) {
           ))}
         </ul>
       </div>
-      <aside className="book">
-        <p>{tr.from} <b>{fmt(s.price)}</b></p>
-        <p className="pts"><Icon n="puntos" size={18} />{tr.points}</p>
-        <button type="button" className="cta" onClick={() => openBooking(s)}>{tr.book}</button>
+      <aside className="dside">
+        <div className="book">
+          <p>{tr.from} <b>{fmt(s.price)}</b></p>
+          <p className="pts"><Icon n="puntos" size={18} />{tr.points}</p>
+          <button type="button" className="cta" onClick={() => openBooking(s)}>{tr.book}</button>
+        </div>
+        {/* Mapa con todas las ubicaciones; el comercio abierto queda resaltado */}
+        <h2 className="dmap-t">{tr.map}</h2>
+        <div className="dmap">
+          <MapView items={salons} here={here} focus={s.id} label={(x) => fmt(x.price)} onPick={(id) => { if (id !== s.id) router.push(`/salon/${id}/`); }} />
+        </div>
       </aside>
     </div>
   );

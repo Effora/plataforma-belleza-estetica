@@ -1,7 +1,7 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { reels, salons, demoComments } from '../lib/data';
+import { reels, salons, demoComments, cats, F0 } from '../lib/data';
 import { useApp, Icon } from './Shell';
 import Carousel from './Carousel';
 import MapView from './Map';
@@ -31,10 +31,56 @@ function ReelMedia({ imgs, name }) {
   );
 }
 
+/** Tarjeta chica tipo Airbnb para las filas del inicio (una foto, sin carrusel para no pelear con el scroll horizontal). */
+function MiniCard({ s }) {
+  const { tr, fmt, favs, toggleFav } = useApp();
+  return (
+    <article className="mcard">
+      <Link href={`/salon/${s.id}/`}>
+        <div className="mph">
+          <img src={`/media/${s.imgs[0]}`} alt={s.name} loading="lazy" />
+          {s.promo && <span className="tag">{s.promo}</span>}
+        </div>
+        <div className="mrow"><b className="mn">{s.name}</b><span>★ {s.rating}</span></div>
+        <p className="mut">{s.zone} · {s.dist ?? s.km} km</p>
+        <p>{tr.from} <b>{fmt(s.price)}</b></p>
+      </Link>
+      <button type="button" className="heart" aria-pressed={!!favs[s.id]} aria-label={tr.favs} onClick={() => toggleFav(s.id)}>
+        <Icon n="favoritos" fill={!!favs[s.id]} size={18} />
+      </button>
+    </article>
+  );
+}
+
+/** Fila con título, flecha para ver todos y scroll horizontal (flechas en escritorio). */
+function Row({ title, items, onAll }) {
+  const r = useRef(null);
+  const go = (d) => r.current?.scrollBy({ left: d * r.current.clientWidth * 0.9, behavior: 'smooth' });
+  // Al reordenarse (p. ej. por distancia) el scroll-snap salta a la tarjeta que estaba enganchada; volvemos al inicio.
+  const ids = items.map((x) => x.id).join();
+  useEffect(() => { if (r.current) r.current.scrollLeft = 0; }, [ids]);
+  return (
+    <section className="hrow">
+      <div className="hrow__h">
+        <button type="button" className="hrow__t" onClick={onAll}>
+          <h2>{title}</h2><span className="hrow__go"><Icon n="atras" size={16} /></span>
+        </button>
+        <div className="hrow__nav">
+          <button type="button" aria-label="‹" onClick={() => go(-1)}><Icon n="atras" size={16} /></button>
+          <button type="button" aria-label="›" onClick={() => go(1)}><Icon n="atras" size={16} /></button>
+        </div>
+      </div>
+      <div className="hrow__trk" ref={r}>
+        {items.map((s) => <MiniCard key={s.id} s={s} />)}
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const {
     ver, lang, tr, fmt, openBooking, filtered, here, favs, toggleFav, requestGeo, geoStatus,
-    feedMode, follows, toggleFollow, needLogin,
+    feedMode, follows, toggleFollow, needLogin, f, setF, q,
   } = useApp();
   const [map, setMap] = useState(false);
   const [pick, setPick] = useState(null);
@@ -73,6 +119,19 @@ export default function Home() {
     setExtra((x) => ({ ...x, [key]: [...(x[key] || []), { u: 'vos', t: text }] }));
     setDraft('');
   };
+
+  // Inicio sin filtros ni búsqueda: filas por sección como Airbnb; con filtros, grilla compacta.
+  const plain = !q && !f.cat && !f.promo && !f.now && !f.rate && f.max === F0.max;
+  const rows = useMemo(() => {
+    if (!plain) return [];
+    const pick = (k) => () => { setF({ ...F0, ...k }); window.scrollTo({ top: 0 }); };
+    return [
+      { k: 'pop', title: tr.secPop, items: [...filtered].sort((a, b) => b.rating - a.rating).slice(0, 12), onAll: pick({ rate: true }) },
+      { k: 'promo', title: tr.secPromo, items: filtered.filter((x) => x.promo), onAll: pick({ promo: true }) },
+      ...cats.map((c) => ({ k: c, title: `${tr[c]} ${tr.nearS}`, items: filtered.filter((x) => x.cat === c), onAll: pick({ cat: c }) })),
+      { k: 'now', title: tr.secNow, items: filtered.filter((x) => x.now), onAll: pick({ now: true }) },
+    ].filter((x) => x.items.length);
+  }, [plain, filtered, tr, setF]);
 
   if (ver === 'b') {
     return (
@@ -156,6 +215,7 @@ export default function Home() {
             {geoStatus === 'ok' ? tr.nearYou : tr.useLocation}
           </button>
         </div>
+        {!map && rows.length > 0 ? rows.map((x) => <Row key={x.k} title={x.title} items={x.items} onAll={x.onAll} />) : (
         <div className="grid">
           {filtered.map((s) => (
             <article key={s.id} className={`card ${pick === s.id ? 'hl' : ''}`}>
@@ -180,6 +240,7 @@ export default function Home() {
             </article>
           ))}
         </div>
+        )}
       </div>
       <div className="mapcol">
         <MapView items={filtered} here={here} label={(s) => fmt(s.price)} onPick={setPick} active />
